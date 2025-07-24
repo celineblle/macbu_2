@@ -1,0 +1,127 @@
+export interface Ingredient {
+  nom: string;
+  price: number;
+  quantity: number;
+}
+
+export interface Size {
+  name: string;
+  capacity: number;
+}
+
+export interface Burger {
+  bread: string;
+  meat: string;
+  cheese?: string[];
+  variousIngredient?: string[];
+  sauce?: string[];
+}
+
+export interface Nugget {
+  nuggetQuantity: number;
+}
+
+export interface IceCream {
+  coulisTopping: [string, string];
+}
+
+export interface Side {
+  side: string;
+}
+
+export interface Drink {
+  flavour: string;
+}
+
+export interface Bag {
+  capacity: number;
+}
+
+export interface FinalProductBag {
+  name: string;
+  ingredient: Bag;
+  size: number;
+  timeId: number;
+  timeObject: number;
+  price: number;
+  type: string;
+}
+
+export interface FinalProductBurger {
+  name: string;
+  ingredient: Burger | Nugget;
+  size: number;
+  timeId: number;
+  timeObject: number;
+  price: number;
+  type: string;
+}
+
+export interface FinalProductSide {
+  name: string;
+  ingredient: Side;
+  size: number;
+  timeId: number;
+  timeObject: number;
+  price: number;
+  type: string;
+}
+
+export interface FinalProductDessert {
+  name: string;
+  ingredient: IceCream;
+  size: number;
+  timeId: number;
+  timeObject: number;
+  price: number;
+  type: string;
+}
+
+export interface FinalProductDrink {
+  name: string;
+  ingredient: Drink;
+  size: number;
+  timeId: number;
+  timeObject: number;
+  price: number;
+  type: string;
+}
+
+export interface Menu {
+  sandwich: FinalProductBurger;
+  side: FinalProductSide;
+  drink: FinalProductDrink;
+}
+
+export interface MenuEnfant {
+  sandwich: FinalProductBurger;
+  side: FinalProductSide;
+  drink: FinalProductDrink;
+  dessert: FinalProductDessert;
+}
+
+export interface Order {
+  products: (
+    | FinalProductBurger
+    | FinalProductDessert
+    | FinalProductDrink
+    | FinalProductSide
+    | Menu
+    | MenuEnfant
+  )[];
+  size: number;
+  price: number;
+}
+
+export interface Tray {
+  products: (
+    | FinalProductBurger
+    | FinalProductDessert
+    | FinalProductDrink
+    | FinalProductSide
+    | FinalProductBag
+  )[];
+  bagCapacity: number;
+  bag: FinalProductBag;
+  price: number;
+}
