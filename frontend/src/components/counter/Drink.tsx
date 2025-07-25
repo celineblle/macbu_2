@@ -7,21 +7,28 @@ function Drink() {
   const [toggleModal, setToggleModal] = useState(false);
 
   return (
-    <>
-      <button
-        onClick={() => setActionModal(setToggleModal, toggleModal)}
-      ></button>
-      <h2>Boisson</h2>
-      <div></div>
+    <div id="drinkComponent" className="component">
+      <div className="headerPage">
+        <button
+          className="buttonOpenModal"
+          onClick={() => setActionModal(setToggleModal, toggleModal)}
+        >
+          Boisson
+        </button>
+      </div>
+      <div id="drinkPageContent"></div>
       <div id={toggleModal ? "modalOpen" : "modalClose"}>
-        <div>
-          <h2>Boisson</h2>
-          <button>
-            <img alt="fermer"></img>
-          </button>
+        <div className="modalContent">
+          <div className="headerModal">
+            <h2>Boisson</h2>
+            <button className="closeModalButton">
+              <img alt="fermer"></img>
+            </button>
+          </div>
+          <div id="drinkModalContent"></div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

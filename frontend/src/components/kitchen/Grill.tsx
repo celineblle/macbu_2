@@ -7,21 +7,26 @@ function Grill() {
   const [toggleModal, setToggleModal] = useState(false);
 
   return (
-    <>
-      <button
-        onClick={() => setActionModal(setToggleModal, toggleModal)}
-      ></button>
-      <h2>Grill</h2>
-      <div></div>
+    <div id="grillComponent" className="component">
+      <div className="headerPage">
+        <button
+          className="buttonOpenModal"
+          onClick={() => setActionModal(setToggleModal, toggleModal)}
+        ></button>
+      </div>
+      <div id="grillPageContent"></div>
       <div id={toggleModal ? "modalOpen" : "modalClose"}>
-        <div>
-          <h2>Grill</h2>
-          <button>
-            <img alt="fermer"></img>
-          </button>
+        <div className="modalContent">
+          <div className="headerModal">
+            <h2>Grill</h2>
+            <button className="closeModalButton">
+              <img alt="fermer"></img>
+            </button>
+          </div>
+          <div id="grillModalContent"></div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -7,19 +7,26 @@ function AssemblyCounter() {
   const [toggleModal, setToggleModal] = useState(false);
 
   return (
-    <>
-      <button onClick={() => setActionModal(setToggleModal, toggleModal)}>
-        Comptoir
-      </button>
-      <h2></h2>
-      <div></div>
+    <div id="assemblyCounterComponent" className="component">
+      <div className="headerPage">
+        <button
+          className="buttonOpenModal"
+          onClick={() => setActionModal(setToggleModal, toggleModal)}
+        >
+          Comptoir
+        </button>
+      </div>
+      <div id="assemblyCounterPageContent"></div>
       <div id={toggleModal ? "modalOpen" : "modalClose"}>
-        <div>
-          <h2>Comptoir</h2>
-          <button></button>
+        <div className="modalContent">
+          <div className="headerModal">
+            <h2>Comptoir</h2>
+            <button className="closeModalButton"></button>
+          </div>
+          <div id="assemblyCounterModalContent"></div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
