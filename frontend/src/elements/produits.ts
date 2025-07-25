@@ -48,8 +48,6 @@ function nugget(): FinalProductBurger[] {
       name: nuggetsName[i],
       ingredient: singleNugget,
       size: ingredient.size[i].capacity,
-      timeId: 0,
-      timeObject: 0,
       price: priceNugget[i],
       type: "nugget",
     };
