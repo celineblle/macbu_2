@@ -10,11 +10,11 @@ function AssemblyKitchen() {
       <button
         onClick={() => setActionModal(setToggleModal, toggleModal)}
       ></button>
-      <h2></h2>
+      <h2>Cuisine</h2>
       <div></div>
       <div id={toggleModal ? "modalOpen" : "modalClose"}>
         <div>
-          <h2></h2>
+          <h2>Cuisine</h2>
           <button>
             <img alt="fermer"></img>
           </button>

@@ -7,17 +7,15 @@ function AssemblyCounter() {
 
   return (
     <>
-      <button
-        onClick={() => setActionModal(setToggleModal, toggleModal)}
-      ></button>
+      <button onClick={() => setActionModal(setToggleModal, toggleModal)}>
+        Comptoir
+      </button>
       <h2></h2>
       <div></div>
       <div id={toggleModal ? "modalOpen" : "modalClose"}>
         <div>
-          <h2></h2>
-          <button>
-            <img alt="fermer"></img>
-          </button>
+          <h2>Comptoir</h2>
+          <button></button>
         </div>
       </div>
     </>
