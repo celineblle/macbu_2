@@ -7,12 +7,12 @@ import "../../style/Counter.css";
 
 function Counter() {
   return (
-    <>
+    <div id="counterComponent">
       <Checkout />
       <AssemblyCounter />
       <Drink />
       <IceCream />
-    </>
+    </div>
   );
 }
 

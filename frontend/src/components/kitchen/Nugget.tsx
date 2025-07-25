@@ -7,21 +7,24 @@ function Nugget() {
   const [toggleModal, setToggleModal] = useState(false);
 
   return (
-    <>
+    <div id="nuggetComponent" className="component">
       <button
+        className="buttonOpenModal"
         onClick={() => setActionModal(setToggleModal, toggleModal)}
       ></button>
-      <h2>Friture</h2>
-      <div></div>
+      <div id="nuggetPageContent"></div>
       <div id={toggleModal ? "modalOpen" : "modalClose"}>
-        <div>
-          <h2>Friture</h2>
-          <button>
-            <img alt="fermer"></img>
-          </button>
+        <div className="modalContent">
+          <div className="headerModal">
+            <h2>Friture</h2>
+            <button className="closeModalButton">
+              <img alt="fermer"></img>
+            </button>
+          </div>
+          <div id="grillModalContent"></div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -7,21 +7,26 @@ function IceCream() {
   const [toggleModal, setToggleModal] = useState(false);
 
   return (
-    <>
-      <button
-        onClick={() => setActionModal(setToggleModal, toggleModal)}
-      ></button>
-      <h2>Glace</h2>
-      <div></div>
+    <div id="iceCreamComponent" className="component">
+      <div className="headerPage">
+        <button
+          className="buttonOpenModal"
+          onClick={() => setActionModal(setToggleModal, toggleModal)}
+        ></button>
+      </div>
+      <div id="iceCreamPageContent"></div>
       <div id={toggleModal ? "modalOpen" : "modalClose"}>
-        <div>
-          <h2>Glace</h2>
-          <button>
-            <img alt="fermer"></img>
-          </button>
+        <div className="modalContent">
+          <div className="headerModal">
+            <h2>Glace</h2>
+            <button>
+              <img alt="fermer"></img>
+            </button>
+          </div>
+          <div id="iceCreamModalContent"></div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

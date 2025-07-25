@@ -7,12 +7,12 @@ import "../../style/Kitchen.css";
 
 function Kitchen() {
   return (
-    <>
+    <div id="kitchenComponent">
       <Fries />
       <Nugget />
       <AssemblyKitchen />
       <Grill />
-    </>
+    </div>
   );
 }
 
