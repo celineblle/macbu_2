@@ -1,18 +1,11 @@
-import React, { useState } from "react";
-import { setActionModal } from "../../functions/generalsFuctions";
+import React from "react";
 
 function Checkout() {
-  // MODAL
-  const [toggleModal, setToggleModal] = useState(false);
-
   return (
     <>
-      <button
-        onClick={() => setActionModal(setToggleModal, toggleModal)}
-      ></button>
       <h2></h2>
       <div></div>
-      <div id={toggleModal ? "modalOpen" : "modalClose"}>
+      <div>
         <div>
           <h2></h2>
           <button>
