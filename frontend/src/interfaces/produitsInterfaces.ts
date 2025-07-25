@@ -41,8 +41,6 @@ export interface FinalProductBag {
   name: string;
   ingredient: Bag;
   size: number;
-  timeId: number;
-  timeObject: number;
   price: number;
   type: string;
 }
@@ -51,8 +49,6 @@ export interface FinalProductBurger {
   name: string;
   ingredient: Burger | Nugget;
   size: number;
-  timeId: number;
-  timeObject: number;
   price: number;
   type: string;
 }
