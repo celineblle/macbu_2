@@ -2,6 +2,16 @@
   font-family: "BebasNeue";
   src: url("./assets/BebasNeue-Regular.ttf") format("truetype"), url("bebasneue-regular-webfont.woff2") format("woff2"), url("bebasneue-regular-webfont.woff") format("woff");
 }
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
 body {
   margin: 0px;
   background-color: whitesmoke;
@@ -48,11 +58,192 @@ button {
   color: #0d0d0d;
   padding: 2px 8px;
   margin: 3px 8px;
+  transition: background-color 2s;
 }
 
 hr {
   border: 1px solid #0d0d0d;
   margin: 10px;
+}
+
+#page {
+  display: flex;
+  flex-direction: column;
+}
+
+.component {
+  border: 4px solid #f2bbc9;
+  margin: 4px;
+  padding: 4px;
+  border-radius: 15px;
+  width: calc(100% - 24px);
+  height: calc(100% - 24px);
+}
+
+#headerModal {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px;
+  height: 40px;
+  width: calc(100% - 24px);
+  background-color: #f2f2f2;
+  border-radius: 5px;
+}
+
+.modalOpen {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  animation-name: animatetop;
+  background-color: rgba(0, 0, 0, 0.4);
+  animation-duration: 0.4s;
+}
+
+.modalContent {
+  position: relative;
+  background-color: #f2f2f2;
+  color: #0d0d0d;
+  border: 4px solid #f2bbc9;
+  margin: 4px;
+  padding: 4px;
+  border-radius: 15px;
+  width: calc(100% - 24px);
+  height: calc(100% - 24px);
+  margin: auto;
+  width: 80%;
+  height: 85%;
+}
+
+.buttonModal {
+  font-family: "BebasNeue", Impact;
+  border: 2px solid #f2bbc9;
+  font-size: 2em;
+}
+
+.closeModalButton,
+.buttonModal,
+.commandeCuisson,
+.commandePret,
+.commandeModal,
+.buttonStockVide {
+  background-color: transparent;
+}
+
+.tabLinksButton {
+  background-color: #d7d3d2;
+  padding: 5px;
+  transition: 0.3s;
+  float: left;
+  outline: none;
+  border: 1px solid #a6a6a6;
+}
+
+.tabLinksButton:hover {
+  background-color: #a6a6a6;
+}
+
+.tabLinksButton:active {
+  background-color: #f2bbc9;
+  transition: 0.2s;
+}
+
+.tabContentHidden,
+.modalClose {
+  display: none;
+}
+
+.buttonGrille {
+  background-color: #402116;
+  color: #f2f2f2;
+}
+
+.buttonPret {
+  background-color: #78e8c1;
+}
+
+.buttonCuisson,
+.commandeCuisson:hover {
+  background-color: #f78800;
+}
+
+.buttonNeutre {
+  background-color: #d7d3d2;
+}
+
+.onglet {
+  background-color: #d7d3d2;
+  border: 1px solid #a6a6a6;
+  border-radius: 5px 5px 0px 0px;
+}
+
+.buttonNeutre:hover,
+.onglet:hover,
+.buttonGrille:hover {
+  background-color: #f2bbc9;
+  color: #0d0d0d;
+}
+
+.buttonNeutre:active,
+.onglet:active {
+  background-color: #a6a6a6;
+}
+
+.buttonGrille:active,
+.commandeCuisson:active {
+  background-color: #d9af8b;
+  color: #0d0d0d;
+}
+
+.buttonPret:hover {
+  background-color: #4bbf52;
+}
+
+.buttonPret:active {
+  background-color: #c7f2b3;
+}
+
+.commandeCuisson {
+  border: 2px solid #f78800;
+  border-radius: 5px;
+  width: 170px;
+  height: 75px;
+}
+
+.commandePret {
+  border: 2px solid #78e8c1;
+  border-radius: 5px;
+  width: 170px;
+  height: 75px;
+}
+
+.commandeModal {
+  border: 2px solid #f2bbc9;
+  border-radius: 5px;
+  width: 170px;
+  height: 75px;
+}
+
+.commandePret:hover {
+  background-color: #78e8c1;
+}
+
+.commandePret:active {
+  background-color: #c7f2b3;
+  border-color: #c7f2b3;
+}
+
+.buttonStockVide {
+  border: 2px solid #a6a6a6;
+}
+.buttonStockVide :hover {
+  background-color: transparent;
+  border: 2px solid #a6a6a6;
+  cursor: default;
 }
 
 /*# sourceMappingURL=App.css.map */
