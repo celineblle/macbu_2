@@ -46,9 +46,184 @@ button {
   color: style.$noir;
   padding: 2px 8px;
   margin: 3px 8px;
+  transition: background-color 2s;
 }
 
 hr {
   border: 1px solid style.$noir;
   margin: 10px;
+}
+
+// Component organisation
+
+#page {
+  display: flex;
+  flex-direction: column;
+}
+
+.component {
+  @include style.border-component;
+}
+
+#headerModal {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px;
+  height: 40px;
+  width: calc(100% - 24px);
+  background-color: style.$blanc;
+  border-radius: 5px;
+}
+
+.modalOpen {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  animation-name: animatetop;
+  background-color: rgba(0, 0, 0, 0.4);
+  animation-duration: 0.4s;
+}
+
+.modalContent {
+  position: relative;
+  background-color: style.$blanc;
+  color: style.$noir;
+  @include style.border-component;
+  margin: auto;
+  width: 80%;
+  height: 85%;
+}
+
+// Button
+
+.buttonModal {
+  font-family: "BebasNeue", Impact;
+  border: 2px solid style.$rose;
+  font-size: 2em;
+}
+
+.closeModalButton,
+.buttonModal,
+.commandeCuisson,
+.commandePret,
+.commandeModal,
+.buttonStockVide {
+  background-color: transparent;
+}
+
+.tabLinksButton {
+  background-color: style.$gris;
+  padding: 5px;
+  transition: 0.3s;
+  float: left;
+  outline: none;
+  border: 1px solid style.$grisBordure;
+}
+
+.tabLinksButton:hover {
+  background-color: style.$grisBordure;
+}
+
+.tabLinksButton:active {
+  background-color: style.$rose;
+  transition: 0.2s;
+}
+
+.tabContentHidden,
+.modalClose {
+  @include style.close-mode;
+}
+
+.buttonGrille {
+  background-color: style.$marron;
+  color: style.$blanc;
+}
+
+.buttonPret {
+  background-color: style.$vert;
+}
+
+.buttonCuisson,
+.commandeCuisson:hover {
+  background-color: style.$orange;
+}
+
+.buttonNeutre {
+  background-color: style.$gris;
+}
+
+.onglet {
+  background-color: style.$gris;
+  border: 1px solid style.$grisBordure;
+  border-radius: 5px 5px 0px 0px;
+}
+
+.buttonNeutre:hover,
+.onglet:hover,
+.buttonGrille:hover {
+  background-color: style.$rose;
+  color: style.$noir;
+}
+
+.buttonNeutre:active,
+.onglet:active {
+  background-color: style.$grisBordure;
+}
+
+.buttonGrille:active,
+.commandeCuisson:active {
+  background-color: style.$beige;
+  color: style.$noir;
+}
+
+.buttonPret:hover {
+  background-color: style.$vertFonce;
+}
+
+.buttonPret:active {
+  background-color: style.$vertClair;
+}
+
+.commandeCuisson {
+  border: 2px solid style.$orange;
+  border-radius: 5px;
+  width: 170px;
+  height: 75px;
+}
+
+.commandePret {
+  border: 2px solid style.$vert;
+  border-radius: 5px;
+  width: 170px;
+  height: 75px;
+}
+
+.commandeModal {
+  border: 2px solid style.$rose;
+  border-radius: 5px;
+  width: 170px;
+  height: 75px;
+}
+
+.commandePret:hover {
+  background-color: style.$vert;
+}
+
+.commandePret:active {
+  background-color: style.$vertClair;
+  border-color: style.$vertClair;
+}
+
+.buttonStockVide {
+  border: 2px solid style.$grisBordure;
+  :hover {
+    background-color: transparent;
+    border: 2px solid style.$grisBordure;
+    cursor: default;
+  }
 }
