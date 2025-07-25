@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { setActionModal } from "../../functions/generalsFuctions";
+import "../../style/Grill.css";
 
 function Grill() {
   // MODAL

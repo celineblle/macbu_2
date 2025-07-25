@@ -1,11 +1,9 @@
-@font-face {
-  font-family: "BebasNeue";
-  src: url("./assets/BebasNeue-Regular.ttf") format("truetype"), url("bebasneue-regular-webfont.woff2") format("woff2"), url("bebasneue-regular-webfont.woff") format("woff");
-}
+@use "./style" as style;
+
 body {
   margin: 0px;
   background-color: whitesmoke;
-  color: #0d0d0d;
+  color: style.$noir;
   display: flex;
   flex-direction: column;
 }
@@ -45,14 +43,12 @@ button {
   outline: none;
   border: none;
   cursor: pointer;
-  color: #0d0d0d;
+  color: style.$noir;
   padding: 2px 8px;
   margin: 3px 8px;
 }
 
 hr {
-  border: 1px solid #0d0d0d;
+  border: 1px solid style.$noir;
   margin: 10px;
 }
-
-/*# sourceMappingURL=App.css.map */
