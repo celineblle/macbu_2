@@ -1,7 +1,7 @@
 import React from "react";
 import "../../style/Checkout.css";
 
-function Checkout() {
+function Checkout({ cashFund }: { cashFund: number }) {
   return (
     <div id="checkoutComponent" className="component">
       <h2>Caisse</h2>

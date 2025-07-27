@@ -5,11 +5,17 @@ import Drink from "./Drink";
 import IceCream from "./IceCream";
 import "../../style/Counter.css";
 
-function Counter() {
+function Counter({
+  cashFund,
+  setCashFund,
+}: {
+  cashFund: number;
+  setCashFund: React.Dispatch<React.SetStateAction<number>>;
+}) {
   return (
     <div id="counterComponent">
-      <Checkout />
-      <AssemblyCounter />
+      <Checkout cashFund={cashFund} />
+      <AssemblyCounter cashFund={cashFund} setCashFund={setCashFund} />
       <Drink />
       <IceCream />
     </div>
