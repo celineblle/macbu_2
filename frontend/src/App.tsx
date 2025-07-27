@@ -19,7 +19,7 @@ import {
 } from "./elements/ingredients";
 
 function App() {
-  const [changeFund, setChangeFund] = useState<number>(100);
+  const [cashFund, setCashFund] = useState<number>(100);
   const [stocksRawsIngredients, setStocksRawsIngredients] = useState<
     SectionRawIngredients[]
   >([
@@ -39,13 +39,13 @@ function App() {
   return (
     <div id="homePage">
       <Office
-        changeFund={changeFund}
-        setChangeFund={setChangeFund}
+        cashFund={cashFund}
+        setCashFund={setCashFund}
         stocksRawsIngredients={stocksRawsIngredients}
         setStocksRawsIngredients={setStocksRawsIngredients}
       />
       <Kitchen />
-      <Counter changeFund={changeFund} setChangeFund={setChangeFund} />
+      <Counter cashFund={cashFund} setCashFund={setCashFund} />
     </div>
   );
 }

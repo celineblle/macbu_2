@@ -6,16 +6,16 @@ import IceCream from "./IceCream";
 import "../../style/Counter.css";
 
 function Counter({
-  changeFund,
-  setChangeFund,
+  cashFund,
+  setCashFund,
 }: {
-  changeFund: number;
-  setChangeFund: React.Dispatch<React.SetStateAction<number>>;
+  cashFund: number;
+  setCashFund: React.Dispatch<React.SetStateAction<number>>;
 }) {
   return (
     <div id="counterComponent">
-      <Checkout changeFund={changeFund} />
-      <AssemblyCounter changeFund={changeFund} setChangeFund={setChangeFund} />
+      <Checkout cashFund={cashFund} />
+      <AssemblyCounter cashFund={cashFund} setCashFund={setCashFund} />
       <Drink />
       <IceCream />
     </div>

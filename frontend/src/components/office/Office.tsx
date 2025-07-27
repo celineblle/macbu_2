@@ -10,13 +10,13 @@ import {
 } from "../../functions/inventoryManagementFunctions";
 
 function Office({
-  changeFund,
-  setChangeFund,
+  cashFund,
+  setCashFund,
   stocksRawsIngredients,
   setStocksRawsIngredients,
 }: {
-  changeFund: number;
-  setChangeFund: React.Dispatch<React.SetStateAction<number>>;
+  cashFund: number;
+  setCashFund: React.Dispatch<React.SetStateAction<number>>;
   stocksRawsIngredients: SectionRawIngredients[];
   setStocksRawsIngredients: React.Dispatch<
     React.SetStateAction<SectionRawIngredients[]>
@@ -39,7 +39,7 @@ function Office({
   // BUY PRODUCT
 
   function enoughBudgetToBuy(price: number): boolean {
-    if (price <= changeFund) {
+    if (price <= cashFund) {
       return true;
     } else {
       return false;
@@ -47,9 +47,9 @@ function Office({
   }
 
   function removeFromFund(price: number) {
-    let changeFundCopy: number = changeFund;
-    changeFundCopy = changeFundCopy - price;
-    setChangeFund(changeFundCopy);
+    let cashFundCopy: number = cashFund;
+    cashFundCopy = cashFundCopy - price;
+    setCashFund(cashFundCopy);
   }
 
   function updateStockIngredientArray(
@@ -80,7 +80,7 @@ function Office({
     <div id="officeComponent" className="component">
       <div className="headerPage">
         <h1>MacBu 2</h1>
-        <h2>Budget : {changeFund} €</h2>
+        <h2>Budget : {cashFund} €</h2>
         <button
           className="buttonOpenModal"
           onClick={() => setActionModal(setToggleModal, toggleModal)}
@@ -106,7 +106,7 @@ function Office({
           />
           <div className="headerModal">
             <h2>Magasin</h2>
-            <h2>Budget : {changeFund} €</h2>
+            <h2>Budget : {cashFund} €</h2>
             <button className="closeModalButton">
               <img alt="fermer"></img>
             </button>

@@ -3,11 +3,11 @@ import { setActionModal } from "../../functions/generalsFuctions";
 import "../../style/AssemblyCounter.css";
 
 function AssemblyCounter({
-  changeFund,
-  setChangeFund,
+  cashFund,
+  setCashFund,
 }: {
-  changeFund: number;
-  setChangeFund: React.Dispatch<React.SetStateAction<number>>;
+  cashFund: number;
+  setCashFund: React.Dispatch<React.SetStateAction<number>>;
 }) {
   // MODAL
   const [toggleModal, setToggleModal] = useState(false);
