@@ -1,332 +1,458 @@
 import { Ingredient, Size } from "../interfaces/produitsInterfaces";
-
-export const bread: Ingredient[] = [
-  {
-    nom: "Pain sésame 3 tranches",
-    price: 30,
-    quantity: 30,
-  },
-  {
-    nom: "Grand pain sésame",
-    price: 20,
-    quantity: 20,
-  },
-  {
-    nom: "Moyen pain sésame",
-    price: 20,
-    quantity: 30,
-  },
-  {
-    nom: "Pain carré ciabatta",
-    price: 30,
-    quantity: 20,
-  },
-  {
-    nom: "Pain carré bacon",
-    price: 30,
-    quantity: 20,
-  },
-  {
-    nom: "Pain muffin",
-    price: 40,
-    quantity: 40,
-  },
-  {
-    nom: "Petit pain bun",
-    price: 40,
-    quantity: 40,
-  },
-  {
-    nom: "Moyen pain bun",
-    price: 50,
-    quantity: 30,
-  },
-  {
-    nom: "Galette wrap",
-    price: 40,
-    quantity: 40,
-  },
-];
+import { SectionRawIngredients } from "../interfaces/compositionElementsInterfaces";
 
 export const frying: Ingredient[] = [
   {
-    nom: "Nugget poulet",
+    ingredientName: "Nugget poulet",
     price: 40,
     quantity: 30,
+    currentStocks: 0,
   },
   {
-    nom: "Grand poisson pané",
+    ingredientName: "Grand poisson pané",
     price: 40,
     quantity: 20,
+    currentStocks: 0,
   },
   {
-    nom: "Petit steak poulet pané",
+    ingredientName: "Petit steak poulet pané",
     price: 25,
     quantity: 20,
+    currentStocks: 0,
   },
   {
-    nom: "Grand steak poulet pané",
+    ingredientName: "Grand steak poulet pané",
     price: 35,
     quantity: 20,
+    currentStocks: 0,
   },
   {
-    nom: "Palet chêvre",
+    ingredientName: "Palet chêvre",
     price: 20,
     quantity: 20,
+    currentStocks: 0,
   },
 ];
+
+export const fryingSection: SectionRawIngredients = {
+  sectionName: "frying",
+  title: "Friture",
+  productionArray: frying,
+}
+
+export const bread: Ingredient[] = [
+  {
+    ingredientName: "Pain sésame 3 tranches",
+    price: 30,
+    quantity: 30,
+    currentStocks: 0,
+  },
+  {
+    ingredientName: "Grand pain sésame",
+    price: 20,
+    quantity: 20,
+    currentStocks: 0,
+  },
+  {
+    ingredientName: "Moyen pain sésame",
+    price: 20,
+    quantity: 30,
+    currentStocks: 0,
+  },
+  {
+    ingredientName: "Pain carré ciabatta",
+    price: 30,
+    quantity: 20,
+    currentStocks: 0,
+  },
+  {
+    ingredientName: "Pain carré bacon",
+    price: 30,
+    quantity: 20,
+    currentStocks: 0,
+  },
+  {
+    ingredientName: "Pain muffin",
+    price: 40,
+    quantity: 40,
+    currentStocks: 0,
+  },
+  {
+    ingredientName: "Petit pain bun",
+    price: 40,
+    quantity: 40,
+    currentStocks: 0,
+  },
+  {
+    ingredientName: "Moyen pain bun",
+    price: 50,
+    quantity: 30,
+    currentStocks: 0,
+  },
+  {
+    ingredientName: "Galette wrap",
+    price: 40,
+    quantity: 40,
+    currentStocks: 0,
+  },
+];
+
+export const breadSection: SectionRawIngredients = {
+  sectionName: "bread",
+  title: "Pain",
+  productionArray: bread,
+}
 
 export const sauce: Ingredient[] = [
   {
-    nom: "Tartare",
+    ingredientName: "Tartare",
     price: 7,
     quantity: 20,
+    currentStocks: 0,
   },
   {
-    nom: "Spécial Bu",
+    ingredientName: "Spécial Bu",
     price: 9,
     quantity: 20,
+    currentStocks: 0,
   },
   {
-    nom: "Abricot",
+    ingredientName: "Abricot",
     price: 8,
     quantity: 20,
+    currentStocks: 0,
   },
   {
-    nom: "Ketchup",
+    ingredientName: "Ketchup",
     price: 6,
     quantity: 20,
+    currentStocks: 0,
   },
   {
-    nom: "Ranch",
+    ingredientName: "Ranch",
     price: 7,
     quantity: 20,
+    currentStocks: 0,
   },
   {
-    nom: "Moutarde",
+    ingredientName: "Moutarde",
     price: 6,
     quantity: 20,
+    currentStocks: 0,
   },
 ];
+
+export const sauceSection: SectionRawIngredients = {
+  sectionName: "sauce",
+  title: "Sauce",
+  productionArray: sauce,
+}
 
 export const cheese: Ingredient[] = [
   {
-    nom: "Cheddar",
+    ingredientName: "Cheddar",
     price: 18,
     quantity: 20,
+    currentStocks: 0,
   },
   {
-    nom: "Emmental",
+    ingredientName: "Emmental",
     price: 18,
     quantity: 20,
+    currentStocks: 0,
   },
   {
-    nom: "Mozzarella",
+    ingredientName: "Mozzarella",
     price: 25,
     quantity: 20,
+    currentStocks: 0,
   },
 ];
+
+export const cheeseSection: SectionRawIngredients = {
+  sectionName: "cheese",
+  title: "Fromage",
+  productionArray: cheese,
+}
 
 export const meat: Ingredient[] = [
   {
-    nom: "Jambon",
+    ingredientName: "Jambon",
     price: 40,
     quantity: 20,
+    currentStocks: 0,
   },
   {
-    nom: "Oeuf",
+    ingredientName: "Oeuf",
     price: 30,
     quantity: 20,
+    currentStocks: 0,
   },
   {
-    nom: "Grand steak plat",
+    ingredientName: "Grand steak plat",
     price: 110,
     quantity: 50,
+    currentStocks: 0,
   },
   {
-    nom: "Petit steak plat",
+    ingredientName: "Petit steak plat",
     price: 100,
     quantity: 50,
+    currentStocks: 0,
   },
   {
-    nom: "Grand gros steak",
+    ingredientName: "Grand gros steak",
     price: 130,
     quantity: 50,
+    currentStocks: 0,
   },
   {
-    nom: "Moyen gros steak",
+    ingredientName: "Moyen gros steak",
     price: 120,
     quantity: 50,
+    currentStocks: 0,
   },
 ];
+
+export const meatSection: SectionRawIngredients = {
+  sectionName: "meat",
+  title: "Viande",
+  productionArray: meat,
+}
 
 export const variousIngredient: Ingredient[] = [
   {
-    nom: "Salade",
+    ingredientName: "Salade",
     price: 6,
     quantity: 20,
+    currentStocks: 0,
   },
   {
-    nom: "Tomates",
+    ingredientName: "Tomates",
     price: 6,
     quantity: 20,
+    currentStocks: 0,
   },
   {
-    nom: "Oignons",
+    ingredientName: "Oignons",
     price: 6,
     quantity: 20,
+    currentStocks: 0,
   },
   {
-    nom: "Pickles",
+    ingredientName: "Pickles",
     price: 8,
     quantity: 20,
+    currentStocks: 0,
   },
   {
-    nom: "Bacon",
+    ingredientName: "Bacon",
     price: 10,
     quantity: 20,
+    currentStocks: 0,
   },
   {
-    nom: "Cornichons",
+    ingredientName: "Cornichons",
     price: 6,
     quantity: 20,
+    currentStocks: 0,
   },
   {
-    nom: "Oignon frit",
+    ingredientName: "Oignon frit",
     price: 7,
     quantity: 20,
+    currentStocks: 0,
   },
 ];
+
+export const variousIngredientSection: SectionRawIngredients = {
+  sectionName: "variousIngredient",
+  title: "Ingrédient",
+  productionArray: variousIngredient,
+}
 
 export const freshProduct: Ingredient[] = [
   {
-    nom: "Petite salade",
+    ingredientName: "Petite salade",
     price: 20,
     quantity: 30,
+    currentStocks: 0,
   },
   {
-    nom: "Légumes",
+    ingredientName: "Légumes",
     price: 15,
     quantity: 30,
+    currentStocks: 0,
   },
   {
-    nom: "Boisson yaourt",
+    ingredientName: "Boisson yaourt",
     price: 12,
     quantity: 30,
+    currentStocks: 0,
   },
   {
-    nom: "Fruits",
+    ingredientName: "Fruits",
     price: 12,
     quantity: 30,
+    currentStocks: 0,
   },
 ];
+
+export const freshProductSection: SectionRawIngredients = {
+  sectionName: "freshProduct",
+  title: "Produit frais",
+  productionArray: freshProduct,
+}
 
 export const iceCream: Ingredient[] = [
   {
-    nom: "Coulis caramel",
+    ingredientName: "Coulis caramel",
     price: 20,
     quantity: 40,
+    currentStocks: 0,
   },
   {
-    nom: "Coulis chocolat",
+    ingredientName: "Coulis chocolat",
     price: 20,
     quantity: 40,
+    currentStocks: 0,
   },
   {
-    nom: "Eclats cacahuète",
+    ingredientName: "Eclats cacahuète",
     price: 15,
     quantity: 20,
+    currentStocks: 0,
   },
   {
-    nom: "Eclats choco-caramel",
+    ingredientName: "Eclats choco-caramel",
     price: 20,
     quantity: 20,
+    currentStocks: 0,
   },
   {
-    nom: "Eclat biscuit-chocolat",
+    ingredientName: "Eclat biscuit-chocolat",
     price: 15,
     quantity: 20,
+    currentStocks: 0,
   },
   {
-    nom: "Eclat cacahuète-chocolat",
+    ingredientName: "Eclat cacahuète-chocolat",
     price: 20,
     quantity: 20,
+    currentStocks: 0,
   },
 ];
+
+export const iceCreamSection: SectionRawIngredients = {
+  sectionName: "iceCream",
+  title: "Glace",
+  productionArray: iceCream,
+}
 
 export const fries: Ingredient[] = [
   {
-    nom: "Frite",
+    ingredientName: "Frite",
     price: 15,
     quantity: 100,
+    currentStocks: 0,
   },
   {
-    nom: "Potatoe",
+    ingredientName: "Potatoe",
     price: 20,
     quantity: 100,
+    currentStocks: 0,
   },
 ];
+
+export const friesSection: SectionRawIngredients = {
+  sectionName: "fries",
+  title: "Frite",
+  productionArray: fries,
+}
 
 export const drink: Ingredient[] = [
   {
-    nom: "Eau",
+    ingredientName: "Eau",
     price: 10,
     quantity: 40,
+    currentStocks: 0,
   },
   {
-    nom: "Eau gazeuse",
+    ingredientName: "Eau gazeuse",
     price: 12,
     quantity: 40,
+    currentStocks: 0,
   },
   {
-    nom: "Limonade",
+    ingredientName: "Limonade",
     price: 15,
     quantity: 40,
+    currentStocks: 0,
   },
   {
-    nom: "Cola",
+    ingredientName: "Cola",
     price: 20,
     quantity: 40,
+    currentStocks: 0,
   },
   {
-    nom: "Orange gazeuse",
+    ingredientName: "Orange gazeuse",
     price: 20,
     quantity: 40,
+    currentStocks: 0,
   },
   {
-    nom: "Jus d'orange",
+    ingredientName: "Jus d'orange",
     price: 15,
     quantity: 40,
+    currentStocks: 0,
   },
   {
-    nom: "Jus multifruit",
+    ingredientName: "Jus multifruit",
     price: 15,
     quantity: 40,
+    currentStocks: 0,
   },
   {
-    nom: "Thé glacé",
+    ingredientName: "Thé glacé",
     price: 17,
     quantity: 40,
+    currentStocks: 0,
   },
 ];
 
+export const drinkSection: SectionRawIngredients = {
+  sectionName: "drink",
+  title: "Boisson",
+  productionArray: drink,
+}
+
 export const bag: Ingredient[] = [
   {
-    nom: "Petit sac",
+    ingredientName: "Petit sac",
     price: 40,
     quantity: 500,
+    currentStocks: 0,
   },
   {
-    nom: "Moyen sac",
+    ingredientName: "Moyen sac",
     price: 50,
     quantity: 500,
+    currentStocks: 0,
   },
   {
-    nom: "Grand sac",
+    ingredientName: "Grand sac",
     price: 40,
     quantity: 250,
+    currentStocks: 0,
   },
 ];
+
+export const bagSection: SectionRawIngredients = {
+  sectionName: "bag",
+  title: "Sac",
+  productionArray: bag,
+}
 
 export const size: Size[] = [
   {
@@ -342,3 +468,4 @@ export const size: Size[] = [
     capacity: 3,
   },
 ];
+

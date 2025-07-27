@@ -60,173 +60,173 @@ function nugget(): FinalProductBurger[] {
 export const allNuggets: FinalProductBurger[] = nugget();
 
 export const fishNPan: Burger = {
-  bread: ingredient.bread[7].nom,
-  meat: ingredient.frying[2].nom,
-  cheese: [ingredient.cheese[0].nom, ingredient.cheese[1].nom],
+  bread: ingredient.bread[7].ingredientName,
+  meat: ingredient.frying[2].ingredientName,
+  cheese: [ingredient.cheese[0].ingredientName, ingredient.cheese[1].ingredientName],
   variousIngredient: [
-    ingredient.variousIngredient[0].nom,
-    ingredient.variousIngredient[1].nom,
+    ingredient.variousIngredient[0].ingredientName,
+    ingredient.variousIngredient[1].ingredientName,
   ],
-  sauce: [ingredient.sauce[0].nom],
+  sauce: [ingredient.sauce[0].ingredientName],
 };
 
 export const specialBu: Burger = {
-  bread: ingredient.bread[0].nom,
-  meat: ingredient.meat[2].nom,
-  cheese: [ingredient.cheese[0].nom],
+  bread: ingredient.bread[0].ingredientName,
+  meat: ingredient.meat[2].ingredientName,
+  cheese: [ingredient.cheese[0].ingredientName],
   variousIngredient: [
-    ingredient.variousIngredient[2].nom,
-    ingredient.variousIngredient[0].nom,
-    ingredient.variousIngredient[3].nom,
+    ingredient.variousIngredient[2].ingredientName,
+    ingredient.variousIngredient[0].ingredientName,
+    ingredient.variousIngredient[3].ingredientName,
   ],
-  sauce: [ingredient.sauce[1].nom],
+  sauce: [ingredient.sauce[1].ingredientName],
 };
 
 export const classicBig: Burger = {
-  bread: ingredient.bread[1].nom,
-  meat: ingredient.meat[4].nom,
-  cheese: [ingredient.cheese[1].nom],
+  bread: ingredient.bread[1].ingredientName,
+  meat: ingredient.meat[4].ingredientName,
+  cheese: [ingredient.cheese[1].ingredientName],
   variousIngredient: [
-    ingredient.variousIngredient[1].nom,
-    ingredient.variousIngredient[0].nom,
-    ingredient.variousIngredient[2].nom,
+    ingredient.variousIngredient[1].ingredientName,
+    ingredient.variousIngredient[0].ingredientName,
+    ingredient.variousIngredient[2].ingredientName,
   ],
-  sauce: [ingredient.sauce[2].nom],
+  sauce: [ingredient.sauce[2].ingredientName],
 };
 
 export const primSBuBoeuf: Burger = {
-  bread: ingredient.bread[2].nom,
-  meat: ingredient.meat[5].nom,
-  cheese: [ingredient.cheese[0].nom],
+  bread: ingredient.bread[2].ingredientName,
+  meat: ingredient.meat[5].ingredientName,
+  cheese: [ingredient.cheese[0].ingredientName],
   variousIngredient: [
-    ingredient.variousIngredient[1].nom,
-    ingredient.variousIngredient[0].nom,
-    ingredient.variousIngredient[2].nom,
+    ingredient.variousIngredient[1].ingredientName,
+    ingredient.variousIngredient[0].ingredientName,
+    ingredient.variousIngredient[2].ingredientName,
   ],
-  sauce: [ingredient.sauce[3].nom, ingredient.sauce[4].nom],
+  sauce: [ingredient.sauce[3].ingredientName, ingredient.sauce[4].ingredientName],
 };
 
 export const primSBuPoulet: Burger = {
-  bread: ingredient.bread[2].nom,
-  meat: ingredient.frying[3].nom,
-  cheese: [ingredient.cheese[0].nom],
+  bread: ingredient.bread[2].ingredientName,
+  meat: ingredient.frying[3].ingredientName,
+  cheese: [ingredient.cheese[0].ingredientName],
   variousIngredient: [
-    ingredient.variousIngredient[1].nom,
-    ingredient.variousIngredient[0].nom,
-    ingredient.variousIngredient[2].nom,
+    ingredient.variousIngredient[1].ingredientName,
+    ingredient.variousIngredient[0].ingredientName,
+    ingredient.variousIngredient[2].ingredientName,
   ],
-  sauce: [ingredient.sauce[3].nom, ingredient.sauce[4].nom],
+  sauce: [ingredient.sauce[3].ingredientName, ingredient.sauce[4].ingredientName],
 };
 
 export const primSBuPoisson: Burger = {
-  bread: ingredient.bread[2].nom,
-  meat: ingredient.frying[1].nom,
-  cheese: [ingredient.cheese[0].nom],
+  bread: ingredient.bread[2].ingredientName,
+  meat: ingredient.frying[1].ingredientName,
+  cheese: [ingredient.cheese[0].ingredientName],
   variousIngredient: [
-    ingredient.variousIngredient[1].nom,
-    ingredient.variousIngredient[0].nom,
-    ingredient.variousIngredient[2].nom,
+    ingredient.variousIngredient[1].ingredientName,
+    ingredient.variousIngredient[0].ingredientName,
+    ingredient.variousIngredient[2].ingredientName,
   ],
-  sauce: [ingredient.sauce[3].nom, ingredient.sauce[4].nom],
+  sauce: [ingredient.sauce[3].ingredientName, ingredient.sauce[4].ingredientName],
 };
 
 export const optiBacon: Burger = {
-  bread: ingredient.bread[1].nom,
-  meat: ingredient.meat[4].nom,
-  cheese: [ingredient.cheese[0].nom],
+  bread: ingredient.bread[1].ingredientName,
+  meat: ingredient.meat[4].ingredientName,
+  cheese: [ingredient.cheese[0].ingredientName],
   variousIngredient: [
-    ingredient.variousIngredient[4].nom,
-    ingredient.variousIngredient[5].nom,
-    ingredient.variousIngredient[2].nom,
+    ingredient.variousIngredient[4].ingredientName,
+    ingredient.variousIngredient[5].ingredientName,
+    ingredient.variousIngredient[2].ingredientName,
   ],
-  sauce: [ingredient.sauce[3].nom, ingredient.sauce[5].nom],
+  sauce: [ingredient.sauce[3].ingredientName, ingredient.sauce[5].ingredientName],
 };
 
 export const bigCheeseOrigin: Burger = {
-  bread: ingredient.bread[1].nom,
-  meat: ingredient.meat[4].nom,
-  cheese: [ingredient.cheese[0].nom],
+  bread: ingredient.bread[1].ingredientName,
+  meat: ingredient.meat[4].ingredientName,
+  cheese: [ingredient.cheese[0].ingredientName],
   variousIngredient: [
-    ingredient.variousIngredient[5].nom,
-    ingredient.variousIngredient[2].nom,
+    ingredient.variousIngredient[5].ingredientName,
+    ingredient.variousIngredient[2].ingredientName,
   ],
-  sauce: [ingredient.sauce[3].nom, ingredient.sauce[5].nom],
+  sauce: [ingredient.sauce[3].ingredientName, ingredient.sauce[5].ingredientName],
 };
 
 export const italicain: Burger = {
-  bread: ingredient.bread[3].nom,
-  meat: ingredient.meat[4].nom,
-  cheese: [ingredient.cheese[2].nom, ingredient.cheese[1].nom],
-  variousIngredient: [ingredient.variousIngredient[1].nom],
-  sauce: [ingredient.sauce[0].nom],
+  bread: ingredient.bread[3].ingredientName,
+  meat: ingredient.meat[4].ingredientName,
+  cheese: [ingredient.cheese[2].ingredientName, ingredient.cheese[1].ingredientName],
+  variousIngredient: [ingredient.variousIngredient[1].ingredientName],
+  sauce: [ingredient.sauce[0].ingredientName],
 };
 
 export const baconBasic: Burger = {
-  bread: ingredient.bread[4].nom,
-  meat: ingredient.meat[4].nom,
-  cheese: [ingredient.cheese[0].nom],
+  bread: ingredient.bread[4].ingredientName,
+  meat: ingredient.meat[4].ingredientName,
+  cheese: [ingredient.cheese[0].ingredientName],
   variousIngredient: [
-    ingredient.variousIngredient[4].nom,
-    ingredient.variousIngredient[0].nom,
-    ingredient.variousIngredient[6].nom,
+    ingredient.variousIngredient[4].ingredientName,
+    ingredient.variousIngredient[0].ingredientName,
+    ingredient.variousIngredient[6].ingredientName,
   ],
-  sauce: [ingredient.sauce[0].nom],
+  sauce: [ingredient.sauce[0].ingredientName],
 };
 
 export const englishTouch: Burger = {
-  bread: ingredient.bread[5].nom,
-  meat: ingredient.meat[1].nom,
-  cheese: [ingredient.cheese[0].nom],
+  bread: ingredient.bread[5].ingredientName,
+  meat: ingredient.meat[1].ingredientName,
+  cheese: [ingredient.cheese[0].ingredientName],
 };
 
 export const cheeseOrigin: Burger = {
-  bread: ingredient.bread[6].nom,
-  meat: ingredient.meat[3].nom,
-  cheese: [ingredient.cheese[0].nom],
+  bread: ingredient.bread[6].ingredientName,
+  meat: ingredient.meat[3].ingredientName,
+  cheese: [ingredient.cheese[0].ingredientName],
   variousIngredient: [
-    ingredient.variousIngredient[2].nom,
-    ingredient.variousIngredient[5].nom,
+    ingredient.variousIngredient[2].ingredientName,
+    ingredient.variousIngredient[5].ingredientName,
   ],
-  sauce: [ingredient.sauce[3].nom, ingredient.sauce[5].nom],
+  sauce: [ingredient.sauce[3].ingredientName, ingredient.sauce[5].ingredientName],
 };
 
 export const originBurger: Burger = {
-  bread: ingredient.bread[6].nom,
-  meat: ingredient.meat[3].nom,
+  bread: ingredient.bread[6].ingredientName,
+  meat: ingredient.meat[3].ingredientName,
   variousIngredient: [
-    ingredient.variousIngredient[5].nom,
-    ingredient.variousIngredient[2].nom,
+    ingredient.variousIngredient[5].ingredientName,
+    ingredient.variousIngredient[2].ingredientName,
   ],
-  sauce: [ingredient.sauce[3].nom, ingredient.sauce[5].nom],
+  sauce: [ingredient.sauce[3].ingredientName, ingredient.sauce[5].ingredientName],
 };
 
 export const pouce: Burger = {
-  bread: ingredient.bread[6].nom,
-  meat: ingredient.meat[0].nom,
-  cheese: [ingredient.cheese[1].nom],
+  bread: ingredient.bread[6].ingredientName,
+  meat: ingredient.meat[0].ingredientName,
+  cheese: [ingredient.cheese[1].ingredientName],
 };
 
 export const goatyWrap: Burger = {
-  bread: ingredient.bread[8].nom,
-  meat: ingredient.meat[6].nom,
+  bread: ingredient.bread[8].ingredientName,
+  meat: ingredient.meat[6].ingredientName,
   variousIngredient: [
-    ingredient.variousIngredient[0].nom,
-    ingredient.variousIngredient[1].nom,
-    ingredient.variousIngredient[6].nom,
+    ingredient.variousIngredient[0].ingredientName,
+    ingredient.variousIngredient[1].ingredientName,
+    ingredient.variousIngredient[6].ingredientName,
   ],
-  sauce: [ingredient.sauce[0].nom],
+  sauce: [ingredient.sauce[0].ingredientName],
 };
 
 export const classyWrap: Burger = {
-  bread: ingredient.bread[8].nom,
-  meat: ingredient.meat[0].nom,
-  cheese: [ingredient.cheese[0].nom],
+  bread: ingredient.bread[8].ingredientName,
+  meat: ingredient.meat[0].ingredientName,
+  cheese: [ingredient.cheese[0].ingredientName],
   variousIngredient: [
-    ingredient.variousIngredient[4].nom,
-    ingredient.variousIngredient[1].nom,
-    ingredient.variousIngredient[0].nom,
+    ingredient.variousIngredient[4].ingredientName,
+    ingredient.variousIngredient[1].ingredientName,
+    ingredient.variousIngredient[0].ingredientName,
   ],
-  sauce: [ingredient.sauce[0].nom],
+  sauce: [ingredient.sauce[0].ingredientName],
 };
 
 const burgersRecipes: Burger[] = [
@@ -276,7 +276,7 @@ function getIceCream(): FinalProductDessert[] {
   for (let i = 0; i < 2; i++) {
     for (let j = 2; j < ingredient.iceCream.length; j++) {
       const recipeIC: IceCream = {
-        coulisTopping: [ingredient.iceCream[i].nom, ingredient.iceCream[j].nom],
+        coulisTopping: [ingredient.iceCream[i].ingredientName, ingredient.iceCream[j].ingredientName],
       };
       const singleIC: FinalProductDessert = {
         name: `Glace ${recipeIC.coulisTopping[0]} ${recipeIC.coulisTopping[1]}`,
@@ -302,7 +302,7 @@ function getFries(): FinalProductSide[] {
   for (let i = 0; i < ingredient.fries.length; i++) {
     for (let j = 0; j < price.length; j++) {
       const recipeFrie: Side = {
-        side: `${ingredient.size[j].name} ${ingredient.fries[i].nom}`,
+        side: `${ingredient.size[j].name} ${ingredient.fries[i].ingredientName}`,
       };
       const finalFrie: FinalProductSide = {
         name: recipeFrie.side,
@@ -322,19 +322,19 @@ function getFries(): FinalProductSide[] {
 export const allFries: FinalProductSide[] = getFries();
 
 export const salad: Side = {
-  side: ingredient.freshProduct[0].nom,
+  side: ingredient.freshProduct[0].ingredientName,
 };
 
 export const vegetable: Side = {
-  side: ingredient.freshProduct[1].nom,
+  side: ingredient.freshProduct[1].ingredientName,
 };
 
 export const drinkingYaourt: Side = {
-  side: ingredient.freshProduct[2].nom,
+  side: ingredient.freshProduct[2].ingredientName,
 };
 
 export const fruits: Side = {
-  side: ingredient.freshProduct[3].nom,
+  side: ingredient.freshProduct[3].ingredientName,
 };
 
 function getFreshSide(): FinalProductSide[] {
@@ -368,7 +368,7 @@ function getDrink(): FinalProductDrink[] {
   for (let i = 0; i < price.length; i++) {
     for (let j = 0; j < ingredient.drink.length; j++) {
       const flavour: Drink = {
-        flavour: `${ingredient.size[i].name} ${ingredient.drink[j].nom}`,
+        flavour: `${ingredient.size[i].name} ${ingredient.drink[j].ingredientName}`,
       };
       const singleDrink: FinalProductDrink = {
         name: flavour.flavour,

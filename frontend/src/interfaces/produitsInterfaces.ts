@@ -1,7 +1,8 @@
 export interface Ingredient {
-  nom: string;
+  ingredientName: string;
   price: number;
   quantity: number;
+  currentStocks: number;
 }
 
 export interface Size {
@@ -83,41 +84,4 @@ export interface FinalProductDrink {
   type: string;
 }
 
-export interface Menu {
-  sandwich: FinalProductBurger;
-  side: FinalProductSide;
-  drink: FinalProductDrink;
-}
 
-export interface MenuEnfant {
-  sandwich: FinalProductBurger;
-  side: FinalProductSide;
-  drink: FinalProductDrink;
-  dessert: FinalProductDessert;
-}
-
-export interface Order {
-  products: (
-    | FinalProductBurger
-    | FinalProductDessert
-    | FinalProductDrink
-    | FinalProductSide
-    | Menu
-    | MenuEnfant
-  )[];
-  size: number;
-  price: number;
-}
-
-export interface Tray {
-  products: (
-    | FinalProductBurger
-    | FinalProductDessert
-    | FinalProductDrink
-    | FinalProductSide
-    | FinalProductBag
-  )[];
-  bagCapacity: number;
-  bag: FinalProductBag;
-  price: number;
-}
