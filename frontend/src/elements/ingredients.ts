@@ -469,3 +469,16 @@ export const size: Size[] = [
   },
 ];
 
+export const allProductsArray: SectionRawIngredients[] = [
+    fryingSection,
+    breadSection,
+    sauceSection,
+    cheeseSection,
+    meatSection,
+    variousIngredientSection,
+    friesSection,
+    freshProductSection,
+    iceCreamSection,
+    drinkSection,
+    bagSection,
+  ]

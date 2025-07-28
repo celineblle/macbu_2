@@ -3,7 +3,8 @@ import { setActionModal } from "../../functions/generalsFuctions";
 import "../../style/Office.css";
 import { SectionRawIngredients } from "../../interfaces/compositionElementsInterfaces";
 import { Ingredient } from "../../interfaces/produitsInterfaces";
-import { Slide, ToastContainer, toast } from "react-toastify";
+import { Slide, ToastContainer } from "react-toastify";
+import { displayLowBudget } from "../../functions/toastFunctions";
 import {
   addToStockUniqueProduct,
   remplaceOldProductByUpdateProduct,
@@ -24,17 +25,6 @@ function Office({
 }) {
   // MODAL
   const [toggleModal, setToggleModal] = useState(false);
-
-  // TOAST ERROR
-
-  const lowBudget = () => (
-    <div>
-      <p>Il n&apos;y a pas assez de budget pour acheter cet ingrédient</p>
-    </div>
-  );
-  const displayLowBudget = () => {
-    toast.error(lowBudget);
-  };
 
   // BUY PRODUCT
 
@@ -58,11 +48,7 @@ function Office({
   ) {
     const updatedProduct: Ingredient = addToStockUniqueProduct(product);
     const updatedStocksArray: SectionRawIngredients[] =
-      remplaceOldProductByUpdateProduct(
-        stocksRawsIngredients,
-        sectionName,
-        updatedProduct
-      );
+      remplaceOldProductByUpdateProduct(sectionName, updatedProduct);
     setStocksRawsIngredients(updatedStocksArray);
   }
 
