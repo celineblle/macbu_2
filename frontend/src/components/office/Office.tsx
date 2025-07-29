@@ -93,8 +93,11 @@ function Office({
           <div className="headerModal">
             <h2>Magasin</h2>
             <h2>Budget : {cashFund} €</h2>
-            <button className="closeModalButton">
-              <img alt="fermer"></img>
+            <button
+              className="closeModalButton"
+              onClick={() => setActionModal(setToggleModal, toggleModal)}
+            >
+              X
             </button>
           </div>
           <div id="officeModalContent">

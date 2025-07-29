@@ -12,15 +12,20 @@ function Grill() {
         <button
           className="buttonOpenModal"
           onClick={() => setActionModal(setToggleModal, toggleModal)}
-        ></button>
+        >
+          Grill
+        </button>
       </div>
       <div id="grillPageContent"></div>
       <div id={toggleModal ? "modalOpen" : "modalClose"}>
         <div className="modalContent">
           <div className="headerModal">
             <h2>Grill</h2>
-            <button className="closeModalButton">
-              <img alt="fermer"></img>
+            <button
+              className="closeModalButton"
+              onClick={() => setActionModal(setToggleModal, toggleModal)}
+            >
+              X
             </button>
           </div>
           <div id="grillModalContent"></div>

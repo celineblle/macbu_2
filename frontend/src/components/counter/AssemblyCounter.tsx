@@ -27,7 +27,12 @@ function AssemblyCounter({
         <div className="modalContent">
           <div className="headerModal">
             <h2>Comptoir</h2>
-            <button className="closeModalButton"></button>
+            <button
+              className="closeModalButton"
+              onClick={() => setActionModal(setToggleModal, toggleModal)}
+            >
+              X
+            </button>
           </div>
           <div id="assemblyCounterModalContent"></div>
         </div>

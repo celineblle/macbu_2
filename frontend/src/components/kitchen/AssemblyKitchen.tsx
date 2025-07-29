@@ -12,15 +12,20 @@ function AssemblyKitchen() {
         <button
           className="buttonOpenModal"
           onClick={() => setActionModal(setToggleModal, toggleModal)}
-        ></button>
+        >
+          Cuisine
+        </button>
       </div>
       <div id="assemblyKitchenPageContent"></div>
       <div id={toggleModal ? "modalOpen" : "modalClose"}>
         <div className="modalContent">
           <div className="headerModal">
             <h2>Cuisine</h2>
-            <button>
-              <img alt="fermer"></img>
+            <button
+              className="closeModalButton"
+              onClick={() => setActionModal(setToggleModal, toggleModal)}
+            >
+              X
             </button>
           </div>
           <div id="assemblyKitchenModalContent"></div>
