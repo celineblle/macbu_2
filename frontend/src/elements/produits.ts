@@ -9,7 +9,7 @@ import {
   FinalProductDessert,
   FinalProductDrink,
   FinalProductSide,
-  Fries,
+  FriesSide,
 } from "../interfaces/produitsInterfaces";
 
 export const nuggetsName: string[] = [
@@ -302,7 +302,7 @@ function getFries(): FinalProductSide[] {
 
   for (let i = 0; i < ingredient.fries.length; i++) {
     for (let j = 0; j < price.length; j++) {
-      const recipeFrie: Fries = {
+      const recipeFrie: FriesSide = {
         side: `${ingredient.size[j].name} ${ingredient.fries[i].ingredientName}`,
         grilled: false,
       };

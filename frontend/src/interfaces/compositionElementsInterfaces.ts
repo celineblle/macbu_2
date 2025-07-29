@@ -1,4 +1,4 @@
-import { FinalProductBag, FinalProductBurger, FinalProductDessert, FinalProductDrink, FinalProductSide, Ingredient } from "./produitsInterfaces";
+import { FinalProductBag, FinalProductBurger, FinalProductDessert, FinalProductDrink, FinalProductSide, Ingredient, Size } from "./produitsInterfaces";
 
 // STOCKS
 
@@ -16,6 +16,12 @@ export interface ProductionTray  {
   quantity: number;
   grilled: boolean;
   type: string;
+  timerId: number;
+}
+
+export interface FriesBuilder {
+  ingredient: string;
+  size: Size | string;
 }
 
 // MENU
