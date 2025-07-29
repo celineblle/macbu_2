@@ -4,38 +4,20 @@ import Kitchen from "./components/kitchen/Kitchen";
 import Counter from "./components/counter/Counter";
 import "./style/App.css";
 import { SectionRawIngredients } from "./interfaces/compositionElementsInterfaces";
-import {
-  fryingSection,
-  breadSection,
-  sauceSection,
-  cheeseSection,
-  meatSection,
-  variousIngredientSection,
-  friesSection,
-  freshProductSection,
-  iceCreamSection,
-  drinkSection,
-  bagSection,
-} from "./elements/ingredients";
+import { allProductsArray } from "./elements/ingredients";
+import { FinalProductSide } from "./interfaces/produitsInterfaces";
 
 function App() {
+  // OFFICE & GLOBAL VARIABLES
+  const allProduct: SectionRawIngredients[] = allProductsArray.slice();
   const [cashFund, setCashFund] = useState<number>(100);
-  const [stocksRawsIngredients, setStocksRawsIngredients] = useState<
-    SectionRawIngredients[]
-  >([
-    fryingSection,
-    breadSection,
-    sauceSection,
-    cheeseSection,
-    meatSection,
-    variousIngredientSection,
-    friesSection,
-    freshProductSection,
-    iceCreamSection,
-    drinkSection,
-    bagSection,
-  ]);
+  const [stocksRawsIngredients, setStocksRawsIngredients] =
+    useState<SectionRawIngredients[]>(allProduct);
 
+  //FRIES VARIABLES
+  const [readyPortionFries, setReadyPortionFries] = useState<
+    FinalProductSide[]
+  >([]);
   return (
     <div id="homePage">
       <Office
@@ -44,7 +26,12 @@ function App() {
         stocksRawsIngredients={stocksRawsIngredients}
         setStocksRawsIngredients={setStocksRawsIngredients}
       />
-      <Kitchen />
+      <Kitchen
+        stocksRawsIngredients={stocksRawsIngredients}
+        setStocksRawsIngredients={setStocksRawsIngredients}
+        readyPortionFries={readyPortionFries}
+        setReadyPortionFries={setReadyPortionFries}
+      />
       <Counter cashFund={cashFund} setCashFund={setCashFund} />
     </div>
   );

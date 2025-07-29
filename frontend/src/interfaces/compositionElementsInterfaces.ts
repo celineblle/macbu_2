@@ -1,4 +1,6 @@
-import { FinalProductBag, FinalProductBurger, FinalProductDessert, FinalProductDrink, FinalProductSide, Ingredient } from "./produitsInterfaces";
+import { FinalProductBag, FinalProductBurger, FinalProductDessert, FinalProductDrink, FinalProductSide, Ingredient, Size } from "./produitsInterfaces";
+
+// STOCKS
 
 export interface SectionRawIngredients {
   sectionName: string;
@@ -6,6 +8,23 @@ export interface SectionRawIngredients {
   productionArray: Ingredient[]
 }
 
+// FRIES
+
+export interface ProductionTray  {
+  productName: string;
+  ingredient: string;
+  quantity: number;
+  grilled: boolean;
+  type: string;
+  timerId: number;
+}
+
+export interface FriesBuilder {
+  ingredient: string;
+  size: Size | string;
+}
+
+// MENU
 
 export interface Menu {
   sandwich: FinalProductBurger;
@@ -19,6 +38,8 @@ export interface MenuEnfant {
   drink: FinalProductDrink;
   dessert: FinalProductDessert;
 }
+
+// ORDER
 
 export interface Order {
   products: (

@@ -30,6 +30,11 @@ export interface Side {
   side: string;
 }
 
+export interface FriesSide {
+  side: string;
+  grilled: boolean;
+}
+
 export interface Drink {
   flavour: string;
 }
@@ -56,7 +61,7 @@ export interface FinalProductBurger {
 
 export interface FinalProductSide {
   name: string;
-  ingredient: Side;
+  ingredient: Side | FriesSide;
   size: number;
   timeId: number;
   timeObject: number;
