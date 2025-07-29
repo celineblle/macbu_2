@@ -21,8 +21,11 @@ function Drink() {
         <div className="modalContent">
           <div className="headerModal">
             <h2>Boisson</h2>
-            <button className="closeModalButton">
-              <img alt="fermer"></img>
+            <button
+              className="closeModalButton"
+              onClick={() => setActionModal(setToggleModal, toggleModal)}
+            >
+              X
             </button>
           </div>
           <div id="drinkModalContent"></div>
