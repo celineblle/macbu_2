@@ -215,7 +215,20 @@ function Nugget({
       >
         Friture
       </button>
-      <div id="nuggetPageContent"></div>
+      <div id="nuggetPageContent">
+        <ul>
+          {readyNuggetBox.map((box) => (
+            <li key={box.boite.name}>
+              {box.boite.name} : {box.quantity}
+            </li>
+          ))}
+          {availableFrying.map((frying) => (
+            <li key={frying.frying.ingredientName}>
+              {frying.frying.ingredientName} : {frying.quantity}
+            </li>
+          ))}
+        </ul>
+      </div>
       <div className={toggleModal ? "modalOpen" : "modalClose"}>
         <div className="modalContent">
           <div className="headerModal">
