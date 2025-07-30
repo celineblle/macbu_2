@@ -103,11 +103,11 @@ function Office({
           <div id="officeModalContent">
             <br />
             {stocksRawsIngredients.map((section: SectionRawIngredients) => (
-              <>
+              <div key={section.title}>
                 <div>
                   <h3>{section.title}</h3>
                   {section.productionArray.map((product: Ingredient) => (
-                    <div>
+                    <div key={product.ingredientName}>
                       <p>{product.ingredientName}</p>
                       <p>{product.quantity} produits</p>
                       <p>Stock actuel : {product.currentStocks}</p>
@@ -124,7 +124,7 @@ function Office({
                 </div>
                 <br />
                 <hr />
-              </>
+              </div>
             ))}
           </div>
         </div>
