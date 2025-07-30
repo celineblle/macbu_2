@@ -9,8 +9,8 @@ function AssemblyKitchen({
   availableGrill,
   setAvailableGrill,
 }: {
-  availableFrying: [AvailableFrying, AvailableFrying, AvailableFrying, AvailableFrying, AvailableFrying];
-  setAvailableFrying: React.Dispatch<React.SetStateAction<[AvailableFrying, AvailableFrying, AvailableFrying, AvailableFrying, AvailableFrying]>>;
+  availableFrying: AvailableFrying[];
+  setAvailableFrying: React.Dispatch<React.SetStateAction<AvailableFrying[]>>;
   availableGrill: AvailableGrill[];
   setAvailableGrill:React.Dispatch<React.SetStateAction<AvailableGrill[]>>;
 
