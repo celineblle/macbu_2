@@ -10,6 +10,7 @@ import {
   FinalProductDrink,
   FinalProductSide,
   FriesSide,
+  FinalProductNugget,
 } from "../interfaces/produitsInterfaces";
 
 export const nuggetsName: string[] = [
@@ -37,15 +38,15 @@ export const burgersName: string[] = [
   "Classy Wrap",
 ];
 
-function nugget(): FinalProductBurger[] {
+function nugget(): FinalProductNugget[] {
   const nombre: number[] = [3, 6, 18];
   const priceNugget: number[] = [4, 6, 15];
-  const allNuggets: FinalProductBurger[] = [];
+  const allNuggets: FinalProductNugget[] = [];
   for (let i = 0; i < nuggetsName.length; i++) {
     const singleNugget: Nugget = {
       nuggetQuantity: nombre[i],
     };
-    const finalNugget: FinalProductBurger = {
+    const finalNugget: FinalProductNugget = {
       name: nuggetsName[i],
       ingredient: singleNugget,
       size: ingredient.size[i].capacity,
@@ -58,12 +59,15 @@ function nugget(): FinalProductBurger[] {
   return allNuggets;
 }
 
-export const allNuggets: FinalProductBurger[] = nugget();
+export const allNuggets: FinalProductNugget[] = nugget();
 
 export const fishNPan: Burger = {
   bread: ingredient.bread[7].ingredientName,
   meat: ingredient.frying[2].ingredientName,
-  cheese: [ingredient.cheese[0].ingredientName, ingredient.cheese[1].ingredientName],
+  cheese: [
+    ingredient.cheese[0].ingredientName,
+    ingredient.cheese[1].ingredientName,
+  ],
   variousIngredient: [
     ingredient.variousIngredient[0].ingredientName,
     ingredient.variousIngredient[1].ingredientName,
@@ -104,7 +108,10 @@ export const primSBuBoeuf: Burger = {
     ingredient.variousIngredient[0].ingredientName,
     ingredient.variousIngredient[2].ingredientName,
   ],
-  sauce: [ingredient.sauce[3].ingredientName, ingredient.sauce[4].ingredientName],
+  sauce: [
+    ingredient.sauce[3].ingredientName,
+    ingredient.sauce[4].ingredientName,
+  ],
 };
 
 export const primSBuPoulet: Burger = {
@@ -116,7 +123,10 @@ export const primSBuPoulet: Burger = {
     ingredient.variousIngredient[0].ingredientName,
     ingredient.variousIngredient[2].ingredientName,
   ],
-  sauce: [ingredient.sauce[3].ingredientName, ingredient.sauce[4].ingredientName],
+  sauce: [
+    ingredient.sauce[3].ingredientName,
+    ingredient.sauce[4].ingredientName,
+  ],
 };
 
 export const primSBuPoisson: Burger = {
@@ -128,7 +138,10 @@ export const primSBuPoisson: Burger = {
     ingredient.variousIngredient[0].ingredientName,
     ingredient.variousIngredient[2].ingredientName,
   ],
-  sauce: [ingredient.sauce[3].ingredientName, ingredient.sauce[4].ingredientName],
+  sauce: [
+    ingredient.sauce[3].ingredientName,
+    ingredient.sauce[4].ingredientName,
+  ],
 };
 
 export const optiBacon: Burger = {
@@ -140,7 +153,10 @@ export const optiBacon: Burger = {
     ingredient.variousIngredient[5].ingredientName,
     ingredient.variousIngredient[2].ingredientName,
   ],
-  sauce: [ingredient.sauce[3].ingredientName, ingredient.sauce[5].ingredientName],
+  sauce: [
+    ingredient.sauce[3].ingredientName,
+    ingredient.sauce[5].ingredientName,
+  ],
 };
 
 export const bigCheeseOrigin: Burger = {
@@ -151,13 +167,19 @@ export const bigCheeseOrigin: Burger = {
     ingredient.variousIngredient[5].ingredientName,
     ingredient.variousIngredient[2].ingredientName,
   ],
-  sauce: [ingredient.sauce[3].ingredientName, ingredient.sauce[5].ingredientName],
+  sauce: [
+    ingredient.sauce[3].ingredientName,
+    ingredient.sauce[5].ingredientName,
+  ],
 };
 
 export const italicain: Burger = {
   bread: ingredient.bread[3].ingredientName,
   meat: ingredient.meat[4].ingredientName,
-  cheese: [ingredient.cheese[2].ingredientName, ingredient.cheese[1].ingredientName],
+  cheese: [
+    ingredient.cheese[2].ingredientName,
+    ingredient.cheese[1].ingredientName,
+  ],
   variousIngredient: [ingredient.variousIngredient[1].ingredientName],
   sauce: [ingredient.sauce[0].ingredientName],
 };
@@ -188,7 +210,10 @@ export const cheeseOrigin: Burger = {
     ingredient.variousIngredient[2].ingredientName,
     ingredient.variousIngredient[5].ingredientName,
   ],
-  sauce: [ingredient.sauce[3].ingredientName, ingredient.sauce[5].ingredientName],
+  sauce: [
+    ingredient.sauce[3].ingredientName,
+    ingredient.sauce[5].ingredientName,
+  ],
 };
 
 export const originBurger: Burger = {
@@ -198,7 +223,10 @@ export const originBurger: Burger = {
     ingredient.variousIngredient[5].ingredientName,
     ingredient.variousIngredient[2].ingredientName,
   ],
-  sauce: [ingredient.sauce[3].ingredientName, ingredient.sauce[5].ingredientName],
+  sauce: [
+    ingredient.sauce[3].ingredientName,
+    ingredient.sauce[5].ingredientName,
+  ],
 };
 
 export const pouce: Burger = {
@@ -209,7 +237,7 @@ export const pouce: Burger = {
 
 export const goatyWrap: Burger = {
   bread: ingredient.bread[8].ingredientName,
-  meat: ingredient.meat[6].ingredientName,
+  meat: ingredient.meat[5].ingredientName,
   variousIngredient: [
     ingredient.variousIngredient[0].ingredientName,
     ingredient.variousIngredient[1].ingredientName,
@@ -277,7 +305,10 @@ function getIceCream(): FinalProductDessert[] {
   for (let i = 0; i < 2; i++) {
     for (let j = 2; j < ingredient.iceCream.length; j++) {
       const recipeIC: IceCream = {
-        coulisTopping: [ingredient.iceCream[i].ingredientName, ingredient.iceCream[j].ingredientName],
+        coulisTopping: [
+          ingredient.iceCream[i].ingredientName,
+          ingredient.iceCream[j].ingredientName,
+        ],
       };
       const singleIC: FinalProductDessert = {
         name: `Glace ${recipeIC.coulisTopping[0]} ${recipeIC.coulisTopping[1]}`,
@@ -396,6 +427,7 @@ export const allProducts: (
   | FinalProductDessert
   | FinalProductDrink
   | FinalProductSide
+  | FinalProductNugget
 )[] = [...allNuggets, ...allBurgers, ...allIceCream, ...allDrinks, ...allSide];
 
 export const productsForRandom: (
@@ -403,4 +435,5 @@ export const productsForRandom: (
   | FinalProductDessert
   | FinalProductDrink
   | FinalProductSide
+  | FinalProductNugget
 )[] = [...allProducts, ...allNuggets, ...allBurgers, ...allBurgers];

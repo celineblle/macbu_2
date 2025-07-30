@@ -18,3 +18,19 @@ export function removeElementFromRefArray(
   oldStageArrayCopy.splice(oldStageElementIndex, 1);
   oldArraySetter(oldStageArrayCopy);
 }
+
+export function updateEmptyPlace(
+  takenPlaces: number,
+  limitSizePlace: number,
+  setterEmptyPlace: React.Dispatch<React.SetStateAction<string[]>>,
+  emptyPatern: string
+) {
+  const emptyPlace: number = limitSizePlace - takenPlaces;
+  const emptyPlaceArray: string[] = [];
+  if (emptyPlace > 0) {
+    for (let i = 0; i < emptyPlace; i++) {
+      emptyPlaceArray.push(emptyPatern);
+    }
+  }
+  setterEmptyPlace(emptyPlaceArray);
+}

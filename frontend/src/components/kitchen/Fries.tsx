@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   removeElementFromRefArray,
   setActionModal,
+  updateEmptyPlace,
 } from "../../functions/generalsFuctions";
 import "../../style/Fries.css";
 import {
@@ -23,7 +24,7 @@ import {
 import { Slide, ToastContainer } from "react-toastify";
 import {
   displayIsGrilled,
-  displayNoPlaceFries,
+  displayNoPlace,
   displayNoStock,
   displayPortionNotComplete,
 } from "../../functions/toastFunctions";
@@ -59,9 +60,6 @@ function Fries({
   const [cookingFries, setCookingFries] = useState<Ingredient[]>([]);
   const [readyFries, setReadyFries] = useState<Ingredient[]>([]);
   const [grilledFries, setGrilledFries] = useState<Ingredient[]>([]);
-  const [timeOutKeepingWarmFries, setTimeOutKeepingWarmFries] = useState<
-    number[]
-  >([]);
   const [emptyPlaceFries, setEmptyPlaceFries] = useState<string[]>([]);
   const cookingFriesRef = useRef<Ingredient[]>([]);
   const readyFriesRef = useRef<Ingredient[]>([]);
@@ -133,40 +131,35 @@ function Fries({
 
   // UPDATE EMPTY PLACE IN FRYER AND TRAY
 
-  function updateEmptyPlace(
-    takenPlaces: number,
-    limitSizePlace: number,
-    setterEmptyPlace: React.Dispatch<React.SetStateAction<string[]>>
-  ) {
-    const emptyPlace: number = limitSizePlace - takenPlaces;
-    const emptyPlaceArray: string[] = [];
-    if (emptyPlace > 0) {
-      for (let i = 0; i < emptyPlace; i++) {
-        emptyPlaceArray.push(emptyFries);
-      }
-    }
-    setterEmptyPlace(emptyPlaceArray);
-  }
-
   useEffect(() => {
     const takenPlaces: number =
       cookingFries.length + readyFries.length + grilledFries.length;
-    updateEmptyPlace(takenPlaces, limiteSizeFryer, setEmptyPlaceFries);
+    updateEmptyPlace(
+      takenPlaces,
+      limiteSizeFryer,
+      setEmptyPlaceFries,
+      emptyFries
+    );
   }, [cookingFries, readyFries, grilledFries]);
 
   useEffect(() => {
     const takenPlaces: number = readyPortionFries.length;
-    updateEmptyPlace(takenPlaces, limiteSizeFriesHolder, setEmptyPlaceTray);
+    updateEmptyPlace(
+      takenPlaces,
+      limiteSizeFriesHolder,
+      setEmptyPlaceTray,
+      emptyFries
+    );
   }, [readyPortionFries]);
 
   // COOKING RAW FRIES FROM FRIDGE AND KEEPING WARM
 
-  function readyFriesGoToGrilledFries(fries: Ingredient) {
+  function readyFriesGoToGrilledFries(fries: Ingredient): number {
     const timerId: number = setTimeout(() => {
       setGrilledFries([...grilledFriesRef.current, fries]);
       removeElementFromRefArray(readyFriesRef, fries, setReadyFries);
-    }, 1000);
-    setTimeOutKeepingWarmFries([...timeOutKeepingWarmFries, timerId]);
+    }, 2000);
+    return timerId;
   }
 
   function handleClickCookingRawFries(fries: Ingredient) {
@@ -196,24 +189,22 @@ function Fries({
 
         // Start cooking time timer
         setTimeout(() => {
+          const timerId: number = readyFriesGoToGrilledFries(fries);
+          fries.timerId = timerId;
           setReadyFries([...readyFriesRef.current, fries]);
           removeElementFromRefArray(cookingFriesRef, fries, setCookingFries);
-          readyFriesGoToGrilledFries(fries);
         }, 1000);
       } else {
         displayNoStock();
       }
     } else {
-      displayNoPlaceFries();
+      displayNoPlace();
     }
   }
 
   // SET READY FRIES IN FRIES TRAY
 
-  function handleClickSetReadyFriesInFriesTray(
-    product: Ingredient,
-    readyFrieIndex: number
-  ) {
+  function handleClickSetReadyFriesInFriesTray(product: Ingredient) {
     //identify the good tray
     const trayIndex: number = productionTray.findIndex(
       (tray) => tray.productName === product.ingredientName
@@ -235,10 +226,7 @@ function Fries({
 
       // remove ready fries of the array & clear timer
       removeElementFromRefArray(readyFriesRef, product, setReadyFries);
-      clearTimeout(timeOutKeepingWarmFries[readyFrieIndex]);
-      const friesTimerArrayCopy: number[] = timeOutKeepingWarmFries.slice();
-      friesTimerArrayCopy.splice(readyFrieIndex, 1);
-      setTimeOutKeepingWarmFries(friesTimerArrayCopy);
+      clearTimeout(product.timerId);
     }
   }
 
@@ -455,12 +443,10 @@ function Fries({
                 {cookingFries.map((fries, i) => (
                   <button key={i}>{fries.ingredientName}</button>
                 ))}
-                {readyFries.map((fries, i) => (
+                {readyFries.map((fries) => (
                   <button
-                    key={i}
-                    onClick={() =>
-                      handleClickSetReadyFriesInFriesTray(fries, i)
-                    }
+                    key={fries.timerId}
+                    onClick={() => handleClickSetReadyFriesInFriesTray(fries)}
                     style={{ color: "blue" }}
                   >
                     {fries.ingredientName}
@@ -468,7 +454,7 @@ function Fries({
                 ))}
                 {grilledFries.map((fries, i) => (
                   <button
-                    key={i}
+                    key={fries.timerId}
                     onClick={() => handleClickDeleteGrilledFryer(i)}
                     style={{ color: "green" }}
                   >

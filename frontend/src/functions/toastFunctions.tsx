@@ -14,14 +14,14 @@ export function displayLowBudget() {
 
 // FRIES
 
-const noPlaceFries = () => (
+const noPlace = () => (
   <div>
     <p>Il n&apos;y a pas assez de place</p>
   </div>
 );
 
-export function displayNoPlaceFries() {
-  toast.error(noPlaceFries);
+export function displayNoPlace() {
+  toast.error(noPlace);
 }
 
 const isGrilled = () => (

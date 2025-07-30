@@ -1,16 +1,25 @@
-import { FinalProductBag, FinalProductBurger, FinalProductDessert, FinalProductDrink, FinalProductSide, Ingredient, Size } from "./produitsInterfaces";
+import {
+  FinalProductBag,
+  FinalProductBurger,
+  FinalProductDessert,
+  FinalProductDrink,
+  FinalProductNugget,
+  FinalProductSide,
+  Ingredient,
+  Size,
+} from "./produitsInterfaces";
 
 // STOCKS
 
 export interface SectionRawIngredients {
   sectionName: string;
   title: string;
-  productionArray: Ingredient[]
+  productionArray: Ingredient[];
 }
 
 // FRIES
 
-export interface ProductionTray  {
+export interface ProductionTray {
   productName: string;
   ingredient: string;
   quantity: number;
@@ -22,6 +31,18 @@ export interface ProductionTray  {
 export interface FriesBuilder {
   ingredient: string;
   size: Size | string;
+}
+
+// NUGGET
+
+export interface NuggetBoxStock {
+  boite: FinalProductNugget;
+  quantity: number;
+}
+
+export interface AvailableFrying {
+  frying: Ingredient;
+  quantity: number;
 }
 
 // MENU

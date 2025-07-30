@@ -3,9 +3,13 @@ import Office from "./components/office/Office";
 import Kitchen from "./components/kitchen/Kitchen";
 import Counter from "./components/counter/Counter";
 import "./style/App.css";
-import { SectionRawIngredients } from "./interfaces/compositionElementsInterfaces";
+import {
+  NuggetBoxStock,
+  SectionRawIngredients,
+} from "./interfaces/compositionElementsInterfaces";
 import { allProductsArray } from "./elements/ingredients";
 import { FinalProductSide } from "./interfaces/produitsInterfaces";
+import { allNuggets } from "./elements/produits";
 
 function App() {
   // OFFICE & GLOBAL VARIABLES
@@ -18,6 +22,26 @@ function App() {
   const [readyPortionFries, setReadyPortionFries] = useState<
     FinalProductSide[]
   >([]);
+
+  // NUGGET VARIABLES
+
+  const [readyNuggetBox, setReadyNuggetBox] = useState<
+    [NuggetBoxStock, NuggetBoxStock, NuggetBoxStock]
+  >([
+    {
+      boite: allNuggets[0],
+      quantity: 0,
+    },
+    {
+      boite: allNuggets[1],
+      quantity: 0,
+    },
+    {
+      boite: allNuggets[2],
+      quantity: 0,
+    },
+  ]);
+
   return (
     <div id="homePage">
       <Office
@@ -31,6 +55,8 @@ function App() {
         setStocksRawsIngredients={setStocksRawsIngredients}
         readyPortionFries={readyPortionFries}
         setReadyPortionFries={setReadyPortionFries}
+        readyNuggetBox={readyNuggetBox}
+        setReadyNuggetBox={setReadyNuggetBox}
       />
       <Counter cashFund={cashFund} setCashFund={setCashFund} />
     </div>
