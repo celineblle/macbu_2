@@ -45,6 +45,13 @@ export interface AvailableFrying {
   quantity: number;
 }
 
+// GRILL
+
+export interface AvailableGrill {
+  steak: Ingredient;
+  quantity: number;
+}
+
 // MENU
 
 export interface Menu {
