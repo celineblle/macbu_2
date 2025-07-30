@@ -353,7 +353,7 @@ function Fries({
         <>
           <h3>Pret</h3>
           {productionTray.map((tray) => (
-            <button>
+            <button key={tray.productName}>
               {tray.productName} : {tray.quantity}
             </button>
           ))}
