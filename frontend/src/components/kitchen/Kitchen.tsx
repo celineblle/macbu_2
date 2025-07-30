@@ -37,13 +37,7 @@ function Kitchen({
   // NUGGET VARIABLES
 
   const [availableFrying, setAvailableFrying] = useState<
-    [
-      AvailableFrying,
-      AvailableFrying,
-      AvailableFrying,
-      AvailableFrying,
-      AvailableFrying
-    ]
+      AvailableFrying[]
   >([
     {
       frying: frying[0],

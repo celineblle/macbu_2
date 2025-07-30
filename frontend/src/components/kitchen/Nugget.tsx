@@ -13,7 +13,7 @@ import {
 import { Ingredient } from "../../interfaces/produitsInterfaces";
 import { frying } from "../../elements/ingredients";
 import { displayNoPlace, displayNoStock } from "../../functions/toastFunctions";
-import { removeToStockOfProduct } from "../../functions/inventoryManagementFunctions";
+import { removeToStockOfProduct, remplaceOldProductByUpdateProduct } from "../../functions/inventoryManagementFunctions";
 
 function Nugget({
   stocksRawsIngredients,
@@ -31,22 +31,13 @@ function Nugget({
   setReadyNuggetBox: React.Dispatch<
     React.SetStateAction<[NuggetBoxStock, NuggetBoxStock, NuggetBoxStock]>
   >;
-  availableFrying: [
-    AvailableFrying,
-    AvailableFrying,
-    AvailableFrying,
-    AvailableFrying,
-    AvailableFrying
-  ];
+  availableFrying: 
+    AvailableFrying[];
   setAvailableFrying: React.Dispatch<
     React.SetStateAction<
-      [
-        AvailableFrying,
-        AvailableFrying,
-        AvailableFrying,
-        AvailableFrying,
-        AvailableFrying
-      ]
+      
+        AvailableFrying[]
+      
     >
   >;
 }) {
@@ -105,8 +96,6 @@ function Nugget({
   function handleClickStartCooking(frying: Ingredient) {
     if (emptyPlace.length > 0) {
       //check stock available
-      const rawGlobalStockCopy: SectionRawIngredients[] =
-        stocksRawsIngredients.slice();
       const haveStock: number | undefined = stocksRawsIngredients[
         indexRawStock
       ].productionArray.findIndex(
@@ -122,12 +111,8 @@ function Nugget({
         setCookingFrying([...cookingFrying, frying]);
         //update stock
         const updateIngredient: Ingredient = removeToStockOfProduct(frying);
-        rawGlobalStockCopy[indexRawStock].productionArray.splice(
-          haveStock,
-          1,
-          updateIngredient
-        );
-        setStocksRawsIngredients(rawGlobalStockCopy);
+        const updateStockArray =  remplaceOldProductByUpdateProduct("frying", updateIngredient)
+        setStocksRawsIngredients(updateStockArray);
         // start cooking time timer
         setTimeout(() => {
           const timerId: number = keepingWarmFrying(frying);
@@ -151,19 +136,8 @@ function Nugget({
     const availableIndex: number = availableFrying.findIndex(
       (avaFry) => avaFry.frying.ingredientName === frying.ingredientName
     );
-    const availableFryingCopy: [
-      AvailableFrying,
-      AvailableFrying,
-      AvailableFrying,
-      AvailableFrying,
-      AvailableFrying
-    ] = availableFrying.slice() as [
-      AvailableFrying,
-      AvailableFrying,
-      AvailableFrying,
-      AvailableFrying,
-      AvailableFrying
-    ];
+    const availableFryingCopy: 
+      AvailableFrying[] = availableFrying.slice() 
     availableFryingCopy[availableIndex].quantity =
       availableFryingCopy[availableIndex].quantity + frying.quantity;
     setAvailableFrying(availableFryingCopy);
@@ -181,13 +155,7 @@ function Nugget({
     if (
       availableFrying[0].quantity >= boxSize.boite.ingredient.nuggetQuantity
     ) {
-      const availableFryingCopy = availableFrying.slice() as [
-        AvailableFrying,
-        AvailableFrying,
-        AvailableFrying,
-        AvailableFrying,
-        AvailableFrying
-      ];
+      const availableFryingCopy: AvailableFrying[] = availableFrying.slice() 
       availableFryingCopy[0].quantity =
         availableFryingCopy[0].quantity -
         boxSize.boite.ingredient.nuggetQuantity;
