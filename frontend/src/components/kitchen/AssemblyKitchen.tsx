@@ -1,8 +1,15 @@
 import React, { useState } from "react";
 import { setActionModal } from "../../functions/generalsFuctions";
 import "../../style/AssemblyKitchen.css";
+import { AvailableFrying } from "../../interfaces/compositionElementsInterfaces";
 
-function AssemblyKitchen() {
+function AssemblyKitchen({
+  availableFrying,
+  setAvailableFrying,
+}: {
+  availableFrying: [AvailableFrying, AvailableFrying, AvailableFrying, AvailableFrying, AvailableFrying];
+  setAvailableFrying: React.Dispatch<React.SetStateAction<[AvailableFrying, AvailableFrying, AvailableFrying, AvailableFrying, AvailableFrying]>>;
+}) {
   // MODAL
   const [toggleModal, setToggleModal] = useState(false);
 

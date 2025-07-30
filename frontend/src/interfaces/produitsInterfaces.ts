@@ -3,6 +3,7 @@ export interface Ingredient {
   price: number;
   quantity: number;
   currentStocks: number;
+  timerId: number;
 }
 
 export interface Size {
@@ -51,9 +52,17 @@ export interface FinalProductBag {
   type: string;
 }
 
+export interface FinalProductNugget {
+  name: string;
+  ingredient: Nugget;
+  size: number;
+  price: number;
+  type: string;
+}
+
 export interface FinalProductBurger {
   name: string;
-  ingredient: Burger | Nugget;
+  ingredient: Burger;
   size: number;
   price: number;
   type: string;
@@ -88,5 +97,3 @@ export interface FinalProductDrink {
   price: number;
   type: string;
 }
-
-
