@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import { setActionModal } from "../../functions/generalsFuctions";
 import "../../style/AssemblyKitchen.css";
-import { AvailableFrying } from "../../interfaces/compositionElementsInterfaces";
+import { AvailableFrying, AvailableGrill } from "../../interfaces/compositionElementsInterfaces";
 
 function AssemblyKitchen({
   availableFrying,
   setAvailableFrying,
+  availableGrill,
+  setAvailableGrill,
 }: {
   availableFrying: [AvailableFrying, AvailableFrying, AvailableFrying, AvailableFrying, AvailableFrying];
   setAvailableFrying: React.Dispatch<React.SetStateAction<[AvailableFrying, AvailableFrying, AvailableFrying, AvailableFrying, AvailableFrying]>>;
+  availableGrill: AvailableGrill[];
+  setAvailableGrill:React.Dispatch<React.SetStateAction<AvailableGrill[]>>;
+
 }) {
   // MODAL
   const [toggleModal, setToggleModal] = useState(false);

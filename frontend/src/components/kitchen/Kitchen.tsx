@@ -5,11 +5,12 @@ import AssemblyKitchen from "./AssemblyKitchen";
 import Grill from "./Grill";
 import "../../style/Kitchen.css";
 import {
+  AvailableGrill,
   NuggetBoxStock,
   SectionRawIngredients,
 } from "../../interfaces/compositionElementsInterfaces";
 import { FinalProductSide } from "../../interfaces/produitsInterfaces";
-import { frying } from "../../elements/ingredients";
+import { frying, meat } from "../../elements/ingredients";
 import { AvailableFrying } from "../../interfaces/compositionElementsInterfaces";
 
 function Kitchen({
@@ -66,6 +67,35 @@ function Kitchen({
     },
   ]);
 
+  // GRILL VARIABLE
+
+  const [availableGrill, setAvailableGrill] = useState<AvailableGrill[]>([
+  {
+    steak: meat[0],
+    quantity: 0,
+  },
+  {
+    steak: meat[1],
+    quantity: 0,
+  },
+  {
+    steak: meat[2],
+    quantity: 0,
+  },
+  {
+    steak: meat[3],
+    quantity: 0,
+  },
+  {
+    steak: meat[4],
+    quantity: 0,
+  },
+  {
+    steak: meat[5],
+    quantity: 0,
+  },
+])
+
   return (
     <div id="kitchenComponent">
       <Fries
@@ -85,8 +115,17 @@ function Kitchen({
       <AssemblyKitchen
         availableFrying={availableFrying}
         setAvailableFrying={setAvailableFrying}
+        availableGrill={availableGrill}
+        setAvailableGrill={setAvailableGrill}
+
       />
-      <Grill />
+      <Grill 
+              stocksRawsIngredients={stocksRawsIngredients}
+        setStocksRawsIngredients={setStocksRawsIngredients}
+
+      availableGrill={availableGrill}
+      setAvailableGrill={setAvailableGrill}
+      />
     </div>
   );
 }
