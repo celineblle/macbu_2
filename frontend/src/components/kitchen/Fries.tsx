@@ -440,8 +440,14 @@ function Fries({
                     {ingredient.ingredientName}
                   </button>
                 ))}
-                {cookingFries.map((fries, i) => (
-                  <button key={i}>{fries.ingredientName}</button>
+                {grilledFries.map((fries, i) => (
+                  <button
+                    key={fries.timerId}
+                    onClick={() => handleClickDeleteGrilledFryer(i)}
+                    style={{ color: "green" }}
+                  >
+                    {fries.ingredientName}
+                  </button>
                 ))}
                 {readyFries.map((fries) => (
                   <button
@@ -452,14 +458,8 @@ function Fries({
                     {fries.ingredientName}
                   </button>
                 ))}
-                {grilledFries.map((fries, i) => (
-                  <button
-                    key={fries.timerId}
-                    onClick={() => handleClickDeleteGrilledFryer(i)}
-                    style={{ color: "green" }}
-                  >
-                    {fries.ingredientName}
-                  </button>
+                {cookingFries.map((fries, i) => (
+                  <button key={i}>{fries.ingredientName}</button>
                 ))}
                 {emptyPlaceFries.map((place, i) => (
                   <button key={i}>{place}</button>
