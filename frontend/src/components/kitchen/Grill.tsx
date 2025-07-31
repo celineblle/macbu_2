@@ -84,6 +84,10 @@ function Grill({
   function handleClickCookingRawSteak(steak: Ingredient) {
     if (steak.currentStocks > 0) {
       if (emptyPlace.length > 0) {
+        // add a uniqueId to the steak
+        const uniqueId: number = Date.now();
+        steak.dateId = uniqueId;
+
         setCookingGrill([...cookingGrill, steak]);
 
         // remove from stock
@@ -119,7 +123,7 @@ function Grill({
     availableGrillCopy[steakIndex].quantity =
       availableGrillCopy[steakIndex].quantity + 1;
     setAvailableGrill(availableGrillCopy);
-    clearTimeout(steak.timerId)
+    clearTimeout(steak.timerId);
   }
 
   // REMOVE GRILLED STEAK
@@ -181,26 +185,26 @@ function Grill({
             </div>
             <div>
               <h3>Cuisson</h3>
-              {grilledGrill.map((steak, i) => (
+              {grilledGrill.map((steak) => (
                 <button
-                  key={i}
+                  key={steak.dateId}
                   onClick={() => handleClickRemoveGrilledSteak(steak)}
                   style={{ color: "blue" }}
                 >
                   {steak.ingredientName}
                 </button>
               ))}
-              {readyGrill.map((steak, i) => (
+              {readyGrill.map((steak) => (
                 <button
-                  key={i}
+                  key={steak.dateId}
                   onClick={() => handleClickRemoveReadySteakFromGrill(steak)}
                   style={{ color: "green" }}
                 >
                   {steak.ingredientName}
                 </button>
               ))}
-              {cookingGrill.map((steak, i) => (
-                <button key={i}>{steak.ingredientName}</button>
+              {cookingGrill.map((steak) => (
+                <button key={steak.dateId}>{steak.ingredientName}</button>
               ))}
               {emptyPlace.map((place, i) => (
                 <button key={i}>{place}</button>

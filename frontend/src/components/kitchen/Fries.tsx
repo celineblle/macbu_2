@@ -176,6 +176,9 @@ function Fries({
           indexIngredientInStock
         ].currentStocks > 0
       ) {
+        // add a unique id to the fries
+        const uniqueID: number = Date.now();
+        fries.dateId = uniqueID;
         // Start a new cooking portion
         const cookingFriesCopy: Ingredient[] = cookingFries.slice();
         cookingFriesCopy.push(fries);
@@ -333,9 +336,12 @@ function Fries({
     setProductionTray(trayArrayCopy);
   }
 
-  function handleClickDeleteGrilledFryer(friesIndex: number) {
+  function handleClickDeleteGrilledFryer(friesDateId: number) {
+    const indexGrilledFries: number = grilledFries.findIndex(
+      (fries) => fries.dateId === friesDateId
+    );
     const grilledFriesCopy: Ingredient[] = grilledFries.slice();
-    grilledFriesCopy.splice(friesIndex, 1);
+    grilledFriesCopy.splice(indexGrilledFries, 1);
     setGrilledFries(grilledFriesCopy);
   }
 
@@ -440,10 +446,10 @@ function Fries({
                     {ingredient.ingredientName}
                   </button>
                 ))}
-                {grilledFries.map((fries, i) => (
+                {grilledFries.map((fries) => (
                   <button
-                    key={fries.timerId}
-                    onClick={() => handleClickDeleteGrilledFryer(i)}
+                    key={fries.dateId}
+                    onClick={() => handleClickDeleteGrilledFryer(fries.dateId)}
                     style={{ color: "green" }}
                   >
                     {fries.ingredientName}
@@ -451,15 +457,15 @@ function Fries({
                 ))}
                 {readyFries.map((fries) => (
                   <button
-                    key={fries.timerId}
+                    key={fries.dateId}
                     onClick={() => handleClickSetReadyFriesInFriesTray(fries)}
                     style={{ color: "blue" }}
                   >
                     {fries.ingredientName}
                   </button>
                 ))}
-                {cookingFries.map((fries, i) => (
-                  <button key={i}>{fries.ingredientName}</button>
+                {cookingFries.map((fries) => (
+                  <button key={fries.dateId}>{fries.ingredientName}</button>
                 ))}
                 {emptyPlaceFries.map((place, i) => (
                   <button key={i}>{place}</button>

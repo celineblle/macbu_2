@@ -4,6 +4,7 @@ export interface Ingredient {
   quantity: number;
   currentStocks: number;
   timerId: number;
+  dateId: number;
 }
 
 export interface Size {
