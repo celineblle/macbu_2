@@ -8,7 +8,10 @@ import {
   SectionRawIngredients,
 } from "./interfaces/compositionElementsInterfaces";
 import { allProductsArray } from "./elements/ingredients";
-import { FinalProductSide } from "./interfaces/produitsInterfaces";
+import {
+  FinalProductBurger,
+  FinalProductSide,
+} from "./interfaces/produitsInterfaces";
 import { allNuggets } from "./elements/produits";
 
 function App() {
@@ -42,6 +45,10 @@ function App() {
     },
   ]);
 
+  // KITCHEN ASSEMBLY VARIABLES
+
+  const [readyBurger, setReadyBurger] = useState<FinalProductBurger[]>([]);
+
   return (
     <div id="homePage">
       <Office
@@ -57,8 +64,15 @@ function App() {
         setReadyPortionFries={setReadyPortionFries}
         readyNuggetBox={readyNuggetBox}
         setReadyNuggetBox={setReadyNuggetBox}
+        readyBurger={readyBurger}
+        setReadyBurger={setReadyBurger}
       />
-      <Counter cashFund={cashFund} setCashFund={setCashFund} />
+      <Counter
+        cashFund={cashFund}
+        setCashFund={setCashFund}
+        readyBurger={readyBurger}
+        setReadyBurger={setReadyBurger}
+      />
     </div>
   );
 }

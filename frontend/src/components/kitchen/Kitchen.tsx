@@ -9,7 +9,10 @@ import {
   NuggetBoxStock,
   SectionRawIngredients,
 } from "../../interfaces/compositionElementsInterfaces";
-import { FinalProductSide } from "../../interfaces/produitsInterfaces";
+import {
+  FinalProductBurger,
+  FinalProductSide,
+} from "../../interfaces/produitsInterfaces";
 import { frying, meat } from "../../elements/ingredients";
 import { AvailableFrying } from "../../interfaces/compositionElementsInterfaces";
 
@@ -20,6 +23,8 @@ function Kitchen({
   setReadyPortionFries,
   readyNuggetBox,
   setReadyNuggetBox,
+  readyBurger,
+  setReadyBurger,
 }: {
   stocksRawsIngredients: SectionRawIngredients[];
   setStocksRawsIngredients: React.Dispatch<
@@ -33,12 +38,12 @@ function Kitchen({
   setReadyNuggetBox: React.Dispatch<
     React.SetStateAction<[NuggetBoxStock, NuggetBoxStock, NuggetBoxStock]>
   >;
+  readyBurger: FinalProductBurger[];
+  setReadyBurger: React.Dispatch<React.SetStateAction<FinalProductBurger[]>>;
 }) {
   // NUGGET VARIABLES
 
-  const [availableFrying, setAvailableFrying] = useState<
-      AvailableFrying[]
-  >([
+  const [availableFrying, setAvailableFrying] = useState<AvailableFrying[]>([
     {
       frying: frying[0],
       quantity: 0,
@@ -64,31 +69,31 @@ function Kitchen({
   // GRILL VARIABLE
 
   const [availableGrill, setAvailableGrill] = useState<AvailableGrill[]>([
-  {
-    steak: meat[0],
-    quantity: 0,
-  },
-  {
-    steak: meat[1],
-    quantity: 0,
-  },
-  {
-    steak: meat[2],
-    quantity: 0,
-  },
-  {
-    steak: meat[3],
-    quantity: 0,
-  },
-  {
-    steak: meat[4],
-    quantity: 0,
-  },
-  {
-    steak: meat[5],
-    quantity: 0,
-  },
-])
+    {
+      steak: meat[0],
+      quantity: 0,
+    },
+    {
+      steak: meat[1],
+      quantity: 0,
+    },
+    {
+      steak: meat[2],
+      quantity: 0,
+    },
+    {
+      steak: meat[3],
+      quantity: 0,
+    },
+    {
+      steak: meat[4],
+      quantity: 0,
+    },
+    {
+      steak: meat[5],
+      quantity: 0,
+    },
+  ]);
 
   return (
     <div id="kitchenComponent">
@@ -111,14 +116,14 @@ function Kitchen({
         setAvailableFrying={setAvailableFrying}
         availableGrill={availableGrill}
         setAvailableGrill={setAvailableGrill}
-
+        readyBurger={readyBurger}
+        setReadyBurger={setReadyBurger}
       />
-      <Grill 
-              stocksRawsIngredients={stocksRawsIngredients}
+      <Grill
+        stocksRawsIngredients={stocksRawsIngredients}
         setStocksRawsIngredients={setStocksRawsIngredients}
-
-      availableGrill={availableGrill}
-      setAvailableGrill={setAvailableGrill}
+        availableGrill={availableGrill}
+        setAvailableGrill={setAvailableGrill}
       />
     </div>
   );
