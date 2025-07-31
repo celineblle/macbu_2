@@ -13,7 +13,10 @@ import {
 import { Ingredient } from "../../interfaces/produitsInterfaces";
 import { frying } from "../../elements/ingredients";
 import { displayNoPlace, displayNoStock } from "../../functions/toastFunctions";
-import { removeToStockOfProduct, remplaceOldProductByUpdateProduct } from "../../functions/inventoryManagementFunctions";
+import {
+  removeToStockOfProduct,
+  remplaceOldProductByUpdateProduct,
+} from "../../functions/inventoryManagementFunctions";
 
 function Nugget({
   stocksRawsIngredients,
@@ -31,15 +34,8 @@ function Nugget({
   setReadyNuggetBox: React.Dispatch<
     React.SetStateAction<[NuggetBoxStock, NuggetBoxStock, NuggetBoxStock]>
   >;
-  availableFrying: 
-    AvailableFrying[];
-  setAvailableFrying: React.Dispatch<
-    React.SetStateAction<
-      
-        AvailableFrying[]
-      
-    >
-  >;
+  availableFrying: AvailableFrying[];
+  setAvailableFrying: React.Dispatch<React.SetStateAction<AvailableFrying[]>>;
 }) {
   // MODAL
   const [toggleModal, setToggleModal] = useState(false);
@@ -107,11 +103,17 @@ function Nugget({
         stocksRawsIngredients[indexRawStock].productionArray[haveStock]
           .currentStocks > 0
       ) {
+        // add a uniqueId
+        const uniqueId: number = Date.now();
+        frying.dateId = uniqueId;
         // start cooking
         setCookingFrying([...cookingFrying, frying]);
         //update stock
         const updateIngredient: Ingredient = removeToStockOfProduct(frying);
-        const updateStockArray =  remplaceOldProductByUpdateProduct("frying", updateIngredient)
+        const updateStockArray = remplaceOldProductByUpdateProduct(
+          "frying",
+          updateIngredient
+        );
         setStocksRawsIngredients(updateStockArray);
         // start cooking time timer
         setTimeout(() => {
@@ -136,8 +138,7 @@ function Nugget({
     const availableIndex: number = availableFrying.findIndex(
       (avaFry) => avaFry.frying.ingredientName === frying.ingredientName
     );
-    const availableFryingCopy: 
-      AvailableFrying[] = availableFrying.slice() 
+    const availableFryingCopy: AvailableFrying[] = availableFrying.slice();
     availableFryingCopy[availableIndex].quantity =
       availableFryingCopy[availableIndex].quantity + frying.quantity;
     setAvailableFrying(availableFryingCopy);
@@ -155,7 +156,7 @@ function Nugget({
     if (
       availableFrying[0].quantity >= boxSize.boite.ingredient.nuggetQuantity
     ) {
-      const availableFryingCopy: AvailableFrying[] = availableFrying.slice() 
+      const availableFryingCopy: AvailableFrying[] = availableFrying.slice();
       availableFryingCopy[0].quantity =
         availableFryingCopy[0].quantity -
         boxSize.boite.ingredient.nuggetQuantity;
@@ -252,7 +253,7 @@ function Nugget({
                 <div>
                   {grilledFrying.map((frying: Ingredient) => (
                     <button
-                      key={frying.timerId}
+                      key={frying.dateId}
                       onClick={() => handleClickRemoveGrilledFrying(frying)}
                     >
                       {frying.ingredientName}
@@ -260,7 +261,7 @@ function Nugget({
                   ))}
                   {readyFrying.map((frying: Ingredient) => (
                     <button
-                      key={frying.timerId}
+                      key={frying.dateId}
                       onClick={() =>
                         handleClickRemoveReadyFryingFromFryer(frying)
                       }
@@ -268,8 +269,8 @@ function Nugget({
                       {frying.ingredientName}
                     </button>
                   ))}
-                  {cookingFrying.map((frying: Ingredient, i) => (
-                    <button key={i}>{frying.ingredientName}</button>
+                  {cookingFrying.map((frying: Ingredient) => (
+                    <button key={frying.dateId}>{frying.ingredientName}</button>
                   ))}
 
                   {emptyPlace.map((place: string, i) => (

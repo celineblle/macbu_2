@@ -8,6 +8,7 @@ export const frying: Ingredient[] = [
     quantity: 30,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Grand poisson pané",
@@ -15,6 +16,7 @@ export const frying: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Petit steak poulet pané",
@@ -22,6 +24,7 @@ export const frying: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Grand steak poulet pané",
@@ -29,6 +32,7 @@ export const frying: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Palet chêvre",
@@ -36,6 +40,7 @@ export const frying: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
 ];
 
@@ -52,6 +57,7 @@ export const bread: Ingredient[] = [
     quantity: 30,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Grand pain sésame",
@@ -59,6 +65,7 @@ export const bread: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Moyen pain sésame",
@@ -66,6 +73,7 @@ export const bread: Ingredient[] = [
     quantity: 30,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Pain carré ciabatta",
@@ -73,6 +81,7 @@ export const bread: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Pain carré bacon",
@@ -80,6 +89,7 @@ export const bread: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Pain muffin",
@@ -87,6 +97,7 @@ export const bread: Ingredient[] = [
     quantity: 40,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Petit pain bun",
@@ -94,6 +105,7 @@ export const bread: Ingredient[] = [
     quantity: 40,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Moyen pain bun",
@@ -101,6 +113,7 @@ export const bread: Ingredient[] = [
     quantity: 30,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Galette wrap",
@@ -108,6 +121,7 @@ export const bread: Ingredient[] = [
     quantity: 40,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
 ];
 
@@ -124,6 +138,7 @@ export const sauce: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Spécial Bu",
@@ -131,6 +146,7 @@ export const sauce: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Abricot",
@@ -138,6 +154,7 @@ export const sauce: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Ketchup",
@@ -145,6 +162,7 @@ export const sauce: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Ranch",
@@ -152,6 +170,7 @@ export const sauce: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Moutarde",
@@ -159,6 +178,7 @@ export const sauce: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
 ];
 
@@ -175,6 +195,7 @@ export const cheese: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Emmental",
@@ -182,6 +203,7 @@ export const cheese: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Mozzarella",
@@ -189,6 +211,7 @@ export const cheese: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
 ];
 
@@ -205,6 +228,7 @@ export const meat: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Oeuf",
@@ -212,6 +236,7 @@ export const meat: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Grand steak plat",
@@ -219,6 +244,7 @@ export const meat: Ingredient[] = [
     quantity: 50,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Petit steak plat",
@@ -226,6 +252,7 @@ export const meat: Ingredient[] = [
     quantity: 50,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Grand gros steak",
@@ -233,6 +260,7 @@ export const meat: Ingredient[] = [
     quantity: 50,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Moyen gros steak",
@@ -240,6 +268,7 @@ export const meat: Ingredient[] = [
     quantity: 50,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
 ];
 
@@ -256,6 +285,7 @@ export const variousIngredient: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Tomates",
@@ -263,6 +293,7 @@ export const variousIngredient: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Oignons",
@@ -270,6 +301,7 @@ export const variousIngredient: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Pickles",
@@ -277,6 +309,7 @@ export const variousIngredient: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Bacon",
@@ -284,6 +317,7 @@ export const variousIngredient: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Cornichons",
@@ -291,6 +325,7 @@ export const variousIngredient: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Oignon frit",
@@ -298,6 +333,7 @@ export const variousIngredient: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
 ];
 
@@ -314,6 +350,7 @@ export const freshProduct: Ingredient[] = [
     quantity: 30,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Légumes",
@@ -321,6 +358,7 @@ export const freshProduct: Ingredient[] = [
     quantity: 30,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Boisson yaourt",
@@ -328,6 +366,7 @@ export const freshProduct: Ingredient[] = [
     quantity: 30,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Fruits",
@@ -335,6 +374,7 @@ export const freshProduct: Ingredient[] = [
     quantity: 30,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
 ];
 
@@ -351,6 +391,7 @@ export const iceCream: Ingredient[] = [
     quantity: 40,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Coulis chocolat",
@@ -358,6 +399,7 @@ export const iceCream: Ingredient[] = [
     quantity: 40,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Eclats cacahuète",
@@ -365,6 +407,7 @@ export const iceCream: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Eclats choco-caramel",
@@ -372,6 +415,7 @@ export const iceCream: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Eclat biscuit-chocolat",
@@ -379,6 +423,7 @@ export const iceCream: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Eclat cacahuète-chocolat",
@@ -386,6 +431,7 @@ export const iceCream: Ingredient[] = [
     quantity: 20,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
 ];
 
@@ -402,6 +448,7 @@ export const fries: Ingredient[] = [
     quantity: 100,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Potatoe",
@@ -409,6 +456,7 @@ export const fries: Ingredient[] = [
     quantity: 100,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
 ];
 
@@ -425,6 +473,7 @@ export const drink: Ingredient[] = [
     quantity: 40,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Eau gazeuse",
@@ -432,6 +481,7 @@ export const drink: Ingredient[] = [
     quantity: 40,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Limonade",
@@ -439,6 +489,7 @@ export const drink: Ingredient[] = [
     quantity: 40,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Cola",
@@ -446,6 +497,7 @@ export const drink: Ingredient[] = [
     quantity: 40,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Orange gazeuse",
@@ -453,6 +505,7 @@ export const drink: Ingredient[] = [
     quantity: 40,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Jus d'orange",
@@ -460,6 +513,7 @@ export const drink: Ingredient[] = [
     quantity: 40,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Jus multifruit",
@@ -467,6 +521,7 @@ export const drink: Ingredient[] = [
     quantity: 40,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Thé glacé",
@@ -474,6 +529,7 @@ export const drink: Ingredient[] = [
     quantity: 40,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
 ];
 
@@ -490,6 +546,7 @@ export const bag: Ingredient[] = [
     quantity: 500,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Moyen sac",
@@ -497,6 +554,7 @@ export const bag: Ingredient[] = [
     quantity: 500,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
   {
     ingredientName: "Grand sac",
@@ -504,6 +562,7 @@ export const bag: Ingredient[] = [
     quantity: 250,
     currentStocks: 0,
     timerId: 0,
+    dateId: 0,
   },
 ];
 
