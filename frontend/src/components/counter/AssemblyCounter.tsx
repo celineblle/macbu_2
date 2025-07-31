@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import { setActionModal } from "../../functions/generalsFuctions";
 import "../../style/AssemblyCounter.css";
+import { FinalProductBurger } from "../../interfaces/produitsInterfaces";
 
 function AssemblyCounter({
   cashFund,
   setCashFund,
+  readyBurger,
+  setReadyBurger,
 }: {
   cashFund: number;
   setCashFund: React.Dispatch<React.SetStateAction<number>>;
+  readyBurger: FinalProductBurger[];
+  setReadyBurger: React.Dispatch<React.SetStateAction<FinalProductBurger[]>>;
 }) {
   // MODAL
   const [toggleModal, setToggleModal] = useState(false);

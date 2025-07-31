@@ -52,6 +52,13 @@ export interface AvailableGrill {
   quantity: number;
 }
 
+// KITCHEN
+
+export interface TabIngredientKitchen {
+  section: string;
+  tabName: string;
+}
+
 // MENU
 
 export interface Menu {
