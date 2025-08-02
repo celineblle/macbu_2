@@ -1,26 +1,26 @@
 import React, { useState } from "react";
-import { setActionModal } from "../../functions/generalsFuctions";
+import { Slide, ToastContainer } from "react-toastify";
+import {
+  setActionModal,
+} from "../../functions/generalsFuctions";
 import "../../style/AssemblyKitchen.css";
 import {
-  AvailableFrying,
-  AvailableGrill,
-  TabIngredientKitchen,
+  AvailableMeat,
+  SectionRawIngredients,
 } from "../../interfaces/compositionElementsInterfaces";
 import {
   Burger,
   FinalProductBurger,
-  Ingredient,
 } from "../../interfaces/produitsInterfaces";
-import {
-  bread,
-  cheese,
-  meat,
-  sauce,
-  variousIngredient,
-} from "../../elements/ingredients";
-import { allBurgers, burgersName } from "../../elements/produits";
+import { allBurgers } from "../../elements/produits";
+import { tabIngredient } from "./assemblyKitchenTools";
+import { emptyBurger } from "./assemblyKitchenTools";
+import BuildingBurgerComponent from "./BuildingBurgerComponent";
+import BuildingBurgerFonctions from "./BuildingBurgerFonctions";
 
 function AssemblyKitchen({
+  stocksRawsIngredients,
+  setStocksRawsIngredients,
   availableFrying,
   setAvailableFrying,
   availableGrill,
@@ -28,10 +28,14 @@ function AssemblyKitchen({
   readyBurger,
   setReadyBurger,
 }: {
-  availableFrying: AvailableFrying[];
-  setAvailableFrying: React.Dispatch<React.SetStateAction<AvailableFrying[]>>;
-  availableGrill: AvailableGrill[];
-  setAvailableGrill: React.Dispatch<React.SetStateAction<AvailableGrill[]>>;
+  stocksRawsIngredients: SectionRawIngredients[];
+  setStocksRawsIngredients: React.Dispatch<
+    React.SetStateAction<SectionRawIngredients[]>
+  >;
+  availableFrying: AvailableMeat[];
+  setAvailableFrying: React.Dispatch<React.SetStateAction<AvailableMeat[]>>;
+  availableGrill: AvailableMeat[];
+  setAvailableGrill: React.Dispatch<React.SetStateAction<AvailableMeat[]>>;
   readyBurger: FinalProductBurger[];
   setReadyBurger: React.Dispatch<React.SetStateAction<FinalProductBurger[]>>;
 }) {
@@ -41,7 +45,6 @@ function AssemblyKitchen({
 
   // LIMIT & PLACE HOLDER VARIABLES
   const limitSizeBurgerTray: number = 4;
-  const emptyBurger: string = "Vide";
   const customBurgerTitle: string = "Recette personnelle";
 
   // BUILDING BURGER VARIABLES
@@ -53,43 +56,28 @@ function AssemblyKitchen({
     ingredient: {
       bread: emptyBurger,
       meat: emptyBurger,
+      cheese: [],
+      variousIngredient: [],
+      sauce: [],
     },
     size: 0,
     price: 0,
     type: "burger",
   });
 
-  // TABS
-  const tabIngredient: TabIngredientKitchen[] = [
-    {
-      section: "bread",
-      tabName: "Pain",
-    },
-    {
-      section: "meat",
-      tabName: "Viande",
-    },
-    {
-      section: "meat",
-      tabName: "Friture",
-    },
-    {
-      section: "cheese",
-      tabName: "Fromage",
-    },
-    {
-      section: "variousIngredient",
-      tabName: "Ingrédient",
-    },
-    {
-      section: "sauce",
-      tabName: "Sauce",
-    },
-  ];
-
-  function handleClickSelectedTab(section: string) {
-    setActiveTab(section);
-  }
+  const {
+    addNewIngredientInBuildingBurger,
+    handleClickRemoveIngredientFromBuildingBurgerForGlobalStock,
+  } = BuildingBurgerFonctions({
+    stocksRawsIngredients,
+    setStocksRawsIngredients,
+    buildingBurger,
+    setBuildingBurger,
+    availableFrying,
+    setAvailableFrying,
+    availableGrill,
+    setAvailableGrill,
+  });
 
   return (
     <div id="assemblyKitchenComponent" className="component">
@@ -121,6 +109,19 @@ function AssemblyKitchen({
       </div>
       <div className={toggleModal ? "modalOpen" : "modalClose"}>
         <div className="modalContent">
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+            transition={Slide}
+          />
           <div className="headerModal">
             <h2>Cuisine</h2>
             <button
@@ -138,7 +139,7 @@ function AssemblyKitchen({
                   {tabIngredient.map((tab) => (
                     <button
                       key={tab.tabName}
-                      onClick={() => handleClickSelectedTab(tab.section)}
+                      onClick={() => (tab.section, setActiveTab)}
                     >
                       {tab.tabName}
                     </button>
@@ -152,9 +153,17 @@ function AssemblyKitchen({
                         : "tabClose"
                     }
                   >
-                    {bread.map((bread) => (
-                      <button key={bread.ingredientName}>
-                        {bread.ingredientName} : {bread.quantity}
+                    {stocksRawsIngredients[1].productionArray.map((bread) => (
+                      <button
+                        key={bread.ingredientName}
+                        onClick={() =>
+                          addNewIngredientInBuildingBurger(
+                            bread,
+                            bread.currentStocks
+                          )
+                        }
+                      >
+                        {bread.ingredientName} : {bread.currentStocks}
                       </button>
                     ))}
                   </div>
@@ -166,8 +175,16 @@ function AssemblyKitchen({
                     }
                   >
                     {availableGrill.map((meat) => (
-                      <button key={meat.steak.ingredientName}>
-                        {meat.steak.ingredientName} : {meat.quantity}
+                      <button
+                        key={meat.meat.ingredientName}
+                        onClick={() =>
+                          addNewIngredientInBuildingBurger(
+                            meat.meat,
+                            meat.quantity
+                          )
+                        }
+                      >
+                        {meat.meat.ingredientName} : {meat.quantity}
                       </button>
                     ))}
                   </div>
@@ -179,8 +196,16 @@ function AssemblyKitchen({
                     }
                   >
                     {availableFrying.map((frying) => (
-                      <button key={frying.frying.ingredientName}>
-                        {frying.frying.ingredientName} : {frying.quantity}
+                      <button
+                        key={frying.meat.ingredientName}
+                        onClick={() =>
+                          addNewIngredientInBuildingBurger(
+                            frying.meat,
+                            frying.quantity
+                          )
+                        }
+                      >
+                        {frying.meat.ingredientName} : {frying.quantity}
                       </button>
                     ))}
                   </div>
@@ -191,9 +216,17 @@ function AssemblyKitchen({
                         : "tabClose"
                     }
                   >
-                    {cheese.map((cheese) => (
-                      <button key={cheese.ingredientName}>
-                        {cheese.ingredientName} : {cheese.quantity}
+                    {stocksRawsIngredients[3].productionArray.map((cheese) => (
+                      <button
+                        key={cheese.ingredientName}
+                        onClick={() =>
+                          addNewIngredientInBuildingBurger(
+                            cheese,
+                            cheese.currentStocks
+                          )
+                        }
+                      >
+                        {cheese.ingredientName} : {cheese.currentStocks}
                       </button>
                     ))}
                   </div>
@@ -204,11 +237,22 @@ function AssemblyKitchen({
                         : "tabClose"
                     }
                   >
-                    {variousIngredient.map((ingredient) => (
-                      <button key={ingredient.ingredientName}>
-                        {ingredient.ingredientName} : {ingredient.quantity}
-                      </button>
-                    ))}
+                    {stocksRawsIngredients[5].productionArray.map(
+                      (ingredient) => (
+                        <button
+                          key={ingredient.ingredientName}
+                          onClick={() =>
+                            addNewIngredientInBuildingBurger(
+                              ingredient,
+                              ingredient.currentStocks
+                            )
+                          }
+                        >
+                          {ingredient.ingredientName} :{" "}
+                          {ingredient.currentStocks}
+                        </button>
+                      )
+                    )}
                   </div>
                   <div
                     className={
@@ -217,9 +261,14 @@ function AssemblyKitchen({
                         : "tabClose"
                     }
                   >
-                    {sauce.map((sauce) => (
-                      <button key={sauce.ingredientName}>
-                        {sauce.ingredientName} : {sauce.quantity}
+                    {stocksRawsIngredients[2].productionArray.map((sauce) => (
+                      <button
+                        key={sauce.ingredientName}
+                        onClick={() =>
+                          addNewIngredientInBuildingBurger(sauce, sauce.currentStocks)
+                        }
+                      >
+                        {sauce.ingredientName} : {sauce.currentStocks}
                       </button>
                     ))}
                   </div>
@@ -231,29 +280,15 @@ function AssemblyKitchen({
                   <button>Pret</button>
                   <button>Mettre en attente</button>
                 </div>
-                <div>
-                  {buildingBurger.ingredient.sauce !== undefined && (
-                    <p>{buildingBurger.ingredient.sauce}</p>
-                  )}
-                  {buildingBurger.ingredient.variousIngredient !==
-                    undefined && (
-                    <p>{buildingBurger.ingredient.variousIngredient}</p>
-                  )}
-                  {buildingBurger.ingredient.cheese !== undefined && (
-                    <p>{buildingBurger.ingredient.cheese}</p>
-                  )}
-                  {buildingBurger.ingredient.meat !== emptyBurger && (
-                    <p>{buildingBurger.ingredient.meat}</p>
-                  )}
-                  {buildingBurger.ingredient.bread !== emptyBurger && (
-                    <p>{buildingBurger.ingredient.bread}</p>
-                  )}
-                </div>
+                <BuildingBurgerComponent
+                  buildingBurger={buildingBurger}
+handleClickRemoveIngredientFromBuildingBurgerForGlobalStock={handleClickRemoveIngredientFromBuildingBurgerForGlobalStock}
+                />
               </div>
               <div>
                 <h3>Recettes</h3>
                 <ul>
-                  {allBurgers.map((burger) => (
+                  {allBurgers.map((burger: FinalProductBurger) => (
                     <li key={burger.name}>
                       {burger.name} :{" "}
                       {burger.ingredient[activeTab as keyof Burger] !==
@@ -291,8 +326,8 @@ function AssemblyKitchen({
                 </div>
 
                 <div>
-                  {waitingArrayBurger.map((burger) => (
-                    <button>
+                  {waitingArrayBurger.map((burger: FinalProductBurger, i) => (
+                    <button key={i}>
                       {burger.ingredient.variousIngredient}
                       {burger.ingredient.sauce}
                       {burger.ingredient.cheese}

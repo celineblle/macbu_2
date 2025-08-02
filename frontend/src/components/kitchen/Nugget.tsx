@@ -8,7 +8,7 @@ import "../../style/Nugget.css";
 import {
   NuggetBoxStock,
   SectionRawIngredients,
-  AvailableFrying,
+  AvailableMeat,
 } from "../../interfaces/compositionElementsInterfaces";
 import { Ingredient } from "../../interfaces/produitsInterfaces";
 import { frying } from "../../elements/ingredients";
@@ -34,8 +34,8 @@ function Nugget({
   setReadyNuggetBox: React.Dispatch<
     React.SetStateAction<[NuggetBoxStock, NuggetBoxStock, NuggetBoxStock]>
   >;
-  availableFrying: AvailableFrying[];
-  setAvailableFrying: React.Dispatch<React.SetStateAction<AvailableFrying[]>>;
+  availableFrying: AvailableMeat[];
+  setAvailableFrying: React.Dispatch<React.SetStateAction<AvailableMeat[]>>;
 }) {
   // MODAL
   const [toggleModal, setToggleModal] = useState(false);
@@ -136,9 +136,9 @@ function Nugget({
     removeElementFromRefArray(readyFryingRef, frying, setReadyFrying);
     clearTimeout(frying.timerId);
     const availableIndex: number = availableFrying.findIndex(
-      (avaFry) => avaFry.frying.ingredientName === frying.ingredientName
+      (avaFry) => avaFry.meat.ingredientName === frying.ingredientName
     );
-    const availableFryingCopy: AvailableFrying[] = availableFrying.slice();
+    const availableFryingCopy: AvailableMeat[] = availableFrying.slice();
     availableFryingCopy[availableIndex].quantity =
       availableFryingCopy[availableIndex].quantity + frying.quantity;
     setAvailableFrying(availableFryingCopy);
@@ -156,7 +156,7 @@ function Nugget({
     if (
       availableFrying[0].quantity >= boxSize.boite.ingredient.nuggetQuantity
     ) {
-      const availableFryingCopy: AvailableFrying[] = availableFrying.slice();
+      const availableFryingCopy: AvailableMeat[] = availableFrying.slice();
       availableFryingCopy[0].quantity =
         availableFryingCopy[0].quantity -
         boxSize.boite.ingredient.nuggetQuantity;
@@ -192,8 +192,8 @@ function Nugget({
             </li>
           ))}
           {availableFrying.map((frying) => (
-            <li key={frying.frying.ingredientName}>
-              {frying.frying.ingredientName} : {frying.quantity}
+            <li key={frying.meat.ingredientName}>
+              {frying.meat.ingredientName} : {frying.quantity}
             </li>
           ))}
         </ul>
@@ -214,9 +214,9 @@ function Nugget({
               <div>
                 <h3>Pret</h3>
                 <ul>
-                  {availableFrying.map((frying: AvailableFrying) => (
-                    <li key={frying.frying.ingredientName}>
-                      {frying.frying.ingredientName} : {frying.quantity}
+                  {availableFrying.map((frying: AvailableMeat) => (
+                    <li key={frying.meat.ingredientName}>
+                      {frying.meat.ingredientName} : {frying.quantity}
                     </li>
                   ))}
                 </ul>

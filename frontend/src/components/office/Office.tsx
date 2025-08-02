@@ -10,6 +10,7 @@ import {
   remplaceOldProductByUpdateProduct,
 } from "../../functions/inventoryManagementFunctions";
 
+
 function Office({
   cashFund,
   setCashFund,

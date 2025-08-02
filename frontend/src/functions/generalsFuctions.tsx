@@ -34,3 +34,7 @@ export function updateEmptyPlace(
   }
   setterEmptyPlace(emptyPlaceArray);
 }
+
+export  function handleClickSelectedTab(section: string, setterTab: React.Dispatch<React.SetStateAction<string>>) {
+    setterTab(section);
+  }

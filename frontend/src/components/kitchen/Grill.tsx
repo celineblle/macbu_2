@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../../style/Grill.css";
 import {
-  AvailableGrill,
-  SectionRawIngredients,
+AvailableMeat, SectionRawIngredients,
 } from "../../interfaces/compositionElementsInterfaces";
 import { Ingredient } from "../../interfaces/produitsInterfaces";
 import {
@@ -26,8 +25,8 @@ function Grill({
   setStocksRawsIngredients: React.Dispatch<
     React.SetStateAction<SectionRawIngredients[]>
   >;
-  availableGrill: AvailableGrill[];
-  setAvailableGrill: React.Dispatch<React.SetStateAction<AvailableGrill[]>>;
+  availableGrill: AvailableMeat[];
+  setAvailableGrill: React.Dispatch<React.SetStateAction<AvailableMeat[]>>;
 }) {
   // MODAL
   const [toggleModal, setToggleModal] = useState(false);
@@ -117,9 +116,9 @@ function Grill({
   function handleClickRemoveReadySteakFromGrill(steak: Ingredient) {
     removeElementFromRefArray(readyGrillRef, steak, setReadyGrill);
     const steakIndex: number = availableGrill.findIndex(
-      (steakGrill) => steakGrill.steak.ingredientName === steak.ingredientName
+      (steakGrill) => steakGrill.meat.ingredientName === steak.ingredientName
     );
-    const availableGrillCopy: AvailableGrill[] = availableGrill.slice();
+    const availableGrillCopy: AvailableMeat[] = availableGrill.slice();
     availableGrillCopy[steakIndex].quantity =
       availableGrillCopy[steakIndex].quantity + 1;
     setAvailableGrill(availableGrillCopy);
@@ -146,8 +145,8 @@ function Grill({
         <h3></h3>
         <ul>
           {availableGrill.map((steak) => (
-            <li key={steak.steak.ingredientName}>
-              {steak.steak.ingredientName} : {steak.quantity}
+            <li key={steak.meat.ingredientName}>
+              {steak.meat.ingredientName} : {steak.quantity}
             </li>
           ))}
         </ul>
@@ -177,8 +176,8 @@ function Grill({
               <h3>Pret</h3>
               <ul>
                 {availableGrill.map((steak) => (
-                  <li key={steak.steak.ingredientName}>
-                    {steak.steak.ingredientName} : {steak.quantity}
+                  <li key={steak.meat.ingredientName}>
+                    {steak.meat.ingredientName} : {steak.quantity}
                   </li>
                 ))}
               </ul>

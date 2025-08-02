@@ -40,15 +40,10 @@ export interface NuggetBoxStock {
   quantity: number;
 }
 
-export interface AvailableFrying {
-  frying: Ingredient;
-  quantity: number;
-}
+// GRILL & FRYING
 
-// GRILL
-
-export interface AvailableGrill {
-  steak: Ingredient;
+export interface AvailableMeat {
+  meat: Ingredient;
   quantity: number;
 }
 
@@ -57,6 +52,12 @@ export interface AvailableGrill {
 export interface TabIngredientKitchen {
   section: string;
   tabName: string;
+  correspondingArray: Ingredient[];
+}
+
+export interface AddNewIngredientBurger {
+  ingredient: Ingredient,
+  ingredientQuantity: number
 }
 
 // MENU
