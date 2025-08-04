@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { setActionModal } from "../../functions/generalsFuctions";
 import "../../style/AssemblyCounter.css";
 import { FinalProductBurger } from "../../interfaces/produitsInterfaces";
-import { AvailableIceCream } from "../../interfaces/compositionElementsInterfaces";
 
 function AssemblyCounter({
   cashFund,
