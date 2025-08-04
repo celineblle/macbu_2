@@ -309,13 +309,14 @@ function getIceCream(): FinalProductDessert[] {
           ingredient.iceCream[i].ingredientName,
           ingredient.iceCream[j].ingredientName,
         ],
+        melted: false,
       };
       const singleIC: FinalProductDessert = {
         name: `Glace ${recipeIC.coulisTopping[0]} ${recipeIC.coulisTopping[1]}`,
         ingredient: recipeIC,
         size: 2,
         timeId: 0,
-        timeObject: 0,
+        dateId: 0,
         price: 5,
         type: "glace",
       };
@@ -342,7 +343,7 @@ function getFries(): FinalProductSide[] {
         ingredient: recipeFrie,
         size: ingredient.size[j].capacity,
         timeId: 0,
-        timeObject: 0,
+        dateId: 0,
         price: price[j],
         type: "fries",
       };
@@ -382,7 +383,7 @@ function getFreshSide(): FinalProductSide[] {
       ingredient: recipeSide[i],
       size: size[i],
       timeId: 0,
-      timeObject: 0,
+      dateId: 0,
       price: price[i],
       type: "side",
     };
@@ -408,7 +409,7 @@ function getDrink(): FinalProductDrink[] {
         ingredient: flavour,
         size: ingredient.size[i].capacity,
         timeId: 0,
-        timeObject: 0,
+        dateId: 0,
         price: price[i],
         type: "drink",
       };

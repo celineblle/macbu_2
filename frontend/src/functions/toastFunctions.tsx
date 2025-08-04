@@ -47,6 +47,18 @@ export function displayPortionNotComplete() {
   toast.error(portionNotComplete);
 }
 
+// ICE CREAM
+
+const toppingNotComplete = () => (
+  <div>
+    <p>Il manque des toppings pour fabriquer la glace</p>
+  </div>
+);
+
+export function displayToppingnNotComplete() {
+  toast.error(toppingNotComplete);
+}
+
 // GENERAL
 
 const noStock = () => (

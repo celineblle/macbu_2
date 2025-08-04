@@ -26,6 +26,7 @@ export interface Nugget {
 
 export interface IceCream {
   coulisTopping: [string, string];
+  melted: boolean;
 }
 
 export interface Side {
@@ -74,7 +75,7 @@ export interface FinalProductSide {
   ingredient: Side | FriesSide;
   size: number;
   timeId: number;
-  timeObject: number;
+  dateId: number;
   price: number;
   type: string;
 }
@@ -84,7 +85,7 @@ export interface FinalProductDessert {
   ingredient: IceCream;
   size: number;
   timeId: number;
-  timeObject: number;
+  dateId: number;
   price: number;
   type: string;
 }
@@ -94,7 +95,7 @@ export interface FinalProductDrink {
   ingredient: Drink;
   size: number;
   timeId: number;
-  timeObject: number;
+  dateId: number;
   price: number;
   type: string;
 }

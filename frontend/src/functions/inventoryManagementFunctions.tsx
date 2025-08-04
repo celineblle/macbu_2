@@ -35,3 +35,9 @@ export function removeToStockOfProduct(product: Ingredient): Ingredient {
   productCopy.currentStocks = productCopy.currentStocks - 1;
   return productCopy;
 }
+
+export function restoreToStockOfProduct(product: Ingredient): Ingredient {
+  const productCopy: Ingredient = structuredClone(product);
+  productCopy.currentStocks = productCopy.currentStocks + 1;
+  return productCopy;
+}
