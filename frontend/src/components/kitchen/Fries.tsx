@@ -290,7 +290,7 @@ function Fries({
         ingredient: recipeFrie,
         size: portion.size.capacity,
         timeId: 0,
-        timeObject: 0,
+        dateId: 0,
         price: 0,
         type: "fries",
       };
