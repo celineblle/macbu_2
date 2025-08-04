@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Checkout from "./Checkout";
 import AssemblyCounter from "./AssemblyCounter";
 import Drink from "./Drink";
 import IceCream from "./IceCream";
 import "../../style/Counter.css";
 import { FinalProductBurger } from "../../interfaces/produitsInterfaces";
+import { allIceCream } from "../../elements/produits";
 
 function Counter({
   cashFund,
@@ -19,6 +20,11 @@ function Counter({
   setReadyBurger: React.Dispatch<React.SetStateAction<FinalProductBurger[]>>;
 
 }) {
+
+const [availableIceCream, setAvailableIceCream] = useState([])
+
+console.log(allIceCream.length)
+
   return (
     <div id="counterComponent">
       <Checkout cashFund={cashFund} />

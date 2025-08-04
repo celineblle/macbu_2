@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Slide, ToastContainer } from "react-toastify";
 import { setActionModal } from "../../../functions/generalsFuctions";
-import "../../style/AssemblyKitchen.css";
+import "../../../style/AssemblyKitchen.css";
 import { AvailableMeat } from "../../../interfaces/compositionElementsInterfaces";
 import {
   Burger,
