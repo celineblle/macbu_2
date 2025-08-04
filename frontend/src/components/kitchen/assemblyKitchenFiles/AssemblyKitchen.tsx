@@ -87,6 +87,13 @@ function AssemblyKitchen({
     setWaitingArrayBurger(waitingArray);
   }
 
+  // THROW BURGER ON CLICK
+  function throwBurger(burgerIndex: number) {
+    const readyBurgerCopy: FinalProductBurger[] = readyBurger.slice();
+    readyBurgerCopy.splice(burgerIndex, 1);
+    setReadyBurger(readyBurgerCopy);
+  }
+
   return (
     <div id="assemblyKitchenComponent" className="component">
       <div className="headerPage">
@@ -101,16 +108,16 @@ function AssemblyKitchen({
         <div>
           <h3>Pret</h3>
           <ul>
-            {readyBurger.map((burger) => (
-              <li>{burger.name}</li>
+            {readyBurger.map((burger, i) => (
+              <li key={i}>{burger.name}</li>
             ))}
           </ul>
         </div>
         <div>
           <h3>En attente</h3>
           <ul>
-            {waitingArrayBurger.map((burger) => (
-              <li>{burger.name}</li>
+            {waitingArrayBurger.map((burger, i) => (
+              <li key={i}>{burger.name}</li>
             ))}
           </ul>
         </div>
@@ -195,8 +202,10 @@ function AssemblyKitchen({
               <div>
                 <h3>Burgers prets</h3>
                 <div>
-                  {readyBurger.map((burger) => (
-                    <button>{burger.name}</button>
+                  {readyBurger.map((burger, i) => (
+                    <button key={i} onClick={() => throwBurger(i)}>
+                      {burger.name}
+                    </button>
                   ))}
                 </div>
               </div>
@@ -220,17 +229,19 @@ function AssemblyKitchen({
                         {burger.ingredient.cheese?.length !== 0 &&
                           burger.ingredient.cheese !== undefined &&
                           burger.ingredient.cheese.map((ingredient) => (
-                            <li>{ingredient} </li>
+                            <li key={ingredient}>{ingredient} </li>
                           ))}
                         {burger.ingredient.sauce?.length !== 0 &&
                           burger.ingredient.sauce !== undefined &&
                           burger.ingredient.sauce.map((sauce) => (
-                            <li>{sauce} </li>
+                            <li key={sauce}>{sauce} </li>
                           ))}
                         {burger.ingredient.variousIngredient?.length !== 0 &&
                           burger.ingredient.variousIngredient !== undefined &&
                           burger.ingredient.variousIngredient.map(
-                            (ingredient) => <li>{ingredient} </li>
+                            (ingredient) => (
+                              <li key={ingredient}>{ingredient} </li>
+                            )
                           )}
                       </ul>
                     </button>
