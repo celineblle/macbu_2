@@ -13,6 +13,7 @@ import {
   FinalProductSide,
 } from "./interfaces/produitsInterfaces";
 import { allNuggets } from "./elements/produits";
+import { StocksRawsIngredientsContext, SetStocksRawsIngredientsContext } from "./context/StockRawsContext";
 
 function App() {
   // OFFICE & GLOBAL VARIABLES
@@ -51,6 +52,10 @@ function App() {
 
   return (
     <div id="homePage">
+      <SetStocksRawsIngredientsContext value={setStocksRawsIngredients}>
+        <StocksRawsIngredientsContext value={stocksRawsIngredients}>
+
+        
       <Office
         cashFund={cashFund}
         setCashFund={setCashFund}
@@ -73,6 +78,8 @@ function App() {
         readyBurger={readyBurger}
         setReadyBurger={setReadyBurger}
       />
+      </StocksRawsIngredientsContext>
+      </SetStocksRawsIngredientsContext>
     </div>
   );
 }

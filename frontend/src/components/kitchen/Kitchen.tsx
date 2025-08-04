@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Fries from "./Fries";
 import Nugget from "./Nugget";
-import AssemblyKitchen from "./AssemblyKitchen";
+import AssemblyKitchen from "./assemblyKitchenFiles/AssemblyKitchen";
 import Grill from "./Grill";
 import "../../style/Kitchen.css";
 import {
-  AvailableGrill,
+  AvailableMeat,
   NuggetBoxStock,
   SectionRawIngredients,
 } from "../../interfaces/compositionElementsInterfaces";
@@ -14,7 +14,6 @@ import {
   FinalProductSide,
 } from "../../interfaces/produitsInterfaces";
 import { frying, meat } from "../../elements/ingredients";
-import { AvailableFrying } from "../../interfaces/compositionElementsInterfaces";
 
 function Kitchen({
   stocksRawsIngredients,
@@ -43,55 +42,55 @@ function Kitchen({
 }) {
   // NUGGET VARIABLES
 
-  const [availableFrying, setAvailableFrying] = useState<AvailableFrying[]>([
+  const [availableFrying, setAvailableFrying] = useState<AvailableMeat[]>([
     {
-      frying: frying[0],
-      quantity: 0,
+      meat: frying[0],
+      quantity: 10,
     },
     {
-      frying: frying[1],
-      quantity: 0,
+      meat: frying[1],
+      quantity: 10,
     },
     {
-      frying: frying[2],
-      quantity: 0,
+      meat: frying[2],
+      quantity: 10,
     },
     {
-      frying: frying[3],
-      quantity: 0,
+      meat: frying[3],
+      quantity: 10,
     },
     {
-      frying: frying[4],
-      quantity: 0,
+      meat: frying[4],
+      quantity: 10,
     },
   ]);
 
   // GRILL VARIABLE
 
-  const [availableGrill, setAvailableGrill] = useState<AvailableGrill[]>([
+  const [availableGrill, setAvailableGrill] = useState<AvailableMeat[]>([
     {
-      steak: meat[0],
-      quantity: 0,
+      meat: meat[0],
+      quantity: 10,
     },
     {
-      steak: meat[1],
-      quantity: 0,
+      meat: meat[1],
+      quantity: 10,
     },
     {
-      steak: meat[2],
-      quantity: 0,
+      meat: meat[2],
+      quantity: 10,
     },
     {
-      steak: meat[3],
-      quantity: 0,
+      meat: meat[3],
+      quantity: 10,
     },
     {
-      steak: meat[4],
-      quantity: 0,
+      meat: meat[4],
+      quantity: 10,
     },
     {
-      steak: meat[5],
-      quantity: 0,
+      meat: meat[5],
+      quantity: 10,
     },
   ]);
 
