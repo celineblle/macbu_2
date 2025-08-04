@@ -12,7 +12,6 @@ import {
   SetStocksRawsIngredientsContext,
 } from "../../context/StockRawsContext";
 import {
-  addToStockUniqueProduct,
   removeToStockOfProduct,
   remplaceOldProductByUpdateProduct,
   restoreToStockOfProduct,
