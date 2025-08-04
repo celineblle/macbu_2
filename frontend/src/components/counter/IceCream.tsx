@@ -6,6 +6,10 @@ function IceCream() {
   // MODAL
   const [toggleModal, setToggleModal] = useState(false);
 
+  // BUILDING ICE CREAM VARIABLES
+
+
+
   return (
     <div id="iceCreamComponent" className="component">
       <div className="headerPage">
