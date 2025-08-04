@@ -1,23 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import { emptyBurger, tabIngredient } from "./assemblyKitchenTools";
-import { AvailableMeat, TabIngredientKitchen, SectionRawIngredients} from "../../interfaces/compositionElementsInterfaces";
-import { Ingredient } from "../../interfaces/produitsInterfaces";
-import { removeToStockOfProduct, remplaceOldProductByUpdateProduct } from "../../functions/inventoryManagementFunctions";
-import { frying, meat } from "../../elements/ingredients";
-import { displayNoStock } from "../../functions/toastFunctions";
-import { FinalProductBurger } from "../../interfaces/produitsInterfaces";
+import {
+  AvailableMeat,
+  TabIngredientKitchen,
+} from "../../../interfaces/compositionElementsInterfaces";
+import { Ingredient } from "../../../interfaces/produitsInterfaces";
+import {
+  removeToStockOfProduct,
+  remplaceOldProductByUpdateProduct,
+} from "../../../functions/inventoryManagementFunctions";
+import { frying, meat } from "../../../elements/ingredients";
+import { displayNoStock } from "../../../functions/toastFunctions";
+import { FinalProductBurger } from "../../../interfaces/produitsInterfaces";
+import {
+  SetStocksRawsIngredientsContext,
+  StocksRawsIngredientsContext,
+} from "../../../context/StockRawsContext";
 
-export function BuildingBurgerFonctions(
-    {  stocksRawsIngredients,
-  setStocksRawsIngredients,
+export function BuildingBurgerFonctions({
   buildingBurger,
   setBuildingBurger,
   availableFrying,
   setAvailableFrying,
   availableGrill,
-  setAvailableGrill,}: {
-  stocksRawsIngredients: SectionRawIngredients[];
-  setStocksRawsIngredients: React.Dispatch<React.SetStateAction<SectionRawIngredients[]>>;
+  setAvailableGrill,
+}: {
   buildingBurger: FinalProductBurger;
   setBuildingBurger: React.Dispatch<React.SetStateAction<FinalProductBurger>>;
 
@@ -25,8 +32,11 @@ export function BuildingBurgerFonctions(
   setAvailableFrying: React.Dispatch<React.SetStateAction<AvailableMeat[]>>;
   availableGrill: AvailableMeat[];
   setAvailableGrill: React.Dispatch<React.SetStateAction<AvailableMeat[]>>;
-
 }) {
+  //CONTEXTS
+  const stocksRawsIngredients = useContext(StocksRawsIngredientsContext);
+  const setStocksRawsIngredients = useContext(SetStocksRawsIngredientsContext);
+
   // CHECK PROPERTY ARRAY : EMPTY  & ALREADY INGREDIENT
 
   function checkEmptyVariableInArray(propertyContent: string[]): boolean {
@@ -68,7 +78,9 @@ export function BuildingBurgerFonctions(
       sectionName,
       updateIngredient
     );
-    setStocksRawsIngredients(updateStocks);
+    if (setStocksRawsIngredients !== undefined) {
+      setStocksRawsIngredients(updateStocks);
+    }
   }
 
   // RESTORE STOCKS
@@ -85,7 +97,9 @@ export function BuildingBurgerFonctions(
         globalStockArrayCopy[i].productionArray[ingredientIndex].currentStocks =
           globalStockArrayCopy[i].productionArray[ingredientIndex]
             .currentStocks + 1;
-        setStocksRawsIngredients(globalStockArrayCopy);
+        if (setStocksRawsIngredients !== undefined) {
+          setStocksRawsIngredients(globalStockArrayCopy);
+        }
       }
     }
   }
@@ -303,7 +317,7 @@ export function BuildingBurgerFonctions(
   }
   return {
     addNewIngredientInBuildingBurger,
-    handleClickRemoveIngredientFromBuildingBurgerForGlobalStock
+    handleClickRemoveIngredientFromBuildingBurgerForGlobalStock,
   };
 }
 

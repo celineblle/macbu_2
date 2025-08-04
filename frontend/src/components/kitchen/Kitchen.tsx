@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Fries from "./Fries";
 import Nugget from "./Nugget";
-import AssemblyKitchen from "./AssemblyKitchen";
+import AssemblyKitchen from "./assemblyKitchenFiles/AssemblyKitchen";
 import Grill from "./Grill";
 import "../../style/Kitchen.css";
 import {
@@ -45,11 +45,11 @@ function Kitchen({
   const [availableFrying, setAvailableFrying] = useState<AvailableMeat[]>([
     {
       meat: frying[0],
-      quantity: 0,
+      quantity: 10,
     },
     {
       meat: frying[1],
-      quantity: 0,
+      quantity: 10,
     },
     {
       meat: frying[2],
@@ -61,7 +61,7 @@ function Kitchen({
     },
     {
       meat: frying[4],
-      quantity: 0,
+      quantity: 10,
     },
   ]);
 
@@ -70,11 +70,11 @@ function Kitchen({
   const [availableGrill, setAvailableGrill] = useState<AvailableMeat[]>([
     {
       meat: meat[0],
-      quantity: 0,
+      quantity: 10,
     },
     {
       meat: meat[1],
-      quantity: 0,
+      quantity: 10,
     },
     {
       meat: meat[2],
@@ -86,11 +86,11 @@ function Kitchen({
     },
     {
       meat: meat[4],
-      quantity: 0,
+      quantity: 10,
     },
     {
       meat: meat[5],
-      quantity: 0,
+      quantity: 10,
     },
   ]);
 
@@ -111,8 +111,6 @@ function Kitchen({
         setAvailableFrying={setAvailableFrying}
       />
       <AssemblyKitchen
-        stocksRawsIngredients={stocksRawsIngredients}
-        setStocksRawsIngredients={setStocksRawsIngredients}
         availableFrying={availableFrying}
         setAvailableFrying={setAvailableFrying}
         availableGrill={availableGrill}

@@ -1,7 +1,5 @@
 import React from "react";
-import {
-  FinalProductBurger,
-} from "../../interfaces/produitsInterfaces";
+import { FinalProductBurger } from "../../../interfaces/produitsInterfaces";
 import { emptyBurger } from "./assemblyKitchenTools";
 
 function BuildingBurgerComponent({
@@ -9,10 +7,10 @@ function BuildingBurgerComponent({
   handleClickRemoveIngredientFromBuildingBurgerForGlobalStock,
 }: {
   buildingBurger: FinalProductBurger;
-  handleClickRemoveIngredientFromBuildingBurgerForGlobalStock: (ingredient: string) => void;
+  handleClickRemoveIngredientFromBuildingBurgerForGlobalStock: (
+    ingredient: string
+  ) => void;
 }) {
-
-
   return (
     <ul>
       <li>
@@ -102,7 +100,4 @@ function BuildingBurgerComponent({
   );
 }
 
-
-
-  
 export default BuildingBurgerComponent;
