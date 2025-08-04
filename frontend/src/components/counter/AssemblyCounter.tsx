@@ -2,17 +2,24 @@ import React, { useState } from "react";
 import { setActionModal } from "../../functions/generalsFuctions";
 import "../../style/AssemblyCounter.css";
 import { FinalProductBurger } from "../../interfaces/produitsInterfaces";
+import { AvailableIceCream } from "../../interfaces/compositionElementsInterfaces";
 
 function AssemblyCounter({
   cashFund,
   setCashFund,
   readyBurger,
   setReadyBurger,
+  readyIceCream,
+  setReadyIceCream,
 }: {
   cashFund: number;
   setCashFund: React.Dispatch<React.SetStateAction<number>>;
   readyBurger: FinalProductBurger[];
   setReadyBurger: React.Dispatch<React.SetStateAction<FinalProductBurger[]>>;
+  readyIceCream: AvailableIceCream[];
+  setReadyIceCream: React.Dispatch<
+    React.SetStateAction<AvailableIceCream[]>
+  >;
 }) {
   // MODAL
   const [toggleModal, setToggleModal] = useState(false);

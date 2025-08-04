@@ -5,7 +5,6 @@ import {
   FinalProductDrink,
   FinalProductNugget,
   FinalProductSide,
-  IceCream,
   Ingredient,
   Size,
 } from "./produitsInterfaces";
@@ -60,14 +59,6 @@ export interface AddNewIngredientBurger {
   ingredient: Ingredient,
   ingredientQuantity: number
 }
-
-// ICE CREAM
-
-export interface AvailableIceCream {
-  recipe: IceCream;
-  quantity: number;
-}
-
 
 // MENU
 
