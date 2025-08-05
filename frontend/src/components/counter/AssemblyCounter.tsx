@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { setActionModal } from "../../functions/generalsFuctions";
 import "../../style/AssemblyCounter.css";
-import { FinalProductBurger } from "../../interfaces/produitsInterfaces";
+import {
+  FinalProductBurger,
+  FinalProductDrink,
+  FinalProductDessert,
+} from "../../interfaces/produitsInterfaces";
 
 function AssemblyCounter({
   cashFund,
@@ -10,15 +14,17 @@ function AssemblyCounter({
   setReadyBurger,
   readyIceCream,
   setReadyIceCream,
+  readyDrink,
+  setReadyDrink,
 }: {
   cashFund: number;
   setCashFund: React.Dispatch<React.SetStateAction<number>>;
   readyBurger: FinalProductBurger[];
   setReadyBurger: React.Dispatch<React.SetStateAction<FinalProductBurger[]>>;
-  readyIceCream: AvailableIceCream[];
-  setReadyIceCream: React.Dispatch<
-    React.SetStateAction<AvailableIceCream[]>
-  >;
+  readyIceCream: FinalProductDessert[];
+  setReadyIceCream: React.Dispatch<React.SetStateAction<FinalProductDessert[]>>;
+  readyDrink: FinalProductDrink[];
+  setReadyDrink: React.Dispatch<React.SetStateAction<FinalProductDrink[]>>;
 }) {
   // MODAL
   const [toggleModal, setToggleModal] = useState(false);

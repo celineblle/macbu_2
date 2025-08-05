@@ -4,7 +4,7 @@ import AssemblyCounter from "./AssemblyCounter";
 import Drink from "./Drink";
 import IceCreamComponent from "./IceCream";
 import "../../style/Counter.css";
-import { FinalProductBurger, FinalProductDessert } from "../../interfaces/produitsInterfaces";
+import { FinalProductBurger, FinalProductDessert, FinalProductDrink } from "../../interfaces/produitsInterfaces";
 
 function Counter({
   cashFund,
@@ -17,9 +17,13 @@ function Counter({
   readyBurger: FinalProductBurger[];
   setReadyBurger: React.Dispatch<React.SetStateAction<FinalProductBurger[]>>;
 }) {
+  // ICE CREAM
   const [readyIceCream, setReadyIceCream] = useState<
     FinalProductDessert[]
   >([]);
+
+  //DRINK
+  const [readyDrink, setReadyDrink] = useState<FinalProductDrink[]>([])
 
   return (
     <div id="counterComponent">
@@ -31,8 +35,13 @@ function Counter({
         setReadyBurger={setReadyBurger}
         readyIceCream={readyIceCream}
         setReadyIceCream={setReadyIceCream}
+        readyDrink={readyDrink}
+        setReadyDrink={setReadyDrink}
       />
-      <Drink />
+      <Drink 
+        readyDrink={readyDrink}
+        setReadyDrink={setReadyDrink}
+      />
       <IceCreamComponent
         readyIceCream={readyIceCream}
         setReadyIceCream={setReadyIceCream}
