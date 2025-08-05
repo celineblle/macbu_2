@@ -55,8 +55,20 @@ const toppingNotComplete = () => (
   </div>
 );
 
-export function displayToppingnNotComplete() {
+export function displayToppingNotComplete() {
   toast.error(toppingNotComplete);
+}
+
+// DRINK
+
+const flavourNotComplete = () => (
+  <div>
+    <p>Il manque la saveur ou la taille pour fabriquer la boisson</p>
+  </div>
+);
+
+export function displayFlavourNotComplete() {
+  toast.error(flavourNotComplete);
 }
 
 // GENERAL

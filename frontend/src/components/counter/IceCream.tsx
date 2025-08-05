@@ -16,7 +16,7 @@ import {
   remplaceOldProductByUpdateProduct,
   restoreToStockOfProduct,
 } from "../../functions/inventoryManagementFunctions";
-import { displayToppingnNotComplete } from "../../functions/toastFunctions";
+import { displayToppingNotComplete } from "../../functions/toastFunctions";
 import { Slide, ToastContainer } from "react-toastify";
 
 function IceCreamComponent({
@@ -215,7 +215,7 @@ function IceCreamComponent({
 
       setBuildingIceCream(emptyIceCreamObject);
     } else {
-      displayToppingnNotComplete();
+      displayToppingNotComplete();
     }
   }
 

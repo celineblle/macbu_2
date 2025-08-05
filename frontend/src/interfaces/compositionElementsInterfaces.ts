@@ -60,6 +60,12 @@ export interface AddNewIngredientBurger {
   ingredientQuantity: number
 }
 
+// DRINK 
+export interface BuildingDrink {
+  size: string;
+  flavour: string;
+}
+
 // MENU
 
 export interface Menu {
