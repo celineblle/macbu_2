@@ -6,6 +6,7 @@ import {
   FinalProductDrink,
   FinalProductDessert,
 } from "../../interfaces/produitsInterfaces";
+import { generateRamdomOrders } from "../../functions/Order";
 
 function AssemblyCounter({
   cashFund,
@@ -29,6 +30,10 @@ function AssemblyCounter({
   // MODAL
   const [toggleModal, setToggleModal] = useState(false);
 
+
+const order = generateRamdomOrders()
+  console.log(order);
+
   return (
     <div id="assemblyCounterComponent" className="component">
       <div className="headerPage">
@@ -39,8 +44,9 @@ function AssemblyCounter({
           Comptoir
         </button>
       </div>
-      <div id="assemblyCounterPageContent"></div>
-      <div id={toggleModal ? "modalOpen" : "modalClose"}>
+      <div id="assemblyCounterPageContent">
+      </div>
+      <div className={toggleModal ? "modalOpen" : "modalClose"}>
         <div className="modalContent">
           <div className="headerModal">
             <h2>Comptoir</h2>

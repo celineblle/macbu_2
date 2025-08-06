@@ -14,6 +14,7 @@ import {
 } from "./interfaces/produitsInterfaces";
 import { allNuggets } from "./elements/produits";
 import { StocksRawsIngredientsContext, SetStocksRawsIngredientsContext } from "./context/StockRawsContext";
+import { generateRamdomOrders } from "./functions/Order";
 
 function App() {
   // OFFICE & GLOBAL VARIABLES

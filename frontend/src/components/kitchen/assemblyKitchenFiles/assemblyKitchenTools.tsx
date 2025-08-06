@@ -60,4 +60,5 @@ export const emptyBurgerObject: FinalProductBurger = {
   size: 0,
   price: 0,
   type: "burger",
+  bread: "type",
 };

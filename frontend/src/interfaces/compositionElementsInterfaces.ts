@@ -56,11 +56,11 @@ export interface TabIngredientKitchen {
 }
 
 export interface AddNewIngredientBurger {
-  ingredient: Ingredient,
-  ingredientQuantity: number
+  ingredient: Ingredient;
+  ingredientQuantity: number;
 }
 
-// DRINK 
+// DRINK
 export interface BuildingDrink {
   size: string;
   flavour: string;
@@ -74,7 +74,7 @@ export interface Menu {
   drink: FinalProductDrink;
 }
 
-export interface MenuEnfant {
+export interface ChildMenu {
   sandwich: FinalProductBurger;
   side: FinalProductSide;
   drink: FinalProductDrink;
@@ -89,8 +89,9 @@ export interface Order {
     | FinalProductDessert
     | FinalProductDrink
     | FinalProductSide
+    | FinalProductNugget
     | Menu
-    | MenuEnfant
+    | ChildMenu
   )[];
   size: number;
   price: number;

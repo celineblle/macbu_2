@@ -293,6 +293,7 @@ function Fries({
         dateId: 0,
         price: 0,
         type: "fries",
+        side: "type",
       };
 
       setReadyPortionFries([...readyPortionFries, finalFrie]);

@@ -292,6 +292,7 @@ function getAllBurger(): FinalProductBurger[] {
       timeObject: 0,
       price: burgerPrice[i],
       type: "burger",
+      bread: "type",
     };
     allBurgers.push(singleBurger);
   }
@@ -319,6 +320,7 @@ function getIceCream(): FinalProductDessert[] {
         dateId: 0,
         price: 5,
         type: "glace",
+        dessert: "type",
       };
       allIceCream.push(singleIC);
     }
@@ -327,6 +329,42 @@ function getIceCream(): FinalProductDessert[] {
 }
 
 export const allIceCream: FinalProductDessert[] = getIceCream();
+
+export const drinkingYaourt: Side = {
+  side: ingredient.freshProduct[2].ingredientName,
+};
+
+export const fruits: Side = {
+  side: ingredient.freshProduct[3].ingredientName,
+};
+
+function getFreshDessert(): FinalProductDessert[] {
+  const allFreshDessert: FinalProductDessert[] = [];
+  const recipeDessert: Side[] = [drinkingYaourt, fruits];
+  const price: number[] = [3, 3, 3, 3];
+
+  for (let i = 0; i < recipeDessert.length; i++) {
+    const singleDessert: FinalProductDessert = {
+      name: recipeDessert[i].side,
+      ingredient: recipeDessert[i],
+      size: ingredient.size[0].capacity,
+      timeId: 0,
+      dateId: 0,
+      price: price[i],
+      type: "side",
+      dessert: "type",
+    };
+    allFreshDessert.push(singleDessert);
+  }
+
+  return allFreshDessert;
+}
+export const allFreshDessert: FinalProductDessert[] = getFreshDessert();
+
+export const allDessert: FinalProductDessert[] = [
+  ...allFreshDessert,
+  ...allIceCream,
+];
 
 function getFries(): FinalProductSide[] {
   const price = [4, 6, 8];
@@ -346,6 +384,7 @@ function getFries(): FinalProductSide[] {
         dateId: 0,
         price: price[j],
         type: "fries",
+        side: "type",
       };
       allFries.push(finalFrie);
     }
@@ -363,29 +402,21 @@ export const vegetable: Side = {
   side: ingredient.freshProduct[1].ingredientName,
 };
 
-export const drinkingYaourt: Side = {
-  side: ingredient.freshProduct[2].ingredientName,
-};
-
-export const fruits: Side = {
-  side: ingredient.freshProduct[3].ingredientName,
-};
-
 function getFreshSide(): FinalProductSide[] {
   const allFreshSide: FinalProductSide[] = [];
-  const recipeSide: Side[] = [salad, vegetable, drinkingYaourt, fruits];
+  const recipeSide: Side[] = [salad, vegetable];
   const price: number[] = [3, 3, 3, 3];
-  const size: number[] = [1, 1, 1, 1];
 
   for (let i = 0; i < recipeSide.length; i++) {
     const singleSide: FinalProductSide = {
       name: recipeSide[i].side,
       ingredient: recipeSide[i],
-      size: size[i],
+      size: ingredient.size[0].capacity,
       timeId: 0,
       dateId: 0,
       price: price[i],
       type: "side",
+      side: "type",
     };
     allFreshSide.push(singleSide);
   }
@@ -394,6 +425,10 @@ function getFreshSide(): FinalProductSide[] {
 }
 
 export const allFreshSide: FinalProductSide[] = getFreshSide();
+
+export const allAdultSide: FinalProductSide[] = [...allFries, allFreshSide[0]];
+
+export const allChildSide: FinalProductSide[] = [...allFreshSide, ...allFries];
 
 function getDrink(): FinalProductDrink[] {
   const allDrinks: FinalProductDrink[] = [];
@@ -412,6 +447,7 @@ function getDrink(): FinalProductDrink[] {
         dateId: 0,
         price: price[i],
         type: "drink",
+        drink: "type",
       };
       allDrinks.push(singleDrink);
     }
@@ -429,7 +465,14 @@ export const allProducts: (
   | FinalProductDrink
   | FinalProductSide
   | FinalProductNugget
-)[] = [...allNuggets, ...allBurgers, ...allIceCream, ...allDrinks, ...allSide];
+)[] = [
+  ...allNuggets,
+  ...allBurgers,
+  ...allIceCream,
+  ...allDrinks,
+  ...allSide,
+  ...allFreshDessert,
+];
 
 export const productsForRandom: (
   | FinalProductBurger
