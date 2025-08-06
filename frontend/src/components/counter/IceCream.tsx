@@ -50,6 +50,7 @@ function IceCreamComponent({
     dateId: 0,
     price: 0,
     type: "glace",
+    dessert: "type"
   };
 
   // BUILDING ICE CREAM VARIABLES

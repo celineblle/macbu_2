@@ -68,6 +68,7 @@ export interface FinalProductBurger {
   size: number;
   price: number;
   type: string;
+  bread: string;
 }
 
 export interface FinalProductSide {
@@ -78,16 +79,18 @@ export interface FinalProductSide {
   dateId: number;
   price: number;
   type: string;
+  side: string;
 }
 
 export interface FinalProductDessert {
   name: string;
-  ingredient: IceCream;
+  ingredient: IceCream | Side;
   size: number;
   timeId: number;
   dateId: number;
   price: number;
   type: string;
+  dessert: string;
 }
 
 export interface FinalProductDrink {
@@ -98,4 +101,5 @@ export interface FinalProductDrink {
   dateId: number;
   price: number;
   type: string;
+  drink: string;
 }
