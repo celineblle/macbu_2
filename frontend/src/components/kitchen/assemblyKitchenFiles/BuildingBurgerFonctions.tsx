@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { emptyBurger, tabIngredient } from "./assemblyKitchenTools";
 import {
   AvailableMeat,
-  TabIngredientKitchen,
+  TabsIngredients,
 } from "../../../interfaces/compositionElementsInterfaces";
 import { Ingredient } from "../../../interfaces/produitsInterfaces";
 import {
@@ -155,7 +155,7 @@ export function BuildingBurgerFonctions({
 
   function findTheBuildingBurgerProperty(
     ingredient: string
-  ): TabIngredientKitchen | undefined {
+  ): TabsIngredients | undefined {
     for (let i = 0; i < tabIngredient.length; i++) {
       if (
         tabIngredient[i].correspondingArray.find(
@@ -271,7 +271,7 @@ export function BuildingBurgerFonctions({
     ingredient: string
   ) {
     //FIND PROPERTY AND REMOVE FROM THE BUILDING BURGER
-    const propertyFromTabArray: TabIngredientKitchen | undefined =
+    const propertyFromTabArray: TabsIngredients | undefined =
       findTheBuildingBurgerProperty(ingredient);
     if (propertyFromTabArray !== undefined) {
       const buildingBugerCopy = structuredClone(buildingBurger);

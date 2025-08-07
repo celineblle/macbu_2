@@ -76,20 +76,22 @@ import { size } from "../elements/ingredients";
     sandwich: emptyBurger,
     side: emptySide,
     drink: emptyDrink,
+    dateId: 0,
   };
 
-  const menuChildTemplate = {
+  const menuChildTemplate: ChildMenu = {
     sandwich: emptyBurger,
     side: emptySide,
     drink: emptyDrink,
     dessert: emptyDessert,
+    dateId: 0, 
   };
 
   // GET RADOM NUMBER & PRODUCT
   function getRadomNumber(max: number): number {
     let random: number = Math.floor(Math.random() * max);
-    if (random === 0) {
-      random = 1;
+    if (random <= 1) {
+      random = 2;
     }
     return random;
   }
@@ -220,6 +222,7 @@ import { size } from "../elements/ingredients";
     for (let i = 0; i < limitMenuWithExistingBurger; i++) {
       const menuTemplateCopy = structuredClone(menuTemplate);
       menuTemplateCopy.sandwich = burgerArray[i];
+      menuTemplateCopy.dateId = Date.now()
       initializedMenu.push(menuTemplateCopy);
     }
 
@@ -229,6 +232,7 @@ import { size } from "../elements/ingredients";
       const newBurger = getNewUniqueProduct(allBurgers, 2)
       if(newBurger !== undefined && "bread" in newBurger) {
         menuTemplateCopy.sandwich = newBurger
+        menuTemplateCopy.dateId = Date.now()
         initializedMenu.push(menuTemplateCopy);
       }
     }
@@ -362,13 +366,14 @@ import { size } from "../elements/ingredients";
     menuArray: Menu[] | ChildMenu[],
     finalOrder: Order
   ) {
+    const menuReduction: number = "dessert" in menuArray[0] ? 7 : 5
     for (let i = 0; i < menuArray.length; i++) {
       const currentMenu = menuArray[i];
       finalOrder.price =
         finalOrder.price +
         currentMenu.drink.price +
         currentMenu.sandwich.price +
-        currentMenu.side.price;
+        currentMenu.side.price - menuReduction;
       finalOrder.size =
         finalOrder.size +
         currentMenu.drink.size +
@@ -392,17 +397,20 @@ import { size } from "../elements/ingredients";
     )[],
     finalOrder: Order
   ) {
+    if(rawsIngredientArray !== undefined && rawsIngredientArray.length !== 0) {
+
+    
     for (let i = 0; i < rawsIngredientArray.length; i++) {
       finalOrder.price = finalOrder.price + rawsIngredientArray[i].price;
       finalOrder.size = finalOrder.size + rawsIngredientArray[i].size;
       finalOrder.products.push(rawsIngredientArray[i]);
     }
+}
   }
 
   // START RAW PRODUCT CREATION
 export  function generateRamdomOrders() {
     const tailleCommande: number = getRadomNumber(limitSizeCommande);
-    console.log("taill",tailleCommande)
     // get raws ingredients
     const rawsProductsOrder: (
       | FinalProductBurger
@@ -411,12 +419,11 @@ export  function generateRamdomOrders() {
       | FinalProductSide
       | FinalProductNugget
     )[] = getRamdomProductForRawOrder(tailleCommande);
-    console.log(rawsProductsOrder)
+
     const { onlyBurger, onlyChildBurger, onlyDrink, onlySide, onlyChildDessert } =
       sortAllIngredient(rawsProductsOrder);
 
-    // create menu
-
+      // create menu
     const adultMenu = createMenus("", onlyBurger, onlyDrink, onlySide, []);
     const childMenu = createMenus(
       "child",
@@ -424,11 +431,11 @@ export  function generateRamdomOrders() {
       onlyDrink,
       onlySide, onlyChildDessert
     );
-
     const finalOrder: Order = {
       products: [],
       size: 0,
       price: 0,
+      dateId: Date.now(),
     };
 
     if (adultMenu !== undefined) {
@@ -438,6 +445,10 @@ export  function generateRamdomOrders() {
       getPricesAndSizesOfMenus(childMenu, finalOrder);
     }
     getPricesAndSizesFromRawsIngredient(rawsProductsOrder, finalOrder);
-
+    getPricesAndSizesFromRawsIngredient(onlyBurger, finalOrder)
+    getPricesAndSizesFromRawsIngredient(onlyChildBurger, finalOrder)
+    getPricesAndSizesFromRawsIngredient(onlyDrink, finalOrder)
+    getPricesAndSizesFromRawsIngredient(onlySide, finalOrder)
+    getPricesAndSizesFromRawsIngredient(onlyChildDessert, finalOrder)
     return finalOrder;
   }

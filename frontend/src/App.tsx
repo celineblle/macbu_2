@@ -14,7 +14,6 @@ import {
 } from "./interfaces/produitsInterfaces";
 import { allNuggets } from "./elements/produits";
 import { StocksRawsIngredientsContext, SetStocksRawsIngredientsContext } from "./context/StockRawsContext";
-import { generateRamdomOrders } from "./functions/Order";
 
 function App() {
   // OFFICE & GLOBAL VARIABLES
@@ -29,7 +28,6 @@ function App() {
   >([]);
 
   // NUGGET VARIABLES
-
   const [readyNuggetBox, setReadyNuggetBox] = useState<
     [NuggetBoxStock, NuggetBoxStock, NuggetBoxStock]
   >([
@@ -78,6 +76,11 @@ function App() {
         setCashFund={setCashFund}
         readyBurger={readyBurger}
         setReadyBurger={setReadyBurger}
+        readyPortionFries={readyPortionFries}
+        setReadyPortionFries={setReadyPortionFries}
+        readyNuggetBox={readyNuggetBox}
+        setReadyNuggetBox={setReadyNuggetBox}
+
       />
       </StocksRawsIngredientsContext>
       </SetStocksRawsIngredientsContext>
