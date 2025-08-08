@@ -1,8 +1,8 @@
 import React, {useContext} from "react";
-import { StocksRawsIngredientsContext } from "../../context/StockRawsContext";
-import { TabsProducts } from "../../interfaces/compositionElementsInterfaces";
-import { FinalProductDessert, FinalProductBurger, FinalProductSide, FinalProductDrink } from "../../interfaces/produitsInterfaces";
-import { NuggetBoxStock } from "../../interfaces/compositionElementsInterfaces";
+import { StocksRawsIngredientsContext } from "../../../context/StockRawsContext";
+import { TabsProducts } from "../../../interfaces/compositionElementsInterfaces";
+import { NuggetBoxStock } from "../../../interfaces/compositionElementsInterfaces";
+import { FinalProductDessert, FinalProductDrink, FinalProductBurger, FinalProductSide } from "../../../interfaces/produitsInterfaces";
 
 function AssemblyCounterTools({
   readyBurger,

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Checkout from "./Checkout";
-import AssemblyCounter from "./AssemblyCounter";
+import AssemblyCounter from "./AssemblyCounter/AssemblyCounter";
 import Drink from "./Drink";
 import IceCreamComponent from "./IceCream";
 import "../../style/Counter.css";
