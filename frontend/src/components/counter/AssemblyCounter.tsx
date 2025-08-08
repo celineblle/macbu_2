@@ -18,8 +18,16 @@ import { NuggetBoxStock } from "../../interfaces/compositionElementsInterfaces";
 import TabsAssemblyCounter from "./TabsAssemblyCounter";
 import { Ingredient } from "../../interfaces/produitsInterfaces";
 import { allBags, allFreshProducts, allNuggets } from "../../elements/produits";
-import { removeToStockOfProduct, remplaceOldProductByUpdateProduct } from "../../functions/inventoryManagementFunctions";
-import { SetStocksRawsIngredientsContext, StocksRawsIngredientsContext } from "../../context/StockRawsContext";
+import {
+  removeToStockOfProduct,
+  remplaceOldProductByUpdateProduct,
+} from "../../functions/inventoryManagementFunctions";
+import {
+  SetStocksRawsIngredientsContext,
+  StocksRawsIngredientsContext,
+} from "../../context/StockRawsContext";
+import { freshProduct } from "../../elements/ingredients";
+import AssemblyCounterTools from "./AssemblyCounterTools";
 
 function AssemblyCounter({
   cashFund,
@@ -55,27 +63,25 @@ function AssemblyCounter({
   // MODAL
   const [toggleModal, setToggleModal] = useState(false);
 
-  // CONTEXT
-const setStocksRawsIngredients = useContext(SetStocksRawsIngredientsContext)
-const stocksRawsIngredients = useContext(StocksRawsIngredientsContext)
-
   // GLOBAL TOOLS
   const limitOfOrdersPlace: number = 4;
   const emptyOrder: string = "Vide";
 
-  // ORDERS TO PREPARE TOOLS
+  // ORDERS TO PREPARE VARIABLES
   const limitOfOrders: number = 10;
   const [ordersToPrepare, setOrdersToPrepare] = useState<Order[]>([]);
   const ordersToPrepareRef = useRef<Order[]>([]);
   // empty place
   const [emptyPlacesPrepare, setEmptyPlacePrepare] = useState<string[]>([]);
 
+  // UPDATE REF, UPDATE EMPTY PLACE ARRAY AND START NEW ORDERS TO PREPARE
   useEffect(() => {
     // update ref
     ordersToPrepareRef.current = ordersToPrepare;
 
     // add empty place for front
     if (ordersToPrepare.length < limitOfOrdersPlace) {
+      // update empty place array
       updateEmptyPlace(
         ordersToPrepare.length,
         limitOfOrdersPlace,
@@ -96,124 +102,6 @@ const stocksRawsIngredients = useContext(StocksRawsIngredientsContext)
       }, 1000);
     }
   }, [ordersToPrepare]);
-
-  //ORDER IN PREPARATION
-  const limitOfTray: number = 8;
-  const emptyTray: Tray = {
-    products: [],
-    bagCapacity: 0,
-    bag: [],
-    price: 0,
-    dateId: 0,
-  };
-  const [tray, setTray] = useState<Tray[]>([]);
-  const [trayIdSelected, setTrayIdSelected] = useState<number>([]);
-  // empty place
-  const [emptyPlacesPreparation, setEmptyPlacesPreparation] = useState<
-    string[]
-  >([]);
-
-  useEffect(() => {
-    for (let i = 0; i < limitOfTray; i++) {
-      emptyTray.dateId = i;
-      tray.push(emptyTray);
-    }
-    emptyTray.dateId = 0;
-  }, []);
-
-  // TRAY VARIABLES
-
-  //   {
-  //   products: (
-  //     | FinalProductBurger
-  //     | FinalProductDessert
-  //     | FinalProductDrink
-  //     | FinalProductSide
-  //     | NuggetBoxStock
-  //   )[];
-  //   bagCapacity: number;
-  //   bag: FinalProductBag[];
-  //   price: number;
-  //   dateId: number;
-  // }
-
-  function addBagInTray(product: Ingredient) {
-    const currentBag: FinalProductBag | undefined = allBags.find(
-      (bag) => bag.name === product.ingredientName
-    );
-    if (currentBag !== undefined) {
-      tray[trayIdSelected].bagCapacity =
-        tray[trayIdSelected].bagCapacity + currentBag.ingredient.capacity;
-      tray[trayIdSelected].bag.push(currentBag);
-      const updatedProduct: Ingredient = removeToStockOfProduct(product);
-      const updatedStock = remplaceOldProductByUpdateProduct("bag", updatedProduct);
-      if(setStocksRawsIngredients !== undefined) {
-        setStocksRawsIngredients(updatedStock)
-      }
-    }
-  }
-
-  function addNuggetInTray(product: NuggetBoxStock) {
-    const newNugget: FinalProductNugget | undefined = allNuggets.find((nugget) => nugget.name === product.boite.name);
-    if(newNugget !== undefined) {
-      tray[trayIdSelected].products.push(newNugget)
-      const nuggetBoxIndex: number = readyNuggetBox.findIndex((nugget) => nugget.boite.name === product.boite.name);
-      if(nuggetBoxIndex !== undefined) {
-        const nuggetBoxCopy = readyNuggetBox.slice() as [NuggetBoxStock, NuggetBoxStock, NuggetBoxStock]
-        nuggetBoxCopy[nuggetBoxIndex].quantity = nuggetBoxCopy[nuggetBoxIndex].quantity - 1;
-        setReadyNuggetBox(nuggetBoxCopy); 
-      }
-    }
-  }
-
-  function removeProductFromRightStock(product: FinalProductBurger
-      | FinalProductSide
-      | FinalProductDrink
-      | FinalProductDessert) {
-            const currentProduct = product;
-tray[trayIdSelected].products.push(currentProduct);
-if("bread" in currentProduct) {
-  const burgerArrayCopy = readyBurger.slice()
-  const productIndex: number | undefined = readyBurger.findIndex((burger) => burger.name === currentProduct.name);
-  burgerArrayCopy.splice(productIndex, 1);
-  setReadyBurger(burgerArrayCopy)
-} else if("side" in currentProduct) {
-  const frieIndex: number | undefined = readyPortionFries.findIndex((frie) => frie.name === currentProduct.name);
-  if(frieIndex !== undefined) {
-    const frieArrayCopy = readyPortionFries.slice()
-    frieArrayCopy.splice(frieIndex, 1)
-    setReadyPortionFries(frieArrayCopy)
-  } else {
-    const rawStockCopy = stocksRawsIngredients.slice();
-   const freshProductIndex =  raw
-  }
-}
-
-
-
-      }
-
-
-  // ADD INGREDIENT IN TRAY
-  function addIngredientInTray(
-    product:
-      | Ingredient
-      | FinalProductBurger
-      | FinalProductSide
-      | FinalProductDrink
-      | FinalProductDessert
-      | NuggetBoxStock
-  ) {
-    const currentProduct = product;
-    if ("ingredientName" in currentProduct) {
-      addBagInTray(currentProduct);
-    } else if("boite" in currentProduct) {
-addNuggetInTray(currentProduct)
-    } else {
-      
-
-    }
-  }
 
   return (
     <div id="assemblyCounterComponent" className="component">
@@ -279,37 +167,16 @@ addNuggetInTray(currentProduct)
                 <button key={i}>{place}</button>
               ))}
             </div>
-            <div>
-              <h3>Commandes en préparation</h3>
-              {tray.map((order) => (
-                <button key={order.dateId}>
-                  <ul>
-                    {order.products.map((product) => (
-                      "boite" in product ?
-                      <li>{product.boite}</li> :
-                      <li>{product.name}</li>
-                    ))}
-                  </ul>
-                  <ul>
-                    {order.bag.map((bag) => (
-                      <li>{bag.name}</li>
-                    ))}
-                  </ul>
-                </button>
-              ))}
-              {emptyPlacesPreparation.map((place, i) => (
-                <button key={i}>{place}</button>
-              ))}
-            </div>
+            
             <div>
               <h3>Produits</h3>
-              <TabsAssemblyCounter
-                readyBurger={readyBurger}
-                readyPortionFries={readyPortionFries}
-                readyDrink={readyDrink}
-                readyNuggetBox={readyNuggetBox}
-                readyIceCream={readyIceCream}
-              />
+              <TabsAssemblyCounter  
+              readyBurger={readyBurger}
+  readyPortionFries={readyPortionFries}
+  readyDrink={readyDrink}
+  readyNuggetBox={readyNuggetBox}
+  readyIceCream={readyIceCream}
+  />
             </div>
           </div>
         </div>

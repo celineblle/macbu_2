@@ -341,13 +341,15 @@ export const fruits: Side = {
 
 function getFreshDessert(): FinalProductDessert[] {
   const allFreshDessert: FinalProductDessert[] = [];
-  const recipeDessert: Side[] = [drinkingYaourt, fruits];
+  const recipeName: string[] = [ingredient.freshProduct[2].ingredientName, ingredient.freshProduct[3].ingredientName]
   const price: number[] = [3, 3, 3, 3];
 
-  for (let i = 0; i < recipeDessert.length; i++) {
+  for (let i = 0; i < recipeName.length; i++) {
     const singleDessert: FinalProductDessert = {
-      name: recipeDessert[i].side,
-      ingredient: recipeDessert[i],
+      name: recipeName[i],
+      ingredient: {
+        side: recipeName[i]
+      },
       size: ingredient.size[0].capacity,
       timeId: 0,
       dateId: 0,
@@ -405,13 +407,15 @@ export const vegetable: Side = {
 
 function getFreshSide(): FinalProductSide[] {
   const allFreshSide: FinalProductSide[] = [];
-  const recipeSide: Side[] = [salad, vegetable];
+  const recipeName: string[] = [ingredient.freshProduct[0].ingredientName, ingredient.freshProduct[1].ingredientName]
   const price: number[] = [3, 3, 3, 3];
 
-  for (let i = 0; i < recipeSide.length; i++) {
+  for (let i = 0; i < recipeName.length; i++) {
     const singleSide: FinalProductSide = {
-      name: recipeSide[i].side,
-      ingredient: recipeSide[i],
+      name: recipeName[i],
+      ingredient: {
+        side: recipeName[i]
+      },
       size: ingredient.size[0].capacity,
       timeId: 0,
       dateId: 0,

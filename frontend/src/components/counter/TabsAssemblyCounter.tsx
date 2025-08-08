@@ -1,6 +1,4 @@
-import React, { useContext, useState } from "react";
-import { TabsProducts } from "../../interfaces/compositionElementsInterfaces";
-import { allFreshProducts } from "../../elements/produits";
+import React, {  useState } from "react";
 import {
   FinalProductBurger,
   FinalProductSide,
@@ -10,7 +8,7 @@ import {
 } from "../../interfaces/produitsInterfaces";
 import { NuggetBoxStock } from "../../interfaces/compositionElementsInterfaces";
 import { handleClickSelectedTab } from "../../functions/generalsFuctions";
-import { StocksRawsIngredientsContext } from "../../context/StockRawsContext";
+import AssemblyCounterTools from "./AssemblyCounterTools";
 
 function TabsAssemblyCounter({
   readyBurger,
@@ -26,48 +24,13 @@ function TabsAssemblyCounter({
   readyIceCream: FinalProductDessert[];
 }) {
 
-    // CONTEXT
-    const stocksRawsIngredients = useContext(StocksRawsIngredientsContext)
+const [activeTab, setActiveTab] = useState<string>("burger");
 
-    const [activeTab, setActiveTab] = useState<string>("burger");
-
-  const tabsCounterArray: TabsProducts[] = [
-    {
-      section: "burger",
-      tabName: "Burger",
-      correspondingArray: readyBurger,
-    },
-    {
-      section: "side",
-      tabName: "Accompagnement",
-      correspondingArray: readyPortionFries,
-    },
-    {
-      section: "fresh",
-      tabName: "Frais",
-      correspondingArray: allFreshProducts,
-    },
-    {
-      section: "drink",
-      tabName: "Boisson",
-      correspondingArray: readyDrink,
-    },
-    {
-      section: "nugget",
-      tabName: "Nugget",
-      correspondingArray: readyNuggetBox,
-    },
-    {
-      section: "dessert",
-      tabName: "Glace",
-      correspondingArray: readyIceCream,
-    },
-        {
-      section: "bag",
-      tabName: "Sac",
-      correspondingArray: stocksRawsIngredients[10].productionArray,
-    },
-  ];
+const {tabsCounterArray} = AssemblyCounterTools(  {readyBurger,
+  readyPortionFries,
+  readyDrink,
+  readyNuggetBox,
+  readyIceCream})
 
   return (
     <div>
