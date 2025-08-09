@@ -219,7 +219,6 @@ function IceCreamComponent({
 
       // add unique id to the new ice cream
       buildingIceCreamCopy.dateId = Date.now();
-      console.log(buildingIceCreamCopy);
       setCookingIceCream([...cookingIceCreamRef.current, buildingIceCreamCopy]);
 
       // start cooking timer
