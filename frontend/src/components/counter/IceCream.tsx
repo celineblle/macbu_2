@@ -112,11 +112,12 @@ function IceCreamComponent({
   // ADD NEW ICE CREAM COOKING ARRAY
 
   // UPDATE TOPPING INGREDIENT IN THE BUILDING ICE CREAM
-  function remplaceIngredientInBuildingIceCream(ingredient: string): string {
+  function remplaceIngredientInBuildingIceCream(ingredient: string): string | undefined {
     const buildingIceCreamCopy = structuredClone(buildingIceCream);
     let oldIngredient: string = emptyIceCream;
 
     // identify type of toping, save old topping and set new one
+    if("coulisTopping" in buildingIceCreamCopy.ingredient ){
     if (ingredient.includes(coulisIdentifier)) {
       if (buildingIceCreamCopy.ingredient.coulisTopping[0] !== emptyIceCream) {
         oldIngredient = buildingIceCreamCopy.ingredient.coulisTopping[0];
@@ -130,6 +131,8 @@ function IceCreamComponent({
     }
     setBuildingIceCream(buildingIceCreamCopy);
     return oldIngredient;
+    }
+
   }
 
   // UPDATE STOCK (RESTORE / REMOVE) IN THE GLOBALS RAWS STOCKS
@@ -156,7 +159,7 @@ function IceCreamComponent({
 
   // START FUNCTION FOR ADD NEW INGREDIENT IN THE BUILDING ICE CREAM
   function handleCLickBuildingIceCream(ingredient: string) {
-    const oldIngredient: string =
+    const oldIngredient: string | undefined =
       remplaceIngredientInBuildingIceCream(ingredient);
 
     // remove quantity in global stock of new topping
@@ -200,9 +203,9 @@ function IceCreamComponent({
   //ADD BUILDING ICE CREAM TO COOKING ARRAY
   function handleClickAddBuildingIceCreamToCookingArray() {
     // if building ice cream ingredient is complete, add in the cooking array
-    if (
-      buildingIceCream.ingredient.coulisTopping[0] !== emptyIceCream &&
-      buildingIceCream.ingredient.coulisTopping[1] !== emptyIceCream
+    if ( "coulisTopping" in buildingIceCream.ingredient &&
+      (buildingIceCream.ingredient.coulisTopping[0] !== emptyIceCream &&
+      buildingIceCream.ingredient.coulisTopping[1] !== emptyIceCream)
     ) {
       const buildingIceCreamCopy = structuredClone(buildingIceCream);
 
@@ -242,8 +245,9 @@ function IceCreamComponent({
       </div>
       <div id="iceCreamPageContent">
         <h3>Pret</h3>
-        {readyIceCream.map((ice) => (
-          <button key={ice.dateId}>
+        {readyIceCream.map((ice: FinalProductDessert, i) => (
+          "coulisTopping" in ice.ingredient &&
+          <button key={ice.dateId + i }>
             {ice.ingredient.coulisTopping[0]} {ice.ingredient.coulisTopping[1]}
           </button>
         ))}
@@ -278,20 +282,25 @@ function IceCreamComponent({
           <div id="iceCreamModalContent">
             <div>
               <h3>Pret</h3>
-              {meltedIceCream.map((ice) => (
-                <button style={{ color: "green" }} onClick={() => throwAwayOneMeltedIce(ice)}>
+              {meltedIceCream.map((ice, i) => (
+                "coulisTopping" in ice.ingredient &&
+                <button style={{ color: "green" }} onClick={() => throwAwayOneMeltedIce(ice)}
+                key={ice.dateId + i}
+                >
                   {ice.ingredient.coulisTopping[0]}{" "}
                   {ice.ingredient.coulisTopping[1]}
                 </button>
               ))}
-              {readyIceCream.map((ice) => (
-                <button key={ice.dateId} style={{ color: "blue" }}>
+              {readyIceCream.map((ice, i) => (
+                "coulisTopping" in ice.ingredient &&
+                <button key={ice.dateId + i} style={{ color: "blue" }}>
                   {ice.ingredient.coulisTopping[0]}{" "}
                   {ice.ingredient.coulisTopping[1]}
                 </button>
               ))}
-              {cookingIceCream.map((ice) => (
-                <button key={ice.dateId}>
+              {cookingIceCream.map((ice, i) => (
+                "coulisTopping" in ice.ingredient &&
+                <button key={ice.dateId + i}>
                   {ice.ingredient.coulisTopping[0]}{" "}
                   {ice.ingredient.coulisTopping[1]}
                 </button>
@@ -332,10 +341,11 @@ function IceCreamComponent({
                   )
               )}
               <h4>Glace</h4>
+              {"coulisTopping" in buildingIceCream.ingredient &&
               <ul>
                 <li>Coulis : {buildingIceCream.ingredient.coulisTopping[0]}</li>
                 <li>Eclats : {buildingIceCream.ingredient.coulisTopping[1]}</li>
-              </ul>
+              </ul>}
               <button onClick={handleClickAddBuildingIceCreamToCookingArray}>
                 Preparer
               </button>

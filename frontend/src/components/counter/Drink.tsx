@@ -187,8 +187,8 @@ displayFlavourNotComplete()
       <div id="drinkPageContent">
         <h3>Pret</h3>
         <ul>
-          {readyDrink.map((drink) => (
-            <li key={drink.dateId}>{drink.name}</li>
+          {readyDrink.map((drink, i: number) => (
+            <li key={drink.dateId + i}>{drink.name}</li>
           ))}
           {emptyPlace.map((drink, i) => (
               <button key={i}>{drink}</button>
@@ -223,13 +223,13 @@ displayFlavourNotComplete()
             <div>
               <h3>Pret</h3>
             </div>
-            {readyDrink.map((drink) => (
-              <button key={drink.dateId} style={{ color: "blue" }}
+            {readyDrink.map((drink, i) => (
+              <button key={drink.dateId + i} style={{ color: "blue" }}
               onClick={() => handleClickRemoveForTrash(drink)}
               >{drink.name}</button>
             ))}
-            {cookingDrink.map((drink) => (
-              <button key={drink.dateId}>{drink.name}</button>
+            {cookingDrink.map((drink, i) => (
+              <button key={drink.dateId + i}>{drink.name}</button>
             ))}
             {emptyPlace.map((drink, i) => (
               <button key={i}>{drink}</button>

@@ -116,32 +116,40 @@ function TrayCounterFunction({
       const burgerIndex = readyBurger.findIndex(
         (burger) => burger.name === currentProduct.name
       );
+      if( burgerIndex !== undefined) {
       readyBurgerCopy.splice(burgerIndex, 1);
       setReadyBurger(readyBurgerCopy);
+      }
     } else if ("dessert" in currentProduct) {
       //dessert
       const readyDessert = readyIceCream.slice();
       const dessertIndex = readyIceCream.findIndex(
         (dessert) => dessert.name === currentProduct.name
       );
+      if(dessertIndex !== undefined) {
       readyDessert.splice(dessertIndex, 1);
       setReadyIceCream(readyDessert);
+      }
     } else if ("drink" in currentProduct) {
       //drink
       const readyDrinkCopy = readyDrink.slice();
       const drinkIndex = readyDrinkCopy.findIndex(
         (drink) => drink.name === currentProduct.name
       );
+      if(drinkIndex !== undefined) {
       readyDrinkCopy.splice(drinkIndex, 1);
       setReadyDrink(readyDrinkCopy);
+      }
     } else if ("side" in currentProduct) {
       //side
       const readySide = readyPortionFries.slice();
       const sideIndex = readyPortionFries.findIndex(
         (side) => side.name === currentProduct.name
       );
+      if( sideIndex !== undefined) {
       readySide.splice(sideIndex, 1);
       setReadyPortionFries(readySide);
+      }
     }
   }
   // ADD NUGGETS
@@ -159,8 +167,10 @@ function TrayCounterFunction({
     const nuggetIndex = readyNuggetBox.findIndex(
       (nugget) => nugget.boite.name === product.boite.name
     );
+    if(nuggetIndex !== undefined) {
     nuggetCopy[nuggetIndex].quantity = nuggetCopy[nuggetIndex].quantity - 1;
     setReadyNuggetBox(nuggetCopy);
+    }
   }
 
   function addFreshProductInTray(product: Ingredient) {
@@ -270,8 +280,10 @@ function TrayCounterFunction({
     const productIndex = trayCopy[trayIdSelected].products.findIndex(
       (inTray) => inTray.name === product.name
     );
+    if(productIndex !== undefined) {
     trayCopy[trayIdSelected].products.splice(productIndex, 1);
     setTray(trayCopy);
+    }
 
     // identify the product for restore stock
     const currentProduct = product;
@@ -310,8 +322,10 @@ function TrayCounterFunction({
       //nugget
       const nuggetBoxCopy = readyNuggetBox.slice() as [NuggetBoxStock, NuggetBoxStock, NuggetBoxStock];
       const nuggetIndex = nuggetBoxCopy.findIndex((nugget) => nugget.boite.name === currentProduct.name)
+      if (nuggetIndex !== undefined) {
       nuggetBoxCopy[nuggetIndex].quantity = nuggetBoxCopy[nuggetIndex].quantity + 1;
       setReadyNuggetBox(nuggetBoxCopy)
+      }
     } 
   }
 
@@ -325,8 +339,10 @@ function TrayCounterFunction({
     const bagIndex = trayCopy[trayIdSelected].bag.findIndex(
       (bag) => bag.name === product.name
     );
+    if(bagIndex !== undefined) {
     trayCopy[trayIdSelected].bag.splice(bagIndex, 1);
     setTray(trayCopy);
+    }
 
     // restore stock
     const bagIngredient = bag.find(
@@ -346,7 +362,6 @@ function TrayCounterFunction({
 
   // REMOVE PRODUCTS AND START FUNCTION
   function handleClickIdentifyTrayAndSortByTypeOfProduct(
-    trayId: number,
     product:
       | FinalProductBurger
       | FinalProductDessert
@@ -355,8 +370,7 @@ function TrayCounterFunction({
       | FinalProductNugget
       | FinalProductBag
   ) {
-    //add tray id
-    setTrayIdSelected(trayId);
+
     // identify product
     const currentProduct = product;
 

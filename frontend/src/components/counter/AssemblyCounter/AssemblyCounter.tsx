@@ -68,7 +68,7 @@ function AssemblyCounter({
     ordersToPrepareRef.current = ordersToPrepare;
 
     // add empty place for front
-    if (ordersToPrepare.length < limitOfOrdersPlace) {
+    if (ordersToPrepareRef.current.length < limitOfOrdersPlace) {
       // update empty place array
       updateEmptyPlace(
         ordersToPrepare.length,
@@ -82,7 +82,7 @@ function AssemblyCounter({
       }
     }
     // add new orders
-    if (ordersToPrepare.length < limitOfOrders) {
+    if ((ordersToPrepareRef.current.length)< limitOfOrders) {
       setTimeout(() => {
         const newOrder = generateRamdomOrders();
 
@@ -158,12 +158,12 @@ function updateTrayId(id: number) {
               {ordersToPrepare.map(
                 (order, index) =>
                   index < 10 && (
-                    <button key={order.dateId}>
+                    <button key={order.dateId + index}>
                       <ul>
-                        {order.products.map((detail) =>
+                        {order.products.map((detail, i) =>
                           "sandwich" in detail ? (
                             "dessert" in detail ? (
-                              <ul key={detail.dateId}>
+                              <ul key={detail.dateId + i}>
                                 <li>Menu enfant</li>
                                 <li>{detail.sandwich.name}</li>
                                 <li>{detail.side.name}</li>
@@ -171,7 +171,7 @@ function updateTrayId(id: number) {
                                 <li>{detail.dessert.name}</li>
                               </ul>
                             ) : (
-                              <ul key={detail.dateId}>
+                              <ul key={detail.dateId + i}>
                                 <li>Menu</li>
                                 <li>{detail.sandwich.name}</li>
                                 <li>{detail.side.name}</li>
@@ -179,7 +179,7 @@ function updateTrayId(id: number) {
                               </ul>
                             )
                           ) : (
-                            <li key={detail.name}>{detail.name}</li>
+                            <li key={detail.name + i }>{detail.name}</li>
                           )
                         )}
                       </ul>
@@ -192,19 +192,19 @@ function updateTrayId(id: number) {
             </div>
             <div>
               <h3>Commandes en préparation</h3>
-              {tray.map((uniqueTray) => (
-                <ul key={uniqueTray.dateId} onClick={() => updateTrayId(uniqueTray.dateId)}>
+              {tray.map((uniqueTray, i) => (
+                <ul key={uniqueTray.dateId + i} onClick={() => updateTrayId(uniqueTray.dateId)}>
                   
-                    {uniqueTray.products.map((product) => (
+                    {uniqueTray.products.map((product, i) => (
                       <button
-                      onClick={() => handleClickIdentifyTrayAndSortByTypeOfProduct(uniqueTray.dateId, product)}
+                      key={product.price + i}
+                      onClick={() => handleClickIdentifyTrayAndSortByTypeOfProduct( product)}
                       >{product.name}</button>
                     ))}
-                  
-                  
-                    {uniqueTray.bag.map((bag) => (
+                    {uniqueTray.bag.map((bag, i) => (
                       <button
-                      onClick={() => handleClickIdentifyTrayAndSortByTypeOfProduct(uniqueTray.dateId, bag)}
+                      key={bag.ingredient.capacity + i}
+                      onClick={() => handleClickIdentifyTrayAndSortByTypeOfProduct(bag)}
                       >{bag.name}</button>
                     ))}
                   
@@ -238,24 +238,24 @@ function updateTrayId(id: number) {
                 | FinalProductSide
                 | FinalProductDrink
                 | FinalProductDessert
-                | NuggetBoxStock | Ingredient
+                | NuggetBoxStock | Ingredient, i
             ) =>
               "boite" in product && "quantity" in product ? (
                 <button
                 onClick={() => handleClickRecoverProductAndSortByTypeToAddToTray(product)}
-                key={product.boite.name}
+                key={product.quantity + i}
                 >{product.boite.name} : {product.quantity}</button>
               ) : 
               "currentStocks" in product ? (
                 <button onClick={() => handleClickRecoverProductAndSortByTypeToAddToTray(product)}
-                key={product.dateId}
+                key={product.dateId + i}
                 >
                     {product.ingredientName} : {product.currentStocks}
                 </button>
               ) :
               (
                 <button onClick={() => handleClickRecoverProductAndSortByTypeToAddToTray(product)}
-                key={product.name}
+                key={product.price + i}
                 >{product.name}</button>
               )
           )}
