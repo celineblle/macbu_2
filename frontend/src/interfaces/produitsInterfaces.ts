@@ -52,6 +52,7 @@ export interface FinalProductBag {
   size: number;
   price: number;
   type: string;
+  bag: string;
 }
 
 export interface FinalProductNugget {

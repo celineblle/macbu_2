@@ -7,11 +7,11 @@ import {
   variousIngredient,
   sauce,
 } from "../../../elements/ingredients";
-import { TabIngredientKitchen } from "../../../interfaces/compositionElementsInterfaces";
+import { TabsIngredients } from "../../../interfaces/compositionElementsInterfaces";
 import { FinalProductBurger } from "../../../interfaces/produitsInterfaces";
 
 // TABS
-export const tabIngredient: TabIngredientKitchen[] = [
+export const tabIngredient: TabsIngredients[] = [
   {
     section: "bread",
     tabName: "Pain",

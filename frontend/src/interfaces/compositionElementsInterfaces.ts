@@ -49,7 +49,7 @@ export interface AvailableMeat {
 
 // KITCHEN
 
-export interface TabIngredientKitchen {
+export interface TabsIngredients {
   section: string;
   tabName: string;
   correspondingArray: Ingredient[];
@@ -66,12 +66,28 @@ export interface BuildingDrink {
   flavour: string;
 }
 
+// COUNTER
+export interface TabsProducts {
+  section: string;
+  tabName: string;
+  correspondingArray:
+    | (
+        | Ingredient
+        | FinalProductBurger
+        | FinalProductSide
+        | FinalProductDrink
+        | FinalProductDessert
+      )[]
+    | [NuggetBoxStock, NuggetBoxStock, NuggetBoxStock];
+}
+
 // MENU
 
 export interface Menu {
   sandwich: FinalProductBurger;
   side: FinalProductSide;
   drink: FinalProductDrink;
+  dateId: number;
 }
 
 export interface ChildMenu {
@@ -79,6 +95,7 @@ export interface ChildMenu {
   side: FinalProductSide;
   drink: FinalProductDrink;
   dessert: FinalProductDessert;
+  dateId: number;
 }
 
 // ORDER
@@ -95,6 +112,7 @@ export interface Order {
   )[];
   size: number;
   price: number;
+  dateId: number;
 }
 
 export interface Tray {
@@ -103,9 +121,10 @@ export interface Tray {
     | FinalProductDessert
     | FinalProductDrink
     | FinalProductSide
-    | FinalProductBag
+    | FinalProductNugget
   )[];
   bagCapacity: number;
-  bag: FinalProductBag;
+  bag: FinalProductBag[];
   price: number;
+  dateId: number;
 }

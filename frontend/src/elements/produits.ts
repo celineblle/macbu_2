@@ -11,6 +11,7 @@ import {
   FinalProductSide,
   FriesSide,
   FinalProductNugget,
+  FinalProductBag,
 } from "../interfaces/produitsInterfaces";
 
 export const nuggetsName: string[] = [
@@ -340,13 +341,15 @@ export const fruits: Side = {
 
 function getFreshDessert(): FinalProductDessert[] {
   const allFreshDessert: FinalProductDessert[] = [];
-  const recipeDessert: Side[] = [drinkingYaourt, fruits];
+  const recipeName: string[] = [ingredient.freshProduct[2].ingredientName, ingredient.freshProduct[3].ingredientName]
   const price: number[] = [3, 3, 3, 3];
 
-  for (let i = 0; i < recipeDessert.length; i++) {
+  for (let i = 0; i < recipeName.length; i++) {
     const singleDessert: FinalProductDessert = {
-      name: recipeDessert[i].side,
-      ingredient: recipeDessert[i],
+      name: recipeName[i],
+      ingredient: {
+        side: recipeName[i]
+      },
       size: ingredient.size[0].capacity,
       timeId: 0,
       dateId: 0,
@@ -404,13 +407,15 @@ export const vegetable: Side = {
 
 function getFreshSide(): FinalProductSide[] {
   const allFreshSide: FinalProductSide[] = [];
-  const recipeSide: Side[] = [salad, vegetable];
+  const recipeName: string[] = [ingredient.freshProduct[0].ingredientName, ingredient.freshProduct[1].ingredientName]
   const price: number[] = [3, 3, 3, 3];
 
-  for (let i = 0; i < recipeSide.length; i++) {
+  for (let i = 0; i < recipeName.length; i++) {
     const singleSide: FinalProductSide = {
-      name: recipeSide[i].side,
-      ingredient: recipeSide[i],
+      name: recipeName[i],
+      ingredient: {
+        side: recipeName[i]
+      },
       size: ingredient.size[0].capacity,
       timeId: 0,
       dateId: 0,
@@ -425,6 +430,11 @@ function getFreshSide(): FinalProductSide[] {
 }
 
 export const allFreshSide: FinalProductSide[] = getFreshSide();
+
+export const allFreshProducts: (FinalProductDessert | FinalProductSide)[] = [
+  ...allFreshDessert,
+  ...allFreshSide,
+];
 
 export const allAdultSide: FinalProductSide[] = [...allFries, allFreshSide[0]];
 
@@ -480,4 +490,32 @@ export const productsForRandom: (
   | FinalProductDrink
   | FinalProductSide
   | FinalProductNugget
-)[] = [...allProducts, ...allNuggets, ...allBurgers, ...allBurgers];
+)[] = [
+  ...allProducts,
+  ...allNuggets,
+  ...allBurgers,
+  ...allBurgers,
+  ...allAdultSide,
+];
+
+function getBag(): FinalProductBag[] {
+  const allBags: FinalProductBag[] = [];
+  const capacity: number[] = [7, 14, 21];
+
+  for (let i = 0; i < ingredient.bag.length; i++) {
+    const uniqueBag: FinalProductBag = {
+      name: ingredient.bag[i].ingredientName,
+      ingredient: {
+        capacity: capacity[i],
+      },
+      size: 0,
+      price: 0,
+      type: "bag",
+      bag: "type",
+    };
+    allBags.push(uniqueBag)
+  }
+  return allBags
+}
+
+export const allBags: FinalProductBag[] = getBag()
