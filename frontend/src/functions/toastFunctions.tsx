@@ -87,10 +87,20 @@ export function displayNoStock() {
 
 const notEnoughBags = () => (
   <div>
-    <p>Il n&apos;y a pas assez de sac pour la commande</p>
+    <p>Il n&apos;y a pas assez de sac pour les produits sur le plateau</p>
   </div>
 );
 
 export function displayNotEnoughBags() {
   toast.error(notEnoughBags);
+}
+
+const noProductsInTray = () => (
+  <div>
+    <p>Le plateau est vide</p>
+  </div>
+);
+
+export function displayNoProductsInTray() {
+  toast.error(noProductsInTray);
 }

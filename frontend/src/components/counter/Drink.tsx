@@ -19,7 +19,10 @@ import {
   remplaceOldProductByUpdateProduct,
   restoreToStockOfProduct,
 } from "../../functions/inventoryManagementFunctions";
-import { displayFlavourNotComplete, displayNoStock } from "../../functions/toastFunctions";
+import {
+  displayFlavourNotComplete,
+  displayNoStock,
+} from "../../functions/toastFunctions";
 import { Slide, ToastContainer } from "react-toastify";
 import { allDrinks } from "../../elements/produits";
 
@@ -52,7 +55,7 @@ function Drink({
     useState<BuildingDrink>(emptyDrinkObject);
   const [emptyPlace, setEmptyPlace] = useState<string[]>([]);
   const cookingDrinkRef = useRef<FinalProductDrink[]>([]);
-  const readyDrinkRef = useRef<FinalProductDrink[]>([])
+  const readyDrinkRef = useRef<FinalProductDrink[]>([]);
 
   // UPDATE REF
 
@@ -60,7 +63,7 @@ function Drink({
     cookingDrinkRef.current = cookingDrink;
   }, [cookingDrink]);
 
-    useEffect(() => {
+  useEffect(() => {
     readyDrinkRef.current = readyDrink;
   }, [readyDrink]);
 
@@ -74,17 +77,25 @@ function Drink({
   // REMOVE DRINK FUNCTION
 
   function removeDrinkFromArray(drink: FinalProductDrink) {
-const arrayCopy: FinalProductDrink[] = cookingDrink.slice();
-const drinkIndex: number | undefined = arrayCopy.findIndex((drinkCopy) => drinkCopy.dateId === drink.dateId);
-arrayCopy.splice(drinkIndex, 1);
-setCookingDrink(arrayCopy);
+    const arrayCopy: FinalProductDrink[] = cookingDrink.slice();
+    const drinkIndex: number = arrayCopy.findIndex(
+      (drinkCopy) => drinkCopy.dateId === drink.dateId
+    );
+    if (drinkIndex !== -1) {
+      arrayCopy.splice(drinkIndex, 1);
+      setCookingDrink(arrayCopy);
+    }
   }
 
   function handleClickRemoveForTrash(drink: FinalProductDrink) {
     const arrayCopy: FinalProductDrink[] = readyDrink.slice();
-const drinkIndex: number | undefined = arrayCopy.findIndex((drinkCopy) => drinkCopy.dateId === drink.dateId);
-arrayCopy.splice(drinkIndex, 1);
-setReadyDrink(arrayCopy);
+    const drinkIndex: number = arrayCopy.findIndex(
+      (drinkCopy) => drinkCopy.dateId === drink.dateId
+    );
+    if (drinkIndex !== -1) {
+      arrayCopy.splice(drinkIndex, 1);
+      setReadyDrink(arrayCopy);
+    }
   }
 
   // BUILDING DRINK
@@ -137,7 +148,7 @@ setReadyDrink(arrayCopy);
         updateStock(ingredient, "remove");
         updateStock(oldIngredient, "restore");
       } else {
-        displayNoStock()
+        displayNoStock();
       }
     }
   }
@@ -145,34 +156,39 @@ setReadyDrink(arrayCopy);
   function startCookingTimer(drink: FinalProductDrink) {
     setTimeout(() => {
       setReadyDrink([...readyDrinkRef.current, drink]);
-      removeDrinkFromArray(drink)
-    }, 1000)
+      removeDrinkFromArray(drink);
+    }, 1000);
   }
 
-  // ADD BUILDING DRINK IN COOKING DRINK 
+  // ADD BUILDING DRINK IN COOKING DRINK
   function handleClickFinishBuilding() {
-if(buildingDrink.flavour !== emptyDrink && buildingDrink.size !== emptyDrink) {
-  let flavour = `${buildingDrink.size} ${buildingDrink.flavour}`;
-const drinkAssetIndex: number | undefined = allDrinks.findIndex((asset) => asset.ingredient.flavour === flavour);
-if(drinkAssetIndex !== undefined) {
-  
-if(buildingDrink.size === size[1].name) {
- flavour =  `${buildingDrink.size}ne ${buildingDrink.flavour}`;
-} else {
- flavour =  `${buildingDrink.size}e ${buildingDrink.flavour}`;
-}
-const drinkAssetCopy: FinalProductDrink = structuredClone(allDrinks[drinkAssetIndex])
-drinkAssetCopy.dateId = Date.now();
-drinkAssetCopy.name = flavour;
-setCookingDrink([...cookingDrink, drinkAssetCopy]);
-setBuildingDrink(emptyDrinkObject);
-startCookingTimer(drinkAssetCopy)
-}
-} else {
-displayFlavourNotComplete()
-}
+    if (
+      buildingDrink.flavour !== emptyDrink &&
+      buildingDrink.size !== emptyDrink
+    ) {
+      let flavour = `${buildingDrink.size} ${buildingDrink.flavour}`;
+      const drinkAssetIndex: number = allDrinks.findIndex(
+        (asset) => asset.ingredient.flavour === flavour
+      );
+      if (drinkAssetIndex !== -1) {
+        if (buildingDrink.size === size[1].name) {
+          flavour = `${buildingDrink.size}ne ${buildingDrink.flavour}`;
+        } else {
+          flavour = `${buildingDrink.size}e ${buildingDrink.flavour}`;
+        }
+        const drinkAssetCopy: FinalProductDrink = structuredClone(
+          allDrinks[drinkAssetIndex]
+        );
+        drinkAssetCopy.dateId = Date.now();
+        drinkAssetCopy.name = flavour;
+        setCookingDrink([...cookingDrink, drinkAssetCopy]);
+        setBuildingDrink(emptyDrinkObject);
+        startCookingTimer(drinkAssetCopy);
+      }
+    } else {
+      displayFlavourNotComplete();
+    }
   }
-
 
   return (
     <div id="drinkComponent" className="component">
@@ -191,8 +207,8 @@ displayFlavourNotComplete()
             <li key={drink.dateId + i}>{drink.name}</li>
           ))}
           {emptyPlace.map((drink, i) => (
-              <button key={i}>{drink}</button>
-            ))}
+            <button key={i}>{drink}</button>
+          ))}
         </ul>
       </div>
       <div className={toggleModal ? "modalOpen" : "modalClose"}>
@@ -224,9 +240,13 @@ displayFlavourNotComplete()
               <h3>Pret</h3>
             </div>
             {readyDrink.map((drink, i) => (
-              <button key={drink.dateId + i} style={{ color: "blue" }}
-              onClick={() => handleClickRemoveForTrash(drink)}
-              >{drink.name}</button>
+              <button
+                key={drink.dateId + i}
+                style={{ color: "blue" }}
+                onClick={() => handleClickRemoveForTrash(drink)}
+              >
+                {drink.name}
+              </button>
             ))}
             {cookingDrink.map((drink, i) => (
               <button key={drink.dateId + i}>{drink.name}</button>
@@ -262,9 +282,7 @@ displayFlavourNotComplete()
                 <li>Taille : {buildingDrink.size}</li>
                 <li>Saveur : {buildingDrink.flavour}</li>
               </ul>
-              <button
-              onClick={handleClickFinishBuilding}
-              >Preparer</button>
+              <button onClick={handleClickFinishBuilding}>Preparer</button>
             </div>
             <div>
               <div>

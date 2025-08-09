@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Tray, Order } from "../../../interfaces/compositionElementsInterfaces";
-import { displayNotEnoughBags } from "../../../functions/toastFunctions";
+import {
+  displayNoProductsInTray,
+  displayNotEnoughBags,
+} from "../../../functions/toastFunctions";
 import {
   FinalProductBurger,
   FinalProductDessert,
@@ -8,6 +11,7 @@ import {
   FinalProductSide,
   FinalProductNugget,
 } from "../../../interfaces/produitsInterfaces";
+import { toast } from "react-toastify";
 
 function ValidateOrders({
   cashFund,
@@ -26,7 +30,17 @@ function ValidateOrders({
   ordersToPrepare: Order[];
   setOrdersToPrepare: React.Dispatch<React.SetStateAction<Order[]>>;
 }) {
-  const [orderPrice, setOrderPrice] = useState<number>(0);
+  let orderPrice = 0;
+  // TOAST FONCTION FOR VALIDATION
+  const orderValidate = () => (
+    <div>
+      <p>+ {orderPrice}</p>
+    </div>
+  );
+
+  function displayOrderValidate() {
+    toast.error(orderValidate);
+  }
 
   // CHECK BY TYPE FUNCTION
 
@@ -40,19 +54,54 @@ function ValidateOrders({
     currentTray: Tray
   ) {
     const orderProduct = currentProduct;
-    const isItPresent: number | undefined = currentTray.products.findIndex(
+    const isItPresent: number = currentTray.products.findIndex(
       (product) => product.name === orderProduct.name
     );
-    if (isItPresent !== undefined) {
+
+    if (isItPresent !== -1) {
       currentTray.products.splice(isItPresent, 1);
-    }
-    let orderPriceCopy = orderPrice;
-    if (orderPriceCopy > orderProduct.price) {
-      orderPriceCopy = orderPriceCopy - orderProduct.price;
-      setOrderPrice(orderPriceCopy);
     } else {
-      setOrderPrice(0);
+
+      if (orderPrice > currentProduct.price) {
+        orderPrice = orderPrice - currentProduct.price;
+      } else {
+        orderPrice = 0;
+      }
     }
+
+    return isItPresent;
+  }
+
+  function startCheckForOrder(currentOrder: Order, currentTray: Tray) {
+    orderPrice = currentOrder.price;
+
+    
+    for (let i = 0; i < currentOrder.products.length; i++) {
+      const currentProduct = currentOrder.products[i];
+      let isItPresent: number | undefined = 0;
+      // browse in menu
+      const menuProperty = ["sandwich", "side", "drink"];
+      if ("sandwich" in currentProduct) {
+        // menu
+        for (let j = 0; j < menuProperty.length; j++) {
+          isItPresent = checkProductByOne(currentProduct.sandwich, currentTray);
+          if (isItPresent !== undefined) {
+            orderPrice = orderPrice - 2;
+          }
+        }
+      } else {
+        // regular product
+        checkProductByOne(currentProduct, currentTray);
+      }
+    }
+  }
+
+  function calculateTrayBagRequirements(currentTray: Tray): number {
+    let trayProductSize: number = 0;
+    for (let i = 0; i < currentTray.products.length; i++) {
+      trayProductSize = trayProductSize + currentTray.products[i].size;
+    }
+    return trayProductSize;
   }
 
   // START ORDER VALIDATION AND SORT PRODUCT BY INTERFACES
@@ -60,33 +109,40 @@ function ValidateOrders({
     const currentOrder = structuredClone(ordersToPrepare[orderId]);
     const currentTray = structuredClone(tray[trayIdSelected]);
 
-    if (currentTray.bagCapacity > currentOrder.size) {
-      for (let i = 0; i < currentOrder.products.length; i++) {
-        const currentProduct = currentOrder.products[i];
-        let isItPresent: number | undefined = 0;
-        setOrderPrice(currentOrder.price);
-        if ("sandwich" in currentProduct) {
-          // menu
-          checkProductByOne(currentProduct.sandwich, currentTray);
-          checkProductByOne(currentProduct.side, currentTray);
-          checkProductByOne(currentProduct.drink, currentTray);
-          if ("dessert" in currentProduct) {
-            // menu enfant
-            checkProductByOne(currentProduct.dessert, currentTray);
-          }
-        } else {
-          // regular product
-          checkProductByOne(currentProduct, currentTray);
-        }
+    //do not accept the tray if there are not enough bags
+    if (currentTray.products[0].name !== "Vide") {
+      // verify the size of the tray and check if the tray have enough bags for all products
+      const trayProductSize = calculateTrayBagRequirements(currentTray);
+
+      if (currentTray.bagCapacity > trayProductSize) {
+        // browse the entire order to validate the products on the tray one by one and update the order price
+        startCheckForOrder(currentOrder, currentTray);
+
+        // update orders array
+        const orderArrayCopy = ordersToPrepare.slice();
+        orderArrayCopy.splice(orderId, 1);
+        setOrdersToPrepare(orderArrayCopy);
+
+        // update tray
+        const trayArrayCopy = tray.slice();
+        trayArrayCopy.splice(trayIdSelected, 1);
+        setTray(trayArrayCopy);
+
+        // update budget
+        const newBudget = cashFund + orderPrice;
+        setCashFund(newBudget);
+
+        displayOrderValidate();
+      } else {
+        displayNotEnoughBags();
       }
-      console.log(orderPrice)
     } else {
-      displayNotEnoughBags();
+      displayNoProductsInTray();
     }
   }
   return {
-    handleClickStartValidationByExtractToMenu
-  }
+    handleClickStartValidationByExtractToMenu,
+  };
 }
 
 export default ValidateOrders;
