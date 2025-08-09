@@ -343,47 +343,6 @@ export const variousIngredientSection: SectionRawIngredients = {
   productionArray: variousIngredient,
 };
 
-export const freshProduct: Ingredient[] = [
-  {
-    ingredientName: "Petite salade",
-    price: 20,
-    quantity: 30,
-    currentStocks: 10,
-    timerId: 0,
-    dateId: 0,
-  },
-  {
-    ingredientName: "Légumes",
-    price: 15,
-    quantity: 30,
-    currentStocks: 10,
-    timerId: 0,
-    dateId: 0,
-  },
-  {
-    ingredientName: "Boisson yaourt",
-    price: 12,
-    quantity: 30,
-    currentStocks: 10,
-    timerId: 0,
-    dateId: 0,
-  },
-  {
-    ingredientName: "Fruits",
-    price: 12,
-    quantity: 30,
-    currentStocks: 10,
-    timerId: 0,
-    dateId: 0,
-  },
-];
-
-export const freshProductSection: SectionRawIngredients = {
-  sectionName: "freshProduct",
-  title: "Produit frais",
-  productionArray: freshProduct,
-};
-
 export const iceCream: Ingredient[] = [
   {
     ingredientName: "Coulis caramel",
@@ -595,7 +554,6 @@ export const allProductsArray: SectionRawIngredients[] = [
   meatSection,
   variousIngredientSection,
   friesSection,
-  freshProductSection,
   iceCreamSection,
   drinkSection,
   bagSection,

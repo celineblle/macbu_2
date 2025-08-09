@@ -29,10 +29,6 @@ export interface IceCream {
   melted: boolean;
 }
 
-export interface Side {
-  side: string;
-}
-
 export interface FriesSide {
   side: string;
   grilled: boolean;
@@ -74,7 +70,7 @@ export interface FinalProductBurger {
 
 export interface FinalProductSide {
   name: string;
-  ingredient: Side | FriesSide;
+  ingredient: FriesSide;
   size: number;
   timeId: number;
   dateId: number;
@@ -85,7 +81,7 @@ export interface FinalProductSide {
 
 export interface FinalProductDessert {
   name: string;
-  ingredient: IceCream | Side;
+  ingredient: IceCream;
   size: number;
   timeId: number;
   dateId: number;

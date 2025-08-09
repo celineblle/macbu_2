@@ -82,3 +82,15 @@ const noStock = () => (
 export function displayNoStock() {
   toast.error(noStock);
 }
+
+// COUNTER
+
+const notEnoughBags = () => (
+  <div>
+    <p>Il n&apos;y a pas assez de sac pour la commande</p>
+  </div>
+);
+
+export function displayNotEnoughBags() {
+  toast.error(notEnoughBags);
+}

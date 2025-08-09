@@ -90,14 +90,6 @@ export interface Menu {
   dateId: number;
 }
 
-export interface ChildMenu {
-  sandwich: FinalProductBurger;
-  side: FinalProductSide;
-  drink: FinalProductDrink;
-  dessert: FinalProductDessert;
-  dateId: number;
-}
-
 // ORDER
 
 export interface Order {
@@ -108,7 +100,6 @@ export interface Order {
     | FinalProductSide
     | FinalProductNugget
     | Menu
-    | ChildMenu
   )[];
   size: number;
   price: number;

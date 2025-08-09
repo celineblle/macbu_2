@@ -1,7 +1,6 @@
-import { productsForRandom, allDrinks, allDessert, allAdultSide, allChildSide, allBurgers } from "../elements/produits";
+import { productsForRandom, allDrinks, allBurgers, allFries } from "../elements/produits";
 import {
   Menu,
-  ChildMenu,
   Order,
 } from "../interfaces/compositionElementsInterfaces";
 import {
@@ -11,13 +10,11 @@ import {
   FinalProductNugget,
   FinalProductSide,
 } from "../interfaces/produitsInterfaces";
-import { size } from "../elements/ingredients";
 
   // TOOL VARIABLE
   const limitSizeCommande: number = 8;
   const allProductArraySize: number = productsForRandom.length;
   const neutralTemplate: string = "Vide";
-  const childSize: number = size[0].capacity;
 
   // TOOL OBJECT TEMPLATE
   const emptyBurger: FinalProductBurger = {
@@ -36,6 +33,7 @@ import { size } from "../elements/ingredients";
     name: neutralTemplate,
     ingredient: {
       side: neutralTemplate,
+      grilled: false,
     },
     size: 0,
     timeId: 0,
@@ -58,33 +56,11 @@ import { size } from "../elements/ingredients";
     drink: neutralTemplate,
   };
 
-  const emptyDessert: FinalProductDessert = {
-    name: neutralTemplate,
-    ingredient: {
-      coulisTopping: [neutralTemplate, neutralTemplate],
-      melted: false,
-    },
-    size: 0,
-    timeId: 0,
-    dateId: 0,
-    price: 0,
-    type: neutralTemplate,
-    dessert: neutralTemplate,
-  };
-
   const menuTemplate: Menu = {
     sandwich: emptyBurger,
     side: emptySide,
     drink: emptyDrink,
     dateId: 0,
-  };
-
-  const menuChildTemplate: ChildMenu = {
-    sandwich: emptyBurger,
-    side: emptySide,
-    drink: emptyDrink,
-    dessert: emptyDessert,
-    dateId: 0, 
   };
 
   // GET RADOM NUMBER & PRODUCT
@@ -130,23 +106,14 @@ import { size } from "../elements/ingredients";
     )[]
   ) {
     const onlyBurger: FinalProductBurger[] = [];
-    const onlyChildBurger: FinalProductBurger[] = [];
     for (let i = 0; i < rawsProductsOrder.length; i++) {
       const currentProduct = rawsProductsOrder[i];
       if ("bread" in currentProduct) {
-        if (currentProduct.size === childSize) {
-          onlyChildBurger.push(currentProduct);
-          rawsProductsOrder.splice(i, 1);
-        } else {
           onlyBurger.push(currentProduct);
           rawsProductsOrder.splice(i, 1);
-        }
       }
     }
-    return {
-      onlyBurger,
-      onlyChildBurger,
-    };
+    return onlyBurger
   }
 
   function sortingSideAndDrinkFromRawOrder(
@@ -160,7 +127,6 @@ import { size } from "../elements/ingredients";
   ) {
     const onlySide: FinalProductSide[] = [];
     const onlyDrink: FinalProductDrink[] = [];
-    const onlyChildDessert: FinalProductDessert[] = [];
     for (let i = 0; i < rawsProductsOrder.length; i++) {
       const currentProduct = rawsProductsOrder[i];
       if ("side" in currentProduct) {
@@ -169,11 +135,9 @@ import { size } from "../elements/ingredients";
       } else if ("drink" in currentProduct) {
         onlyDrink.push(currentProduct);
         rawsProductsOrder.splice(i, 1);
-      } else if ("dessert" in currentProduct && currentProduct.size === childSize) {
-        onlyChildDessert.push(currentProduct);
-      }
+      } 
     }
-    return { onlySide, onlyDrink, onlyChildDessert };
+    return { onlySide, onlyDrink };
   }
 
   function sortAllIngredient(
@@ -186,29 +150,25 @@ import { size } from "../elements/ingredients";
     )[]
   ) {
     //sorting order to get burgers
-    const { onlyBurger, onlyChildBurger } =
+    const onlyBurger  =
       sortingBurgerFromRawOrder(rawsProductsOrder);
 
     // sorting order to get side and drink
-    const { onlySide, onlyDrink, onlyChildDessert } =
+    const { onlySide, onlyDrink } =
       sortingSideAndDrinkFromRawOrder(rawsProductsOrder);
-
     return {
       onlyBurger,
-      onlyChildBurger,
       onlyDrink,
       onlySide,
-      onlyChildDessert,
     };
   }
 
   // CREATE AND COMPLETED MENUS
   function initializeMenuWithBurger(
     burgerArray: FinalProductBurger[],
-    menuTemplate: Menu | ChildMenu,
     limitMenuNumber: number
-  ): (Menu | ChildMenu)[] {
-    const initializedMenu: (Menu | ChildMenu)[] = [];
+  ): Menu[] {
+    const initializedMenu: Menu[] = [];
     let limitMenuWithExistingBurger: number = 0
     let limitMenuWithGeneratedBurger: number = 0
     if(burgerArray.length > limitMenuNumber) {
@@ -261,10 +221,9 @@ import { size } from "../elements/ingredients";
   }
 
   function finishToCompleteEmptyMenu(
-    menuArray: (Menu | ChildMenu)[],
+    menuArray: Menu[],
     property: string,
     allProductArray:
-      | FinalProductDessert[]
       | FinalProductDrink[]
       | FinalProductSide[]
   ) {
@@ -283,7 +242,7 @@ import { size } from "../elements/ingredients";
 
   function completeMenuWitchSizeMatch(
     productArray: FinalProductDrink[] | FinalProductSide[] | FinalProductDessert[],
-    menuArray: (Menu | ChildMenu)[]
+    menuArray: Menu[]
   ) {
     if (productArray !== undefined && productArray.length > 0) {
       const property: string = "side" in productArray[0] ? "side" : "drink";
@@ -324,35 +283,25 @@ import { size } from "../elements/ingredients";
   }
 
   function createMenus(
-    type: string,
     onlyBurger: FinalProductBurger[],
     onlyDrink: FinalProductDrink[],
     onlySide: FinalProductSide[],
-    onlyChildDessert: FinalProductDessert[]
-  ): Menu[] | ChildMenu[] | undefined {
-    const rightMenuTemplate =
-      type === "child" ? menuChildTemplate : menuTemplate;
-    const rigthSideArray = type === "child" ? allChildSide : allAdultSide;
+  ): Menu[] | undefined {
     const numberMenu: number = determiningNumberOfMenu(
       onlyBurger,
       onlySide,
       onlyDrink
     );
     if (numberMenu > 0) {
-      const builtMenu: Menu[] | ChildMenu[] = initializeMenuWithBurger(
+      const builtMenu: Menu[] = initializeMenuWithBurger(
         onlyBurger,
-        rightMenuTemplate,
         numberMenu
       );
 
       completeMenuWitchSizeMatch(onlyDrink, builtMenu);
       completeMenuWitchSizeMatch(onlySide, builtMenu);
       finishToCompleteEmptyMenu(builtMenu, "drink", allDrinks);
-      finishToCompleteEmptyMenu(builtMenu, "side", rigthSideArray);
-      if (type === "child") {
-        completeMenuWitchSizeMatch(onlyChildDessert, builtMenu );
-        finishToCompleteEmptyMenu(builtMenu, "dessert", allDessert)
-      }
+      finishToCompleteEmptyMenu(builtMenu, "side", allFries);
       return builtMenu;
       
 
@@ -363,7 +312,7 @@ import { size } from "../elements/ingredients";
 
   // GET PRICES AND SIZES
   function getPricesAndSizesOfMenus(
-    menuArray: Menu[] | ChildMenu[],
+    menuArray: Menu[],
     finalOrder: Order
   ) {
     const menuReduction: number = "dessert" in menuArray[0] ? 7 : 5
@@ -379,10 +328,6 @@ import { size } from "../elements/ingredients";
         currentMenu.drink.size +
         currentMenu.sandwich.size +
         currentMenu.side.size;
-      if ("dessert" in currentMenu) {
-        finalOrder.price = finalOrder.price + currentMenu.dessert.price;
-        finalOrder.size = finalOrder.size + currentMenu.dessert.size;
-      }
     }
     finalOrder.products = [...finalOrder.products, ...menuArray];
   }
@@ -420,17 +365,11 @@ export  function generateRamdomOrders() {
       | FinalProductNugget
     )[] = getRamdomProductForRawOrder(tailleCommande);
 
-    const { onlyBurger, onlyChildBurger, onlyDrink, onlySide, onlyChildDessert } =
+    const { onlyBurger, onlyDrink, onlySide } =
       sortAllIngredient(rawsProductsOrder);
 
       // create menu
-    const adultMenu = createMenus("", onlyBurger, onlyDrink, onlySide, []);
-    const childMenu = createMenus(
-      "child",
-      onlyChildBurger,
-      onlyDrink,
-      onlySide, onlyChildDessert
-    );
+     const adultMenu = createMenus(onlyBurger, onlyDrink, onlySide);
     const finalOrder: Order = {
       products: [],
       size: 0,
@@ -438,17 +377,12 @@ export  function generateRamdomOrders() {
       dateId: Date.now(),
     };
 
-    if (adultMenu !== undefined) {
-      getPricesAndSizesOfMenus(adultMenu, finalOrder);
-    }
-    if (childMenu !== undefined) {
-      getPricesAndSizesOfMenus(childMenu, finalOrder);
-    }
-    getPricesAndSizesFromRawsIngredient(rawsProductsOrder, finalOrder);
-    getPricesAndSizesFromRawsIngredient(onlyBurger, finalOrder)
-    getPricesAndSizesFromRawsIngredient(onlyChildBurger, finalOrder)
-    getPricesAndSizesFromRawsIngredient(onlyDrink, finalOrder)
-    getPricesAndSizesFromRawsIngredient(onlySide, finalOrder)
-    getPricesAndSizesFromRawsIngredient(onlyChildDessert, finalOrder)
-    return finalOrder;
+     if (adultMenu !== undefined) {
+       getPricesAndSizesOfMenus(adultMenu, finalOrder);
+     }
+     getPricesAndSizesFromRawsIngredient(rawsProductsOrder, finalOrder);
+     getPricesAndSizesFromRawsIngredient(onlyBurger, finalOrder)
+     getPricesAndSizesFromRawsIngredient(onlyDrink, finalOrder)
+     getPricesAndSizesFromRawsIngredient(onlySide, finalOrder)
+     return finalOrder;
   }
