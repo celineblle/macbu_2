@@ -341,9 +341,11 @@ function Fries({
     const indexGrilledFries: number = grilledFries.findIndex(
       (fries) => fries.dateId === friesDateId
     );
-    const grilledFriesCopy: Ingredient[] = grilledFries.slice();
-    grilledFriesCopy.splice(indexGrilledFries, 1);
-    setGrilledFries(grilledFriesCopy);
+    if (indexGrilledFries !== -1) {
+      const grilledFriesCopy: Ingredient[] = grilledFries.slice();
+      grilledFriesCopy.splice(indexGrilledFries, 1);
+      setGrilledFries(grilledFriesCopy);
+    }
   }
 
   return (

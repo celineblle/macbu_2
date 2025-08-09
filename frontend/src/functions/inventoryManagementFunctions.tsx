@@ -16,11 +16,12 @@ export function remplaceOldProductByUpdateProduct(
   ].productionArray.findIndex(
     (product) => product.ingredientName === updateProduct.ingredientName
   );
+  if(indexProduct !== -1) {
   allProducts[indexSection].productionArray.splice(
     indexProduct,
     1,
     updateProduct
-  );
+  );}
   return allProducts;
 }
 

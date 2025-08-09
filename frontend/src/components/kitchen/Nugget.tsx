@@ -92,14 +92,14 @@ function Nugget({
   function handleClickStartCooking(frying: Ingredient) {
     if (emptyPlace.length > 0) {
       //check stock available
-      const haveStock: number | undefined = stocksRawsIngredients[
+      const haveStock: number = stocksRawsIngredients[
         indexRawStock
       ].productionArray.findIndex(
         (ingredientStock) =>
           ingredientStock.ingredientName === frying.ingredientName
       );
       if (
-        haveStock !== undefined &&
+        haveStock !== -1 &&
         stocksRawsIngredients[indexRawStock].productionArray[haveStock]
           .currentStocks > 0
       ) {

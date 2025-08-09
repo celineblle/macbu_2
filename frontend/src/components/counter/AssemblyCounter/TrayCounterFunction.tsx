@@ -12,7 +12,7 @@ import {
   NuggetBoxStock,
   Tray,
 } from "../../../interfaces/compositionElementsInterfaces";
-import { allBags, allFreshProducts } from "../../../elements/produits";
+import { allBags } from "../../../elements/produits";
 import {
   removeToStockOfProduct,
   remplaceOldProductByUpdateProduct,
@@ -20,7 +20,6 @@ import {
 } from "../../../functions/inventoryManagementFunctions";
 import {
   SetStocksRawsIngredientsContext,
-  StocksRawsIngredientsContext,
 } from "../../../context/StockRawsContext";
 import { displayNoStock } from "../../../functions/toastFunctions";
 import { bag } from "../../../elements/ingredients";
@@ -54,7 +53,6 @@ function TrayCounterFunction({
 }) {
   // CONTEXT
   const setStocksRawsIngredients = useContext(SetStocksRawsIngredientsContext);
-  const stocksRawsIngredients = useContext(StocksRawsIngredientsContext);
 
   //EMPTY TRAY VARIABLE AND FUCTION
   const limitOfTray: number = 8;
@@ -116,7 +114,7 @@ function TrayCounterFunction({
       const burgerIndex = readyBurger.findIndex(
         (burger) => burger.name === currentProduct.name
       );
-      if (burgerIndex !== undefined) {
+      if (burgerIndex !== -1) {
         readyBurgerCopy.splice(burgerIndex, 1);
         setReadyBurger(readyBurgerCopy);
       }
@@ -126,7 +124,7 @@ function TrayCounterFunction({
       const dessertIndex = readyIceCream.findIndex(
         (dessert) => dessert.name === currentProduct.name
       );
-      if (dessertIndex !== undefined) {
+      if (dessertIndex !== -1) {
         readyDessert.splice(dessertIndex, 1);
         setReadyIceCream(readyDessert);
       }
@@ -136,7 +134,7 @@ function TrayCounterFunction({
       const drinkIndex = readyDrinkCopy.findIndex(
         (drink) => drink.name === currentProduct.name
       );
-      if (drinkIndex !== undefined) {
+      if (drinkIndex !== -1) {
         readyDrinkCopy.splice(drinkIndex, 1);
         setReadyDrink(readyDrinkCopy);
       }
@@ -146,7 +144,7 @@ function TrayCounterFunction({
       const sideIndex = readyPortionFries.findIndex(
         (side) => side.name === currentProduct.name
       );
-      if (sideIndex !== undefined) {
+      if (sideIndex !== -1) {
         readySide.splice(sideIndex, 1);
         setReadyPortionFries(readySide);
       }
@@ -167,31 +165,9 @@ function TrayCounterFunction({
     const nuggetIndex = readyNuggetBox.findIndex(
       (nugget) => nugget.boite.name === product.boite.name
     );
-    if (nuggetIndex !== undefined) {
+    if (nuggetIndex !== -1) {
       nuggetCopy[nuggetIndex].quantity = nuggetCopy[nuggetIndex].quantity - 1;
       setReadyNuggetBox(nuggetCopy);
-    }
-  }
-
-  function addFreshProductInTray(product: Ingredient) {
-    // find the finalProduct version
-    const finalFresh = allFreshProducts.find(
-      (fresh) => fresh.name === product.ingredientName
-    );
-    // add to the tray
-    if (finalFresh !== undefined) {
-      const trayCopy = tray.slice();
-      tray[trayIdSelected].products.push(finalFresh);
-      setTray(trayCopy);
-      // remove to stock
-      const updatedProduct = removeToStockOfProduct(product);
-      const updatedArray = remplaceOldProductByUpdateProduct(
-        "freshProduct",
-        updatedProduct
-      );
-      if (setStocksRawsIngredients !== undefined) {
-        setStocksRawsIngredients(updatedArray);
-      }
     }
   }
 
@@ -232,21 +208,15 @@ function TrayCounterFunction({
       | NuggetBoxStock
   ) {
     const currentProduct = product;
-    if (tray[trayIdSelected].products[0].name === "Vide") {
+    if (tray[trayIdSelected].products[0].name === "Vide" && "ingredientName" in currentProduct === false) {
       const trayCopy = tray.slice();
       trayCopy[trayIdSelected].products.shift();
     }
 
     if ("ingredientName" in currentProduct) {
-      // Ingredient
+      // bag
       if (currentProduct.currentStocks > 0) {
-        if (currentProduct.ingredientName.includes("sac")) {
-          // bag
-          addBagInTray(currentProduct);
-        } else {
-          // fresh product
-          addFreshProductInTray(currentProduct);
-        }
+          addBagInTray(currentProduct);        
       } else {
         displayNoStock();
       }
@@ -279,32 +249,25 @@ function TrayCounterFunction({
     const productIndex = trayCopy[trayIdSelected].products.findIndex(
       (inTray) => inTray.name === product.name
     );
-    if (productIndex !== undefined) {
+    if (productIndex !== -1) {
       trayCopy[trayIdSelected].products.splice(productIndex, 1);
+      if(trayCopy[trayIdSelected].products.length === 0) {
+        trayCopy[trayIdSelected].products.push({
+        name: "Vide",
+        ingredient: {
+          nuggetQuantity: 0,
+        },
+        size: 0,
+        price: 0,
+        type: "Vide",
+      })
+      }
       setTray(trayCopy);
     }
 
     // identify the product for restore stock
     const currentProduct = product;
-    if (
-      allFreshProducts.find((fresh) => fresh.name === currentProduct.name) !==
-      undefined
-    ) {
-      // fresh
-      const freshIngredient = stocksRawsIngredients[7].productionArray.find(
-        (fresh) => fresh.ingredientName === currentProduct.name
-      );
-      if (freshIngredient !== undefined) {
-        const updatedProduct = restoreToStockOfProduct(freshIngredient);
-        const updatedArray = remplaceOldProductByUpdateProduct(
-          stocksRawsIngredients[7].sectionName,
-          updatedProduct
-        );
-        if (setStocksRawsIngredients !== undefined) {
-          setStocksRawsIngredients(updatedArray);
-        }
-      }
-    } else if ("bread" in currentProduct) {
+ if ("bread" in currentProduct) {
       // burger
       const burgerCopy = readyBurger.slice();
       burgerCopy.push(currentProduct);
@@ -331,11 +294,10 @@ function TrayCounterFunction({
         NuggetBoxStock,
         NuggetBoxStock
       ];
-      console.log(nuggetBoxCopy);
-      const nuggetIndex: number | undefined = nuggetBoxCopy.findIndex(
+      const nuggetIndex: number = nuggetBoxCopy.findIndex(
         (nugget) => nugget.boite.name === currentProduct.name
       );
-      if (nuggetIndex !== undefined) {
+      if (nuggetIndex !== -1) {
         nuggetBoxCopy[nuggetIndex].quantity =
           nuggetBoxCopy[nuggetIndex].quantity + 1;
         setReadyNuggetBox(nuggetBoxCopy);
@@ -353,7 +315,7 @@ function TrayCounterFunction({
     const bagIndex = trayCopy[trayIdSelected].bag.findIndex(
       (bag) => bag.name === product.name
     );
-    if (bagIndex !== undefined) {
+    if (bagIndex !== -1) {
       trayCopy[trayIdSelected].bag.splice(bagIndex, 1);
       setTray(trayCopy);
     }
@@ -401,6 +363,7 @@ function TrayCounterFunction({
 
   return {
     tray,
+    setTray,
     trayIdSelected,
     setTrayIdSelected,
     handleClickRecoverProductAndSortByTypeToAddToTray,

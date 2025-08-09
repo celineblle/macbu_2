@@ -33,15 +33,15 @@ function App() {
   >([
     {
       boite: allNuggets[0],
-      quantity: 0,
+      quantity: 10,
     },
     {
       boite: allNuggets[1],
-      quantity: 0,
+      quantity: 10,
     },
     {
       boite: allNuggets[2],
-      quantity: 0,
+      quantity: 10,
     },
   ]);
 

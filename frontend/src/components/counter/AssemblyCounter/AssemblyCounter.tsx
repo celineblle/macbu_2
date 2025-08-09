@@ -19,6 +19,7 @@ import {
 } from "../../../interfaces/compositionElementsInterfaces";
 import TrayCounterFunction from "./TrayCounterFunction";
 import AssemblyCounterTools from "./AssemblyCounterTools";
+import ValidateOrders from "./ValidateOrders";
 
 function AssemblyCounter({
   cashFund,
@@ -108,6 +109,7 @@ function AssemblyCounter({
   // TRAY FUNCTIONS
   const {
     tray,
+    setTray,
     trayIdSelected,
     setTrayIdSelected,
     handleClickRecoverProductAndSortByTypeToAddToTray,
@@ -129,6 +131,15 @@ function AssemblyCounter({
   function updateTrayId(id: number) {
     setTrayIdSelected(id);
   }
+
+  // VALIDATE ORDER
+  const {handleClickStartValidationByExtractToMenu} = ValidateOrders({  cashFund,
+  setCashFund,
+  tray,
+  setTray,
+  trayIdSelected,
+  ordersToPrepare,
+  setOrdersToPrepare,})
 
   return (
     <div id="assemblyCounterComponent" className="component">
@@ -162,19 +173,12 @@ function AssemblyCounter({
               {ordersToPrepare.map(
                 (order, index) =>
                   index < 10 && (
-                    <button key={order.dateId + index}>
+                    <button key={order.dateId + index}
+                    onClick={() => handleClickStartValidationByExtractToMenu(index)}
+                    >
                       <ul>
                         {order.products.map((detail, i) =>
                           "sandwich" in detail ? (
-                            "dessert" in detail ? (
-                              <ul key={detail.dateId + i}>
-                                <li>Menu enfant</li>
-                                <li>{detail.sandwich.name}</li>
-                                <li>{detail.side.name}</li>
-                                <li>{detail.drink.name}</li>
-                                <li>{detail.dessert.name}</li>
-                              </ul>
-                            ) : (
                               <ul key={detail.dateId + i}>
                                 <li>Menu</li>
                                 <li>{detail.sandwich.name}</li>
@@ -182,7 +186,7 @@ function AssemblyCounter({
                                 <li>{detail.drink.name}</li>
                               </ul>
                             )
-                          ) : (
+                           : (
                             <li key={detail.name + i}>{detail.name}</li>
                           )
                         )}

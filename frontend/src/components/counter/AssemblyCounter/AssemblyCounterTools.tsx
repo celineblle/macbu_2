@@ -39,11 +39,6 @@ function AssemblyCounterTools({
       correspondingArray: readyPortionFries,
     },
     {
-      section: "fresh",
-      tabName: "Frais",
-      correspondingArray: stocksRawsIngredients[7].productionArray,
-    },
-    {
       section: "drink",
       tabName: "Boisson",
       correspondingArray: readyDrink,
@@ -61,7 +56,7 @@ function AssemblyCounterTools({
     {
       section: "bag",
       tabName: "Sac",
-      correspondingArray: stocksRawsIngredients[10].productionArray,
+      correspondingArray: stocksRawsIngredients[9].productionArray,
     },
   ];
 

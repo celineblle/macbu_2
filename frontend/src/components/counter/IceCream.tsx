@@ -50,7 +50,7 @@ function IceCreamComponent({
     dateId: 0,
     price: 0,
     type: "glace",
-    dessert: "type"
+    dessert: "type",
   };
 
   // BUILDING ICE CREAM VARIABLES
@@ -105,34 +105,41 @@ function IceCreamComponent({
     const movingIceIndex: number = oldArrayCopy.findIndex(
       (ice) => movingIce.dateId === ice.dateId
     );
-    oldArrayCopy.splice(movingIceIndex, 1);
-    oldArraySetter(oldArrayCopy);
+    if (movingIceIndex !== -1) {
+      oldArrayCopy.splice(movingIceIndex, 1);
+      oldArraySetter(oldArrayCopy);
+    }
   }
 
   // ADD NEW ICE CREAM COOKING ARRAY
 
   // UPDATE TOPPING INGREDIENT IN THE BUILDING ICE CREAM
-  function remplaceIngredientInBuildingIceCream(ingredient: string): string | undefined {
+  function remplaceIngredientInBuildingIceCream(
+    ingredient: string
+  ): string | undefined {
     const buildingIceCreamCopy = structuredClone(buildingIceCream);
     let oldIngredient: string = emptyIceCream;
 
     // identify type of toping, save old topping and set new one
-    if("coulisTopping" in buildingIceCreamCopy.ingredient ){
-    if (ingredient.includes(coulisIdentifier)) {
-      if (buildingIceCreamCopy.ingredient.coulisTopping[0] !== emptyIceCream) {
-        oldIngredient = buildingIceCreamCopy.ingredient.coulisTopping[0];
+    if ("coulisTopping" in buildingIceCreamCopy.ingredient) {
+      if (ingredient.includes(coulisIdentifier)) {
+        if (
+          buildingIceCreamCopy.ingredient.coulisTopping[0] !== emptyIceCream
+        ) {
+          oldIngredient = buildingIceCreamCopy.ingredient.coulisTopping[0];
+        }
+        buildingIceCreamCopy.ingredient.coulisTopping.splice(0, 1, ingredient);
+      } else {
+        if (
+          buildingIceCreamCopy.ingredient.coulisTopping[1] !== emptyIceCream
+        ) {
+          oldIngredient = buildingIceCreamCopy.ingredient.coulisTopping[1];
+        }
+        buildingIceCreamCopy.ingredient.coulisTopping.splice(1, 1, ingredient);
       }
-      buildingIceCreamCopy.ingredient.coulisTopping.splice(0, 1, ingredient);
-    } else {
-      if (buildingIceCreamCopy.ingredient.coulisTopping[1] !== emptyIceCream) {
-        oldIngredient = buildingIceCreamCopy.ingredient.coulisTopping[1];
-      }
-      buildingIceCreamCopy.ingredient.coulisTopping.splice(1, 1, ingredient);
+      setBuildingIceCream(buildingIceCreamCopy);
+      return oldIngredient;
     }
-    setBuildingIceCream(buildingIceCreamCopy);
-    return oldIngredient;
-    }
-
   }
 
   // UPDATE STOCK (RESTORE / REMOVE) IN THE GLOBALS RAWS STOCKS
@@ -203,9 +210,10 @@ function IceCreamComponent({
   //ADD BUILDING ICE CREAM TO COOKING ARRAY
   function handleClickAddBuildingIceCreamToCookingArray() {
     // if building ice cream ingredient is complete, add in the cooking array
-    if ( "coulisTopping" in buildingIceCream.ingredient &&
-      (buildingIceCream.ingredient.coulisTopping[0] !== emptyIceCream &&
-      buildingIceCream.ingredient.coulisTopping[1] !== emptyIceCream)
+    if (
+      "coulisTopping" in buildingIceCream.ingredient &&
+      buildingIceCream.ingredient.coulisTopping[0] !== emptyIceCream &&
+      buildingIceCream.ingredient.coulisTopping[1] !== emptyIceCream
     ) {
       const buildingIceCreamCopy = structuredClone(buildingIceCream);
 
@@ -229,8 +237,10 @@ function IceCreamComponent({
     const meltedIceIndex: number = meltedArrayCopy.findIndex(
       (meltedIce) => meltedIce.dateId === ice.dateId
     );
-    meltedArrayCopy.splice(meltedIceIndex, 1);
-    setMeltedIceCream(meltedArrayCopy);
+    if (meltedIceIndex !== -1) {
+      meltedArrayCopy.splice(meltedIceIndex, 1);
+      setMeltedIceCream(meltedArrayCopy);
+    }
   }
 
   return (
@@ -245,12 +255,15 @@ function IceCreamComponent({
       </div>
       <div id="iceCreamPageContent">
         <h3>Pret</h3>
-        {readyIceCream.map((ice: FinalProductDessert, i) => (
-          "coulisTopping" in ice.ingredient &&
-          <button key={ice.dateId + i }>
-            {ice.ingredient.coulisTopping[0]} {ice.ingredient.coulisTopping[1]}
-          </button>
-        ))}
+        {readyIceCream.map(
+          (ice: FinalProductDessert, i) =>
+            "coulisTopping" in ice.ingredient && (
+              <button key={ice.dateId + i}>
+                {ice.ingredient.coulisTopping[0]}{" "}
+                {ice.ingredient.coulisTopping[1]}
+              </button>
+            )
+        )}
         {emptyPlace.map((ice, i) => (
           <button key={i}>{ice}</button>
         ))}
@@ -282,29 +295,37 @@ function IceCreamComponent({
           <div id="iceCreamModalContent">
             <div>
               <h3>Pret</h3>
-              {meltedIceCream.map((ice, i) => (
-                "coulisTopping" in ice.ingredient &&
-                <button style={{ color: "green" }} onClick={() => throwAwayOneMeltedIce(ice)}
-                key={ice.dateId + i}
-                >
-                  {ice.ingredient.coulisTopping[0]}{" "}
-                  {ice.ingredient.coulisTopping[1]}
-                </button>
-              ))}
-              {readyIceCream.map((ice, i) => (
-                "coulisTopping" in ice.ingredient &&
-                <button key={ice.dateId + i} style={{ color: "blue" }}>
-                  {ice.ingredient.coulisTopping[0]}{" "}
-                  {ice.ingredient.coulisTopping[1]}
-                </button>
-              ))}
-              {cookingIceCream.map((ice, i) => (
-                "coulisTopping" in ice.ingredient &&
-                <button key={ice.dateId + i}>
-                  {ice.ingredient.coulisTopping[0]}{" "}
-                  {ice.ingredient.coulisTopping[1]}
-                </button>
-              ))}
+              {meltedIceCream.map(
+                (ice, i) =>
+                  "coulisTopping" in ice.ingredient && (
+                    <button
+                      style={{ color: "green" }}
+                      onClick={() => throwAwayOneMeltedIce(ice)}
+                      key={ice.dateId + i}
+                    >
+                      {ice.ingredient.coulisTopping[0]}{" "}
+                      {ice.ingredient.coulisTopping[1]}
+                    </button>
+                  )
+              )}
+              {readyIceCream.map(
+                (ice, i) =>
+                  "coulisTopping" in ice.ingredient && (
+                    <button key={ice.dateId + i} style={{ color: "blue" }}>
+                      {ice.ingredient.coulisTopping[0]}{" "}
+                      {ice.ingredient.coulisTopping[1]}
+                    </button>
+                  )
+              )}
+              {cookingIceCream.map(
+                (ice, i) =>
+                  "coulisTopping" in ice.ingredient && (
+                    <button key={ice.dateId + i}>
+                      {ice.ingredient.coulisTopping[0]}{" "}
+                      {ice.ingredient.coulisTopping[1]}
+                    </button>
+                  )
+              )}
               {emptyPlace.map((ice, i) => (
                 <button key={i}>{ice}</button>
               ))}
@@ -341,11 +362,16 @@ function IceCreamComponent({
                   )
               )}
               <h4>Glace</h4>
-              {"coulisTopping" in buildingIceCream.ingredient &&
-              <ul>
-                <li>Coulis : {buildingIceCream.ingredient.coulisTopping[0]}</li>
-                <li>Eclats : {buildingIceCream.ingredient.coulisTopping[1]}</li>
-              </ul>}
+              {"coulisTopping" in buildingIceCream.ingredient && (
+                <ul>
+                  <li>
+                    Coulis : {buildingIceCream.ingredient.coulisTopping[0]}
+                  </li>
+                  <li>
+                    Eclats : {buildingIceCream.ingredient.coulisTopping[1]}
+                  </li>
+                </ul>
+              )}
               <button onClick={handleClickAddBuildingIceCreamToCookingArray}>
                 Preparer
               </button>

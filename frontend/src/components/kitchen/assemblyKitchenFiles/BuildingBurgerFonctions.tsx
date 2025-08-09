@@ -290,10 +290,12 @@ export function BuildingBurgerFonctions({
           const ingredientIndex = buildingBugerCopy.ingredient[
             propertyFromTabArray.section
           ].findIndex((testedIngredient) => testedIngredient === ingredient);
-          buildingBugerCopy.ingredient[propertyFromTabArray.section].splice(
-            ingredientIndex,
-            1
-          );
+          if (ingredientIndex !== -1) {
+            buildingBugerCopy.ingredient[propertyFromTabArray.section].splice(
+              ingredientIndex,
+              1
+            );
+          }
         } else {
           buildingBugerCopy.ingredient[propertyFromTabArray.section] = [];
         }
