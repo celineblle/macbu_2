@@ -1,8 +1,13 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { StocksRawsIngredientsContext } from "../../../context/StockRawsContext";
 import { TabsProducts } from "../../../interfaces/compositionElementsInterfaces";
 import { NuggetBoxStock } from "../../../interfaces/compositionElementsInterfaces";
-import { FinalProductDessert, FinalProductDrink, FinalProductBurger, FinalProductSide } from "../../../interfaces/produitsInterfaces";
+import {
+  FinalProductDessert,
+  FinalProductDrink,
+  FinalProductBurger,
+  FinalProductSide,
+} from "../../../interfaces/produitsInterfaces";
 
 function AssemblyCounterTools({
   readyBurger,
@@ -17,12 +22,12 @@ function AssemblyCounterTools({
   readyNuggetBox: [NuggetBoxStock, NuggetBoxStock, NuggetBoxStock];
   readyIceCream: FinalProductDessert[];
 }) {
-// CONTEXT
+  // CONTEXT
 
-const stocksRawsIngredients = useContext(StocksRawsIngredientsContext);
+  const stocksRawsIngredients = useContext(StocksRawsIngredientsContext);
 
-// TABS ARRAY
- const tabsCounterArray: TabsProducts[] = [
+  // TABS ARRAY
+  const tabsCounterArray: TabsProducts[] = [
     {
       section: "burger",
       tabName: "Burger",
@@ -53,16 +58,16 @@ const stocksRawsIngredients = useContext(StocksRawsIngredientsContext);
       tabName: "Glace",
       correspondingArray: readyIceCream,
     },
-        {
+    {
       section: "bag",
       tabName: "Sac",
       correspondingArray: stocksRawsIngredients[10].productionArray,
     },
-  ];   
-   
-    return {
-tabsCounterArray
-    }
+  ];
+
+  return {
+    tabsCounterArray,
+  };
 }
 
 export default AssemblyCounterTools;

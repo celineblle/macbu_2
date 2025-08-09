@@ -1,10 +1,10 @@
-import React, {  useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   setActionModal,
   updateEmptyPlace,
   handleClickSelectedTab,
 } from "../../../functions/generalsFuctions";
-import "../../../style/AssemblyCounter.css"
+import "../../../style/AssemblyCounter.css";
 import {
   FinalProductBurger,
   FinalProductDrink,
@@ -13,7 +13,10 @@ import {
   Ingredient,
 } from "../../../interfaces/produitsInterfaces";
 import { generateRamdomOrders } from "../../../functions/Order";
-import { Order, NuggetBoxStock } from "../../../interfaces/compositionElementsInterfaces";
+import {
+  Order,
+  NuggetBoxStock,
+} from "../../../interfaces/compositionElementsInterfaces";
 import TrayCounterFunction from "./TrayCounterFunction";
 import AssemblyCounterTools from "./AssemblyCounterTools";
 
@@ -82,7 +85,7 @@ function AssemblyCounter({
       }
     }
     // add new orders
-    if ((ordersToPrepareRef.current.length)< limitOfOrders) {
+    if (ordersToPrepareRef.current.length < limitOfOrders) {
       setTimeout(() => {
         const newOrder = generateRamdomOrders();
 
@@ -92,39 +95,40 @@ function AssemblyCounter({
   }, [ordersToPrepare]);
 
   // TABS
-const [activeTab, setActiveTab] = useState<string>("burger");
+  const [activeTab, setActiveTab] = useState<string>("burger");
 
-const {tabsCounterArray} = AssemblyCounterTools(  {readyBurger,
-  readyPortionFries,
-  readyDrink,
-  readyNuggetBox,
-  readyIceCream})
-
+  const { tabsCounterArray } = AssemblyCounterTools({
+    readyBurger,
+    readyPortionFries,
+    readyDrink,
+    readyNuggetBox,
+    readyIceCream,
+  });
 
   // TRAY FUNCTIONS
-const {
+  const {
     tray,
     trayIdSelected,
     setTrayIdSelected,
     handleClickRecoverProductAndSortByTypeToAddToTray,
     handleClickIdentifyTrayAndSortByTypeOfProduct,
   } = TrayCounterFunction({
-  readyBurger,
-  readyPortionFries,
-  readyDrink,
-  readyNuggetBox,
-  readyIceCream,
-  setReadyNuggetBox,
-  setReadyBurger,
-  setReadyIceCream,
-  setReadyDrink,
-  setReadyPortionFries,
-})
+    readyBurger,
+    readyPortionFries,
+    readyDrink,
+    readyNuggetBox,
+    readyIceCream,
+    setReadyNuggetBox,
+    setReadyBurger,
+    setReadyIceCream,
+    setReadyDrink,
+    setReadyPortionFries,
+  });
 
-// UPDATE TRAY ID
-function updateTrayId(id: number) {
-  setTrayIdSelected(id);
-}
+  // UPDATE TRAY ID
+  function updateTrayId(id: number) {
+    setTrayIdSelected(id);
+  }
 
   return (
     <div id="assemblyCounterComponent" className="component">
@@ -179,7 +183,7 @@ function updateTrayId(id: number) {
                               </ul>
                             )
                           ) : (
-                            <li key={detail.name + i }>{detail.name}</li>
+                            <li key={detail.name + i}>{detail.name}</li>
                           )
                         )}
                       </ul>
@@ -193,75 +197,104 @@ function updateTrayId(id: number) {
             <div>
               <h3>Commandes en préparation</h3>
               {tray.map((uniqueTray, i) => (
-                <ul key={uniqueTray.dateId + i} onClick={() => updateTrayId(uniqueTray.dateId)}>
-                  
-                    {uniqueTray.products.map((product, i) => (
-                      <button
+                <ul
+                  key={uniqueTray.dateId + i}
+                  onClick={() => updateTrayId(uniqueTray.dateId)}
+                >
+                  {uniqueTray.products.map((product, i) => (
+                    <button
                       key={product.price + i}
-                      onClick={() => handleClickIdentifyTrayAndSortByTypeOfProduct( product)}
-                      >{product.name}</button>
-                    ))}
-                    {uniqueTray.bag.map((bag, i) => (
-                      <button
+                      onClick={() =>
+                        handleClickIdentifyTrayAndSortByTypeOfProduct(product)
+                      }
+                    >
+                      {product.name}
+                    </button>
+                  ))}
+                  {uniqueTray.bag.map((bag, i) => (
+                    <button
                       key={bag.ingredient.capacity + i}
-                      onClick={() => handleClickIdentifyTrayAndSortByTypeOfProduct(bag)}
-                      >{bag.name}</button>
-                    ))}
-                  
+                      onClick={() =>
+                        handleClickIdentifyTrayAndSortByTypeOfProduct(bag)
+                      }
+                    >
+                      {bag.name}
+                    </button>
+                  ))}
                 </ul>
               ))}
             </div>
             <div>
               <h3>Produits</h3>
- <div>
-      <div id="tabs">
-        {tabsCounterArray.map((tab) => (
-          <button
-            key={tab.tabName}
-            onClick={() => handleClickSelectedTab(tab.section, setActiveTab)}
-          >
-            {tab.tabName}
-          </button>
-        ))}
-      </div>
-      {tabsCounterArray.map((array) => (
-        <div
-          className={
-            activeTab === array.section ? "tabOpen" : "tabClose"
-          }
-          key={array.tabName}
-        >
-          {array.correspondingArray.map(
-            (
-              product:
-                | FinalProductBurger
-                | FinalProductSide
-                | FinalProductDrink
-                | FinalProductDessert
-                | NuggetBoxStock | Ingredient, i
-            ) =>
-              "boite" in product && "quantity" in product ? (
-                <button
-                onClick={() => handleClickRecoverProductAndSortByTypeToAddToTray(product)}
-                key={product.quantity + i}
-                >{product.boite.name} : {product.quantity}</button>
-              ) : 
-              "currentStocks" in product ? (
-                <button onClick={() => handleClickRecoverProductAndSortByTypeToAddToTray(product)}
-                key={product.dateId + i}
-                >
-                    {product.ingredientName} : {product.currentStocks}
-                </button>
-              ) :
-              (
-                <button onClick={() => handleClickRecoverProductAndSortByTypeToAddToTray(product)}
-                key={product.price + i}
-                >{product.name}</button>
-              )
-          )}
-        </div>
-      ))}
-    </div>
+              <div>
+                <div id="tabs">
+                  {tabsCounterArray.map((tab) => (
+                    <button
+                      key={tab.tabName}
+                      onClick={() =>
+                        handleClickSelectedTab(tab.section, setActiveTab)
+                      }
+                    >
+                      {tab.tabName}
+                    </button>
+                  ))}
+                </div>
+                {tabsCounterArray.map((array) => (
+                  <div
+                    className={
+                      activeTab === array.section ? "tabOpen" : "tabClose"
+                    }
+                    key={array.tabName}
+                  >
+                    {array.correspondingArray.map(
+                      (
+                        product:
+                          | FinalProductBurger
+                          | FinalProductSide
+                          | FinalProductDrink
+                          | FinalProductDessert
+                          | NuggetBoxStock
+                          | Ingredient,
+                        i
+                      ) =>
+                        "boite" in product && "quantity" in product ? (
+                          <button
+                            onClick={() =>
+                              handleClickRecoverProductAndSortByTypeToAddToTray(
+                                product
+                              )
+                            }
+                            key={product.quantity + i}
+                          >
+                            {product.boite.name} : {product.quantity}
+                          </button>
+                        ) : "currentStocks" in product ? (
+                          <button
+                            onClick={() =>
+                              handleClickRecoverProductAndSortByTypeToAddToTray(
+                                product
+                              )
+                            }
+                            key={product.dateId + i}
+                          >
+                            {product.ingredientName} : {product.currentStocks}
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() =>
+                              handleClickRecoverProductAndSortByTypeToAddToTray(
+                                product
+                              )
+                            }
+                            key={product.price + i}
+                          >
+                            {product.name}
+                          </button>
+                        )
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
