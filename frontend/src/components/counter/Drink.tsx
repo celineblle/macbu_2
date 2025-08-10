@@ -42,7 +42,7 @@ function Drink({
 
   //TOOLS VARIABLES
   const limitSizeDrink: number = 10;
-  const stockGlobalIndex: number = 9;
+  const stockGlobalIndex: number = 8;
   const emptyDrink: string = "Vide";
   const emptyDrinkObject: BuildingDrink = {
     size: emptyDrink,
@@ -197,17 +197,21 @@ function Drink({
           className="buttonOpenModal"
           onClick={() => setActionModal(setToggleModal, toggleModal)}
         >
-          Boisson
+          BOISSON
         </button>
       </div>
       <div id="drinkPageContent">
         <h3>Pret</h3>
-        <ul>
+        <ul className="readyProductArrayFrontPage">
           {readyDrink.map((drink, i: number) => (
-            <li key={drink.dateId + i}>{drink.name}</li>
+            <li key={drink.dateId + i}
+            className="readyButton frontPageLi"
+            >{drink.name}</li>
           ))}
           {emptyPlace.map((drink, i) => (
-            <button key={i}>{drink}</button>
+            <li key={i}
+            className="neutralButton frontPageLi"
+            >{drink}</li>
           ))}
         </ul>
       </div>
@@ -242,17 +246,21 @@ function Drink({
             {readyDrink.map((drink, i) => (
               <button
                 key={drink.dateId + i}
-                style={{ color: "blue" }}
                 onClick={() => handleClickRemoveForTrash(drink)}
+              className="readyButton"
               >
                 {drink.name}
               </button>
             ))}
             {cookingDrink.map((drink, i) => (
-              <button key={drink.dateId + i}>{drink.name}</button>
+              <button key={drink.dateId + i}
+              className="cookingButton"
+              >{drink.name}</button>
             ))}
             {emptyPlace.map((drink, i) => (
-              <button key={i}>{drink}</button>
+              <button key={i}
+              className="neutralButton"
+              >{drink}</button>
             ))}
             <div>
               <h3>Preparation</h3>
@@ -264,6 +272,7 @@ function Drink({
                     onClick={() =>
                       buildNewDrink(drink.ingredientName, drink.currentStocks)
                     }
+                    className="neutralButton"
                   >
                     {drink.ingredientName}
                   </button>
@@ -274,6 +283,7 @@ function Drink({
                 <button
                   key={size.name}
                   onClick={() => buildNewDrink(size.name, 0)}
+                className="neutralButton"
                 >
                   {size.name}
                 </button>
@@ -282,7 +292,9 @@ function Drink({
                 <li>Taille : {buildingDrink.size}</li>
                 <li>Saveur : {buildingDrink.flavour}</li>
               </ul>
-              <button onClick={handleClickFinishBuilding}>Preparer</button>
+              <button onClick={handleClickFinishBuilding}
+              className="neutralButton"
+              >Preparer</button>
             </div>
             <div>
               <div>
@@ -293,7 +305,8 @@ function Drink({
                 <ul>
                   {stocksRawsIngredients[stockGlobalIndex].productionArray.map(
                     (ingredient) => (
-                      <li key={ingredient.ingredientName}>
+                      <li key={ingredient.ingredientName}
+                      >
                         {ingredient.ingredientName} : {ingredient.currentStocks}
                       </li>
                     )

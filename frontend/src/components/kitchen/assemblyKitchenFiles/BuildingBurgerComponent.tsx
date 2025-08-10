@@ -12,7 +12,7 @@ function BuildingBurgerComponent({
   ) => void;
 }) {
   return (
-    <ul>
+    <ul className="buildingBurgerAndRecipeComponent">
       <li>
         Pain :{" "}
         {buildingBurger.ingredient.bread === emptyBurger ? (
@@ -24,6 +24,7 @@ function BuildingBurgerComponent({
                 buildingBurger.ingredient.bread
               )
             }
+            className="neutralButton"
           >
             {buildingBurger.ingredient.bread}
           </button>
@@ -40,6 +41,7 @@ function BuildingBurgerComponent({
                 buildingBurger.ingredient.meat
               )
             }
+            className="neutralButton"
           >
             {buildingBurger.ingredient.meat}
           </button>
@@ -57,6 +59,7 @@ function BuildingBurgerComponent({
                   )
                 }
                 key={cheese}
+                className="neutralButton"
               >
                 {cheese}
               </button>
@@ -74,6 +77,7 @@ function BuildingBurgerComponent({
                   )
                 }
                 key={ingredient}
+                className="neutralButton"
               >
                 {ingredient}
               </button>
@@ -91,6 +95,7 @@ function BuildingBurgerComponent({
                   )
                 }
                 key={sauce}
+                className="neutralButton"
               >
                 {sauce}
               </button>

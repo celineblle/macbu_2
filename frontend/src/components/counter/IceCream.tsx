@@ -34,7 +34,7 @@ function IceCreamComponent({
   const setStocksRawsIngredients = useContext(SetStocksRawsIngredientsContext);
 
   //TOOL VARIABLES
-  const stockRawIndex: number = 8;
+  const stockRawIndex: number = 7;
   const limiteSizeShelf: number = 11;
   const coulisIdentifier: string = "Coulis";
   const eclatsIndentifier: string = "Eclats";
@@ -249,23 +249,29 @@ function IceCreamComponent({
           className="buttonOpenModal"
           onClick={() => setActionModal(setToggleModal, toggleModal)}
         >
-          Glace
+          GLACE
         </button>
       </div>
       <div id="iceCreamPageContent">
         <h3>Pret</h3>
+        <ul className="readyProductArrayFrontPage">
         {readyIceCream.map(
           (ice: FinalProductDessert, i) =>
             "coulisTopping" in ice.ingredient && (
-              <button key={ice.dateId + i}>
+              <li key={ice.dateId + i}
+              className="readyButton frontPageLi"
+              >
                 {ice.ingredient.coulisTopping[0]}{" "}
                 {ice.ingredient.coulisTopping[1]}
-              </button>
+              </li>
             )
         )}
         {emptyPlace.map((ice, i) => (
-          <button key={i}>{ice}</button>
+          <li key={i}
+          className="neutralButton frontPageLi"
+          >{ice}</li>
         ))}
+        </ul>
       </div>
       <div className={toggleModal ? "modalOpen" : "modalClose"}>
         <div className="modalContent">
@@ -298,9 +304,9 @@ function IceCreamComponent({
                 (ice, i) =>
                   "coulisTopping" in ice.ingredient && (
                     <button
-                      style={{ color: "green" }}
                       onClick={() => throwAwayOneMeltedIce(ice)}
                       key={ice.dateId + i}
+                      className="grilledButton"
                     >
                       {ice.ingredient.coulisTopping[0]}{" "}
                       {ice.ingredient.coulisTopping[1]}
@@ -310,7 +316,9 @@ function IceCreamComponent({
               {readyIceCream.map(
                 (ice, i) =>
                   "coulisTopping" in ice.ingredient && (
-                    <button key={ice.dateId + i} style={{ color: "blue" }}>
+                    <button key={ice.dateId + i}
+                    className="readyButton"
+                    >
                       {ice.ingredient.coulisTopping[0]}{" "}
                       {ice.ingredient.coulisTopping[1]}
                     </button>
@@ -319,14 +327,18 @@ function IceCreamComponent({
               {cookingIceCream.map(
                 (ice, i) =>
                   "coulisTopping" in ice.ingredient && (
-                    <button key={ice.dateId + i}>
+                    <button key={ice.dateId + i}
+                    className="cookingButton"
+                    >
                       {ice.ingredient.coulisTopping[0]}{" "}
                       {ice.ingredient.coulisTopping[1]}
                     </button>
                   )
               )}
               {emptyPlace.map((ice, i) => (
-                <button key={i}>{ice}</button>
+                <button key={i}
+                className="neutralButton"
+                >{ice}</button>
               ))}
             </div>
             <hr />
@@ -341,6 +353,7 @@ function IceCreamComponent({
                       onClick={() =>
                         handleCLickBuildingIceCream(ice.ingredientName)
                       }
+                      className="neutralButton"
                     >
                       {ice.ingredientName}
                     </button>
@@ -355,6 +368,7 @@ function IceCreamComponent({
                       onClick={() =>
                         handleCLickBuildingIceCream(ice.ingredientName)
                       }
+                      className="neutralButton"
                     >
                       {ice.ingredientName}
                     </button>
@@ -371,7 +385,9 @@ function IceCreamComponent({
                   </li>
                 </ul>
               )}
-              <button onClick={handleClickAddBuildingIceCreamToCookingArray}>
+              <button onClick={handleClickAddBuildingIceCreamToCookingArray}
+              className="neutralButton"
+              >
                 Preparer
               </button>
             </div>

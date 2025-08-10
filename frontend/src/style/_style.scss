@@ -22,8 +22,7 @@ $vertClair: #c7f2b3;
   margin: 4px;
   padding: 4px;
   border-radius: 15px;
-  width: calc(100% - 24px);
-  height: calc(100% - 24px);
+  height: calc(45vh - 24px);
 }
 
 @mixin close-mode {

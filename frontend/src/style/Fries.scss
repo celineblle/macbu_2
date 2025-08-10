@@ -1,0 +1,30 @@
+#friesModalContent {
+    display: flex;
+    height: 90%;
+}
+
+#buildingAndReadFries, #cookingAndStockFries {
+    display: block;
+}
+
+#buildingAndReadFries, #ordersFries {
+    width: 35%;
+}
+
+#cookingAndStockFries {
+    width: 30%;
+}
+
+#buildingFries {
+    height: 35%;
+    display: flex;
+    flex-direction: column;
+}
+
+.buildingFriesButton {
+    width: 8vw;
+}
+
+.cookingFriesButton {
+    width: 7vw;
+}

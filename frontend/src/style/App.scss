@@ -12,8 +12,9 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: "BebasNeue";
+  font-family: "BebasNeue", "Gill Sans", "Gill Sans MT";
   margin: 4px;
+  padding-bottom: 5px;
 }
 
 h1 {
@@ -38,15 +39,9 @@ li {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
-button {
-  border-radius: 5px;
-  outline: none;
-  border: none;
-  cursor: pointer;
-  color: style.$noir;
-  padding: 2px 8px;
-  margin: 3px 8px;
-  transition: background-color 2s;
+p {
+  margin: 0;
+  padding: 0;
 }
 
 hr {
@@ -54,7 +49,7 @@ hr {
   margin: 10px;
 }
 
-// Component organisation
+// COMPONENT ORGANISATION
 
 #page {
   display: flex;
@@ -65,7 +60,12 @@ hr {
   @include style.border-component;
 }
 
-#headerModal {
+.headerPage {
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerModal {
   display: flex;
   justify-content: space-between;
   padding: 4px;
@@ -97,133 +97,156 @@ hr {
   margin: auto;
   width: 80%;
   height: 85%;
+  overflow: scroll;
+  padding: 1em;
 }
 
-// Button
+// BUTTON
 
-.buttonModal {
+ .frontPageLi, button {
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  color: style.$noir;
+  padding: 2px 12px;
+  margin: 5px 5px;
+  background-color: style.$gris;
+  min-height: 30px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.buttonOpenModal {
   font-family: "BebasNeue", Impact;
   border: 2px solid style.$rose;
   font-size: 2em;
+  max-height: 50px;
 }
 
 .closeModalButton,
-.buttonModal,
-.commandeCuisson,
-.commandePret,
-.commandeModal,
-.buttonStockVide {
+.buttonOpenModal,
+.cookingOrder,
+.readyOrder,
+.modalOrder,
+.emptyStockButton {
   background-color: transparent;
 }
 
-.tabLinksButton {
-  background-color: style.$gris;
-  padding: 5px;
-  transition: 0.3s;
-  float: left;
-  outline: none;
-  border: 1px solid style.$grisBordure;
-}
-
-.tabLinksButton:hover {
-  background-color: style.$grisBordure;
-}
-
-.tabLinksButton:active {
-  background-color: style.$rose;
-  transition: 0.2s;
-}
-
-.tabContentHidden,
-.modalClose {
-  @include style.close-mode;
-}
-
-.buttonGrille {
+.grilledButton {
   background-color: style.$marron;
   color: style.$blanc;
 }
 
-.buttonPret {
+.readyButton {
   background-color: style.$vert;
 }
 
-.buttonCuisson,
-.commandeCuisson:hover {
+.cookingButton {
   background-color: style.$orange;
 }
 
-.buttonNeutre {
+.neutralButton {
   background-color: style.$gris;
 }
 
-.onglet {
-  background-color: style.$gris;
-  border: 1px solid style.$grisBordure;
-  border-radius: 5px 5px 0px 0px;
-}
-
-.buttonNeutre:hover,
-.onglet:hover,
-.buttonGrille:hover {
+.neutralButton:hover,
+.grilledButton:hover {
   background-color: style.$rose;
   color: style.$noir;
 }
 
-.buttonNeutre:active,
-.onglet:active {
+.neutralButton:active {
   background-color: style.$grisBordure;
 }
 
-.buttonGrille:active,
-.commandeCuisson:active {
+.grilledButton:active {
   background-color: style.$beige;
   color: style.$noir;
 }
 
-.buttonPret:hover {
+.readyButton:hover {
   background-color: style.$vertFonce;
 }
 
-.buttonPret:active {
+.readyButton:active {
   background-color: style.$vertClair;
 }
 
-.commandeCuisson {
-  border: 2px solid style.$orange;
-  border-radius: 5px;
-  width: 170px;
-  height: 75px;
-}
-
-.commandePret {
-  border: 2px solid style.$vert;
-  border-radius: 5px;
-  width: 170px;
-  height: 75px;
-}
-
-.commandeModal {
-  border: 2px solid style.$rose;
-  border-radius: 5px;
-  width: 170px;
-  height: 75px;
-}
-
-.commandePret:hover {
-  background-color: style.$vert;
-}
-
-.commandePret:active {
-  background-color: style.$vertClair;
-  border-color: style.$vertClair;
-}
-
-.buttonStockVide {
+.emptyStockButton {
   border: 2px solid style.$grisBordure;
   :hover {
     background-color: transparent;
     border: 2px solid style.$grisBordure;
     cursor: default;
   }
+}
+
+// TAB 
+
+.modalClose, .tabClose {
+  @include style.close-mode;
+}
+
+.tabs {
+  background-color: style.$gris;
+  border-radius: 5px 5px 0px 0px;
+  margin-bottom: 5px;
+}
+
+.tabs:hover, .tabs:focus, .tabs:active, .tabs:target {
+  background-color: style.$rose;
+}
+
+.tabOpen {
+  display: block;
+  height: 110px;
+}
+
+// COMMANDES
+
+.cookingOrder {
+  border: 2px solid style.$orange;
+  border-radius: 5px;
+  width: 170px;
+}
+
+.cookingOrder:hover, .cookingOrder:focus, .cookingOrder:active, .cookingOrder:target {
+  background-color: style.$orange;
+}
+
+.cookingOrder:active {
+  background-color: style.$beige;
+  color: style.$noir;
+}
+
+.readyOrder {
+  border: 2px solid style.$vert;
+  border-radius: 5px;
+  width: 170px;
+}
+
+.modalOrder {
+  border: 2px solid style.$rose;
+  border-radius: 5px;
+  width: 170px;
+  height: 75px;
+}
+
+.readyOrder:hover {
+  background-color: style.$vert;
+}
+
+.readyOrder:active {
+  background-color: style.$vertClair;
+  border-color: style.$vertClair;
+}
+
+// COMPONENT ELEMENTS
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 1em;
 }

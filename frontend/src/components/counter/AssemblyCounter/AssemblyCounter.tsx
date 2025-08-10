@@ -148,12 +148,23 @@ function AssemblyCounter({
           className="buttonOpenModal"
           onClick={() => setActionModal(setToggleModal, toggleModal)}
         >
-          Comptoir
+          COMPTOIR
         </button>
         <p>Commandes en attente : {ordersToPrepare.length}</p>
       </div>
       <div id="assemblyCounterPageContent">
         <h3>Commandes en preparation</h3>
+        <div id="trayArrayFrontPage">
+        {tray.map((uniqueTray) => (
+          <ul className="cookingOrder assemblyComptoirTrayFrontPage">
+            {uniqueTray.products.map((product) => (
+              <li>
+                {product.name}
+              </li>
+            ))}
+          </ul>
+        ))}
+        </div>
       </div>
       <div className={toggleModal ? "modalOpen" : "modalClose"}>
         <div className="modalContent">
@@ -231,13 +242,14 @@ function AssemblyCounter({
             <div>
               <h3>Produits</h3>
               <div>
-                <div id="tabs">
+                <div >
                   {tabsCounterArray.map((tab) => (
                     <button
                       key={tab.tabName}
                       onClick={() =>
                         handleClickSelectedTab(tab.section, setActiveTab)
                       }
+                      className="tabs"
                     >
                       {tab.tabName}
                     </button>

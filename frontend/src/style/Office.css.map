@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":[],"names":[],"mappings":"","file":"Office.css"}
+{"version":3,"sourceRoot":"","sources":["_style.scss","Office.scss"],"names":[],"mappings":"AAAA;EACE;EACA;;AA6BF;EACE;IACE;IACA;;EAEF;IACE;IACA;;;ACpCJ;EACI;;;AAGJ;EACI;EACA;;;AAGJ;EACI;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA","file":"Office.css"}

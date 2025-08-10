@@ -24,8 +24,9 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: "BebasNeue";
+  font-family: "BebasNeue", "Gill Sans", "Gill Sans MT";
   margin: 4px;
+  padding-bottom: 5px;
 }
 
 h1 {
@@ -50,15 +51,9 @@ li {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
-button {
-  border-radius: 5px;
-  outline: none;
-  border: none;
-  cursor: pointer;
-  color: #0d0d0d;
-  padding: 2px 8px;
-  margin: 3px 8px;
-  transition: background-color 2s;
+p {
+  margin: 0;
+  padding: 0;
 }
 
 hr {
@@ -76,11 +71,15 @@ hr {
   margin: 4px;
   padding: 4px;
   border-radius: 15px;
-  width: calc(100% - 24px);
-  height: calc(100% - 24px);
+  height: calc(45vh - 24px);
 }
 
-#headerModal {
+.headerPage {
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerModal {
   display: flex;
   justify-content: space-between;
   padding: 4px;
@@ -112,138 +111,154 @@ hr {
   margin: 4px;
   padding: 4px;
   border-radius: 15px;
-  width: calc(100% - 24px);
-  height: calc(100% - 24px);
+  height: calc(45vh - 24px);
   margin: auto;
   width: 80%;
   height: 85%;
+  overflow: scroll;
+  padding: 1em;
 }
 
-.buttonModal {
+.frontPageLi, button {
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  color: #0d0d0d;
+  padding: 2px 12px;
+  margin: 5px 5px;
+  background-color: #d7d3d2;
+  min-height: 30px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.buttonOpenModal {
   font-family: "BebasNeue", Impact;
   border: 2px solid #f2bbc9;
   font-size: 2em;
+  max-height: 50px;
 }
 
 .closeModalButton,
-.buttonModal,
-.commandeCuisson,
-.commandePret,
-.commandeModal,
-.buttonStockVide {
+.buttonOpenModal,
+.cookingOrder,
+.readyOrder,
+.modalOrder,
+.emptyStockButton {
   background-color: transparent;
 }
 
-.tabLinksButton {
-  background-color: #d7d3d2;
-  padding: 5px;
-  transition: 0.3s;
-  float: left;
-  outline: none;
-  border: 1px solid #a6a6a6;
-}
-
-.tabLinksButton:hover {
-  background-color: #a6a6a6;
-}
-
-.tabLinksButton:active {
-  background-color: #f2bbc9;
-  transition: 0.2s;
-}
-
-.tabContentHidden,
-.modalClose {
-  display: none;
-}
-
-.buttonGrille {
+.grilledButton {
   background-color: #402116;
   color: #f2f2f2;
 }
 
-.buttonPret {
+.readyButton {
   background-color: #78e8c1;
 }
 
-.buttonCuisson,
-.commandeCuisson:hover {
+.cookingButton {
   background-color: #f78800;
 }
 
-.buttonNeutre {
+.neutralButton {
   background-color: #d7d3d2;
 }
 
-.onglet {
-  background-color: #d7d3d2;
-  border: 1px solid #a6a6a6;
-  border-radius: 5px 5px 0px 0px;
-}
-
-.buttonNeutre:hover,
-.onglet:hover,
-.buttonGrille:hover {
+.neutralButton:hover,
+.grilledButton:hover {
   background-color: #f2bbc9;
   color: #0d0d0d;
 }
 
-.buttonNeutre:active,
-.onglet:active {
+.neutralButton:active {
   background-color: #a6a6a6;
 }
 
-.buttonGrille:active,
-.commandeCuisson:active {
+.grilledButton:active {
   background-color: #d9af8b;
   color: #0d0d0d;
 }
 
-.buttonPret:hover {
+.readyButton:hover {
   background-color: #4bbf52;
 }
 
-.buttonPret:active {
+.readyButton:active {
   background-color: #c7f2b3;
 }
 
-.commandeCuisson {
+.emptyStockButton {
+  border: 2px solid #a6a6a6;
+}
+.emptyStockButton :hover {
+  background-color: transparent;
+  border: 2px solid #a6a6a6;
+  cursor: default;
+}
+
+.modalClose, .tabClose {
+  display: none;
+}
+
+.tabs {
+  background-color: #d7d3d2;
+  border-radius: 5px 5px 0px 0px;
+  margin-bottom: 5px;
+}
+
+.tabs:hover, .tabs:focus, .tabs:active, .tabs:target {
+  background-color: #f2bbc9;
+}
+
+.tabOpen {
+  display: block;
+  height: 110px;
+}
+
+.cookingOrder {
   border: 2px solid #f78800;
   border-radius: 5px;
   width: 170px;
-  height: 75px;
 }
 
-.commandePret {
+.cookingOrder:hover, .cookingOrder:focus, .cookingOrder:active, .cookingOrder:target {
+  background-color: #f78800;
+}
+
+.cookingOrder:active {
+  background-color: #d9af8b;
+  color: #0d0d0d;
+}
+
+.readyOrder {
   border: 2px solid #78e8c1;
   border-radius: 5px;
   width: 170px;
-  height: 75px;
 }
 
-.commandeModal {
+.modalOrder {
   border: 2px solid #f2bbc9;
   border-radius: 5px;
   width: 170px;
   height: 75px;
 }
 
-.commandePret:hover {
+.readyOrder:hover {
   background-color: #78e8c1;
 }
 
-.commandePret:active {
+.readyOrder:active {
   background-color: #c7f2b3;
   border-color: #c7f2b3;
 }
 
-.buttonStockVide {
-  border: 2px solid #a6a6a6;
-}
-.buttonStockVide :hover {
-  background-color: transparent;
-  border: 2px solid #a6a6a6;
-  cursor: default;
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 1em;
 }
 
 /*# sourceMappingURL=App.css.map */

@@ -1,0 +1,17 @@
+#trayArrayFrontPage {
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  width: calc(40vw - 24px);
+  height: 29vh;
+}
+
+.cookingOrder {
+  margin: 5px;
+  padding: 5px;
+  flex-shrink: 0;
+}
+
+.assemblyComptoirTrayFrontPage {
+  height: 200px;
+}

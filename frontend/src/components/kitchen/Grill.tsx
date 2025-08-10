@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../../style/Grill.css";
 import {
-AvailableMeat, SectionRawIngredients,
+  AvailableMeat,
+  SectionRawIngredients,
 } from "../../interfaces/compositionElementsInterfaces";
 import { Ingredient } from "../../interfaces/produitsInterfaces";
 import {
@@ -138,27 +139,33 @@ function Grill({
           className="buttonOpenModal"
           onClick={() => setActionModal(setToggleModal, toggleModal)}
         >
-          Grill
+          GRILL
         </button>
       </div>
-      <div id="grillPageContent">
-        <h3></h3>
-        <ul>
-          {availableGrill.map((steak) => (
-            <li key={steak.meat.ingredientName}>
-              {steak.meat.ingredientName} : {steak.quantity}
-            </li>
-          ))}
-        </ul>
+      <div id="stocksListGrillFrontPage">
+        <div className="stockListGrill">
+          <h3>Pret</h3>
+          <ul>
+            {availableGrill.map((steak) => (
+              <li key={steak.meat.ingredientName}>
+                {steak.meat.ingredientName} : {steak.quantity}
+              </li>
+            ))}
+          </ul>
+        </div>
         <hr />
-        <h3>Stock</h3>
-        <ul>
-          {stocksRawsIngredients[indexRawArray].productionArray.map((steak) => (
-            <li key={steak.ingredientName}>
-              {steak.ingredientName} : {steak.currentStocks}
-            </li>
-          ))}
-        </ul>
+        <div className="stockListGrill">
+          <h3>Stock</h3>
+          <ul>
+            {stocksRawsIngredients[indexRawArray].productionArray.map(
+              (steak) => (
+                <li key={steak.ingredientName}>
+                  {steak.ingredientName} : {steak.currentStocks}
+                </li>
+              )
+            )}
+          </ul>
+        </div>
       </div>
       <div className={toggleModal ? "modalOpen" : "modalClose"}>
         <div className="modalContent">
@@ -188,7 +195,7 @@ function Grill({
                 <button
                   key={steak.dateId}
                   onClick={() => handleClickRemoveGrilledSteak(steak)}
-                  style={{ color: "blue" }}
+                  className="grilledButton"
                 >
                   {steak.ingredientName}
                 </button>
@@ -197,16 +204,20 @@ function Grill({
                 <button
                   key={steak.dateId}
                   onClick={() => handleClickRemoveReadySteakFromGrill(steak)}
-                  style={{ color: "green" }}
+                  className="readyButton"
                 >
                   {steak.ingredientName}
                 </button>
               ))}
               {cookingGrill.map((steak) => (
-                <button key={steak.dateId}>{steak.ingredientName}</button>
+                <button key={steak.dateId} className="cookingButton">
+                  {steak.ingredientName}
+                </button>
               ))}
               {emptyPlace.map((place, i) => (
-                <button key={i}>{place}</button>
+                <button key={i} className="neutralButton">
+                  {place}
+                </button>
               ))}
             </div>
             <div>
@@ -214,7 +225,10 @@ function Grill({
               {stocksRawsIngredients[indexRawArray].productionArray.map(
                 (steak) => (
                   <div key={steak.ingredientName}>
-                    <button onClick={() => handleClickCookingRawSteak(steak)}>
+                    <button
+                      onClick={() => handleClickCookingRawSteak(steak)}
+                      className="neutralButton"
+                    >
                       {steak.ingredientName}
                     </button>
                     <p>Stock : {steak.currentStocks}</p>

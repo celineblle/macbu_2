@@ -101,23 +101,27 @@ function AssemblyKitchen({
           className="buttonOpenModal"
           onClick={() => setActionModal(setToggleModal, toggleModal)}
         >
-          Cuisine
+          CUISINE
         </button>
       </div>
       <div id="assemblyKitchenPageContent">
         <div>
-          <h3>Pret</h3>
-          <ul>
+          <h3>Burger prêt</h3>
+          <ul className="burgerArrayFrontPage">
             {readyBurger.map((burger, i) => (
-              <li key={i}>{burger.name}</li>
+              <li key={i} className="readyOrder readyBurgerArrayFrontPage">
+                {burger.name}
+              </li>
             ))}
           </ul>
         </div>
         <div>
-          <h3>En attente</h3>
-          <ul>
+          <h3>Burger en attente</h3>
+          <ul className="burgerArrayFrontPage">
             {waitingArrayBurger.map((burger, i) => (
-              <li key={i}>{burger.name}</li>
+              <li key={i} className="cookingOrder readyBurgerArrayFrontPage">
+                {burger.name}
+              </li>
             ))}
           </ul>
         </div>
@@ -147,7 +151,7 @@ function AssemblyKitchen({
             </button>
           </div>
           <div id="assemblyKitchenModalContent">
-            <div>
+            <div id="buildingBurger">
               <TabsCuisineComponent
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
@@ -158,12 +162,23 @@ function AssemblyKitchen({
                 availableFrying={availableFrying}
               />
               <div>
-                <div>
+                <br />
+                <div id="inProgressBurgerButton">
                   <h3>Burger en cours</h3>
-                  <button onClick={handleClickSetReadyBurger}>Pret</button>
-                  <button onClick={handleClickStandByBurger}>
-                    Mettre en attente
-                  </button>
+                  <div>
+                    <button
+                      onClick={handleClickSetReadyBurger}
+                      className="neutralButton"
+                    >
+                      Pret
+                    </button>
+                    <button
+                      onClick={handleClickStandByBurger}
+                      className="neutralButton"
+                    >
+                      Mettre en attente
+                    </button>
+                  </div>
                 </div>
                 <BuildingBurgerComponent
                   buildingBurger={buildingBurger}
@@ -174,17 +189,24 @@ function AssemblyKitchen({
               </div>
               <div>
                 <h3>Recettes</h3>
-                <ul>
+                <ul className="buildingBurgerAndRecipeComponent">
                   {allBurgers.map((burger: FinalProductBurger) => (
-                    <li key={burger.name}>
-                      {burger.name} :{" "}
+                    <li key={burger.name} className="recipeBurgerLi">
+                      {burger.name} :{"  "}
                       {burger.ingredient[activeTab as keyof Burger] !==
                       undefined ? (
                         typeof burger.ingredient[activeTab] === "string" ? (
-                          <p>{burger.ingredient[activeTab]}</p>
+                          <p>
+                            {"  "}
+                            {burger.ingredient[activeTab]}
+                          </p>
                         ) : (
                           burger.ingredient[activeTab].map((ingredient) => (
-                            <p key={ingredient}>{ingredient}, </p>
+                            <p key={ingredient}>
+                              {"  "}
+                              {ingredient}
+                              {","}
+                            </p>
                           ))
                         )
                       ) : (
@@ -195,29 +217,34 @@ function AssemblyKitchen({
                 </ul>
               </div>
             </div>
-            <div>
+            <hr />
+            <div id="standByBurger">
               <div>
                 <h3>Commandes</h3>
+                <div id="burgerOrder"></div>
               </div>
               <div>
                 <h3>Burgers prets</h3>
-                <div>
+                <div id="readyBurgerArray">
                   {readyBurger.map((burger, i) => (
-                    <button key={i} onClick={() => throwBurger(i)}>
+                    <button
+                      key={i}
+                      onClick={() => throwBurger(i)}
+                      className="readyOrder"
+                    >
                       {burger.name}
                     </button>
                   ))}
                 </div>
               </div>
               <div>
-                <div>
-                  <h3>Burgers en attente</h3>
-                </div>
-                <div>
+                <h3>Burgers en attente</h3>
+                <div id="waitingBurgerArray">
                   {waitingArrayBurger.map((burger: FinalProductBurger, i) => (
                     <button
                       key={i}
                       onClick={() => handleClickTakeWaitingBurger(i)}
+                      className="cookingOrder"
                     >
                       <ul>
                         {burger.ingredient.bread !== emptyBurger && (

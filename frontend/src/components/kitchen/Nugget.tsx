@@ -182,10 +182,11 @@ function Nugget({
         className="buttonOpenModal"
         onClick={() => setActionModal(setToggleModal, toggleModal)}
       >
-        Friture
+        FRITURE
       </button>
       <div id="nuggetPageContent">
-        <ul>
+        <h3>Pret</h3>
+        <ul id="nuggetStockFrontPage">
           {readyNuggetBox.map((box) => (
             <li key={box.boite.name}>
               {box.boite.name} : {box.quantity}
@@ -210,7 +211,7 @@ function Nugget({
             </button>
           </div>
           <div id="grillModalContent">
-            <div>
+            <div id="readyNugget">
               <div>
                 <h3>Pret</h3>
                 <ul>
@@ -223,17 +224,19 @@ function Nugget({
               </div>
               <div>
                 <h3>Boite a nugget</h3>
-
                 <div>
                   <h4>Fabrication</h4>
+                  <div id="buildingNuggetBox">
                   {readyNuggetBox.map((box: NuggetBoxStock) => (
                     <button
                       key={box.boite.name}
                       onClick={() => handleClickBuildNuggetBox(box)}
+                      className="neutralButton nuggetBuildingButton"
                     >
                       {box.boite.name}
                     </button>
                   ))}
+                  </div>
                 </div>
                 <div>
                   <h4>Pret</h4>
@@ -247,7 +250,8 @@ function Nugget({
                 </div>
               </div>
             </div>
-            <div>
+            <hr /> 
+            <div id="buildingNugget">
               <div>
                 <h3>Cuisson</h3>
                 <div>
@@ -255,6 +259,7 @@ function Nugget({
                     <button
                       key={frying.dateId}
                       onClick={() => handleClickRemoveGrilledFrying(frying)}
+                    className="grilledButton nuggetBuildingButton"
                     >
                       {frying.ingredientName}
                     </button>
@@ -265,16 +270,21 @@ function Nugget({
                       onClick={() =>
                         handleClickRemoveReadyFryingFromFryer(frying)
                       }
+                      className="readyButton nuggetBuildingButton"
                     >
                       {frying.ingredientName}
                     </button>
                   ))}
                   {cookingFrying.map((frying: Ingredient) => (
-                    <button key={frying.dateId}>{frying.ingredientName}</button>
+                    <button key={frying.dateId}
+                    className="cookingButton nuggetBuildingButton"
+                    >{frying.ingredientName}</button>
                   ))}
 
                   {emptyPlace.map((place: string, i) => (
-                    <button key={i}>{place}</button>
+                    <button key={i}
+                    className="neutralButton nuggetBuildingButton"
+                    >{place}</button>
                   ))}
                 </div>
                 <h3>Frigo</h3>
@@ -283,6 +293,7 @@ function Nugget({
                     <button
                       key={frying.ingredientName}
                       onClick={() => handleClickStartCooking(frying)}
+                      className="neutralButton nuggetBuildingButton"
                     >
                       {frying.ingredientName}
                     </button>
@@ -298,7 +309,8 @@ function Nugget({
                 </ul>
               </div>
             </div>
-            <div>
+            <hr />
+            <div id="orderNugget">
               <h3>Commandes</h3>
             </div>
           </div>
