@@ -45,23 +45,23 @@ function Kitchen({
   const [availableFrying, setAvailableFrying] = useState<AvailableMeat[]>([
     {
       meat: frying[0],
-      quantity: 10,
+      quantity: 0,
     },
     {
       meat: frying[1],
-      quantity: 10,
+      quantity: 0,
     },
     {
       meat: frying[2],
-      quantity: 10,
+      quantity: 0,
     },
     {
       meat: frying[3],
-      quantity: 10,
+      quantity: 0,
     },
     {
       meat: frying[4],
-      quantity: 10,
+      quantity: 0,
     },
   ]);
 
@@ -70,27 +70,27 @@ function Kitchen({
   const [availableGrill, setAvailableGrill] = useState<AvailableMeat[]>([
     {
       meat: meat[0],
-      quantity: 10,
+      quantity: 0,
     },
     {
       meat: meat[1],
-      quantity: 10,
+      quantity: 0,
     },
     {
       meat: meat[2],
-      quantity: 10,
+      quantity: 0,
     },
     {
       meat: meat[3],
-      quantity: 10,
+      quantity: 0,
     },
     {
       meat: meat[4],
-      quantity: 10,
+      quantity: 0,
     },
     {
       meat: meat[5],
-      quantity: 10,
+      quantity: 0,
     },
   ]);
 
