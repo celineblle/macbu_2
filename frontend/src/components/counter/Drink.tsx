@@ -41,7 +41,7 @@ function Drink({
   const setStocksRawsIngredients = useContext(SetStocksRawsIngredientsContext);
 
   //TOOLS VARIABLES
-  const limitSizeDrink: number = 10;
+  const limitSizeDrink: number = 15;
   const stockGlobalIndex: number = 8;
   const emptyDrink: string = "Vide";
   const emptyDrinkObject: BuildingDrink = {
@@ -204,14 +204,14 @@ function Drink({
         <h3>Pret</h3>
         <ul className="readyProductArrayFrontPage">
           {readyDrink.map((drink, i: number) => (
-            <li key={drink.dateId + i}
-            className="readyButton frontPageLi"
-            >{drink.name}</li>
+            <li key={drink.dateId + i} className="readyButton frontPageLi">
+              {drink.name}
+            </li>
           ))}
           {emptyPlace.map((drink, i) => (
-            <li key={i}
-            className="neutralButton frontPageLi"
-            >{drink}</li>
+            <li key={i} className="neutralButton frontPageLi">
+              {drink}
+            </li>
           ))}
         </ul>
       </div>
@@ -240,73 +240,83 @@ function Drink({
             </button>
           </div>
           <div id="drinkModalContent">
-            <div>
-              <h3>Pret</h3>
-            </div>
-            {readyDrink.map((drink, i) => (
-              <button
-                key={drink.dateId + i}
-                onClick={() => handleClickRemoveForTrash(drink)}
-              className="readyButton"
-              >
-                {drink.name}
-              </button>
-            ))}
-            {cookingDrink.map((drink, i) => (
-              <button key={drink.dateId + i}
-              className="cookingButton"
-              >{drink.name}</button>
-            ))}
-            {emptyPlace.map((drink, i) => (
-              <button key={i}
-              className="neutralButton"
-              >{drink}</button>
-            ))}
-            <div>
-              <h3>Preparation</h3>
-              <h4>Saveur</h4>
-              {stocksRawsIngredients[stockGlobalIndex].productionArray.map(
-                (drink) => (
+            <div id="cookAndbuildDrink">
+              <div id="cookingDrink">
+                <h3>Pret</h3>
+                <div id="cookingArrayDrink">
+                  {readyDrink.map((drink, i) => (
+                    <button
+                      key={drink.dateId + i}
+                      onClick={() => handleClickRemoveForTrash(drink)}
+                      className="readyButton drinkCookingButton"
+                    >
+                      {drink.name}
+                    </button>
+                  ))}
+                  {cookingDrink.map((drink, i) => (
+                    <button key={drink.dateId + i} className="cookingButton drinkCookingButton">
+                      {drink.name}
+                    </button>
+                  ))}
+                  {emptyPlace.map((drink, i) => (
+                    <button key={i} className="neutralButton drinkCookingButton">
+                      {drink}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <hr />
+              <div id="buildingDrink">
+                <h3>Preparation</h3>
+                <h4>Saveur</h4>
+                {stocksRawsIngredients[stockGlobalIndex].productionArray.map(
+                  (drink) => (
+                    <button
+                      key={drink.ingredientName}
+                      onClick={() =>
+                        buildNewDrink(drink.ingredientName, drink.currentStocks)
+                      }
+                      className="neutralButton"
+                    >
+                      {drink.ingredientName}
+                    </button>
+                  )
+                )}
+                <h4>Taille</h4>
+                {size.map((size) => (
                   <button
-                    key={drink.ingredientName}
-                    onClick={() =>
-                      buildNewDrink(drink.ingredientName, drink.currentStocks)
-                    }
+                    key={size.name}
+                    onClick={() => buildNewDrink(size.name, 0)}
                     className="neutralButton"
                   >
-                    {drink.ingredientName}
+                    {size.name}
                   </button>
-                )
-              )}
-              <h4>Taille</h4>
-              {size.map((size) => (
+                ))}
+                <ul>
+                  <li>Taille : {buildingDrink.size}</li>
+                  <li>Saveur : {buildingDrink.flavour}</li>
+                </ul>
                 <button
-                  key={size.name}
-                  onClick={() => buildNewDrink(size.name, 0)}
-                className="neutralButton"
+                  onClick={handleClickFinishBuilding}
+                  className="neutralButton"
                 >
-                  {size.name}
+                  Preparer
                 </button>
-              ))}
-              <ul>
-                <li>Taille : {buildingDrink.size}</li>
-                <li>Saveur : {buildingDrink.flavour}</li>
-              </ul>
-              <button onClick={handleClickFinishBuilding}
-              className="neutralButton"
-              >Preparer</button>
-            </div>
-            <div>
-              <div>
-                <h3>Commandes</h3>
               </div>
-              <div>
+            </div>
+            <hr />
+            <div id="orderAndStockDrink">
+              <div id="orderDrink">
+                <h3>Commandes</h3>
+                <div id="orderArrayDrink"></div>
+              </div>
+              <hr />
+              <div id="stockDrink">
                 <h3>Stocks</h3>
                 <ul>
                   {stocksRawsIngredients[stockGlobalIndex].productionArray.map(
                     (ingredient) => (
-                      <li key={ingredient.ingredientName}
-                      >
+                      <li key={ingredient.ingredientName}>
                         {ingredient.ingredientName} : {ingredient.currentStocks}
                       </li>
                     )

@@ -18,6 +18,7 @@ import {
   limitSizeBurgerTray,
   emptyBurger,
 } from "./assemblyKitchenTools";
+import WaitingBurgerJSX from "./WaitingBurgerJSX";
 
 function AssemblyKitchen({
   availableFrying,
@@ -119,8 +120,8 @@ function AssemblyKitchen({
           <h3>Burger en attente</h3>
           <ul className="burgerArrayFrontPage">
             {waitingArrayBurger.map((burger, i) => (
-              <li key={i} className="cookingOrder readyBurgerArrayFrontPage">
-                {burger.name}
+              <li key={i} className="cookingOrder waitingBurgerArrayFrontPage">
+                <WaitingBurgerJSX burger={burger} />
               </li>
             ))}
           </ul>
@@ -220,17 +221,13 @@ function AssemblyKitchen({
             <hr />
             <div id="standByBurger">
               <div>
-                <h3>Commandes</h3>
-                <div id="burgerOrder"></div>
-              </div>
-              <div>
                 <h3>Burgers prets</h3>
                 <div id="readyBurgerArray">
                   {readyBurger.map((burger, i) => (
                     <button
                       key={i}
                       onClick={() => throwBurger(i)}
-                      className="readyOrder"
+                      className="readyOrder uniqueReadyBurger"
                     >
                       {burger.name}
                     </button>
@@ -244,36 +241,16 @@ function AssemblyKitchen({
                     <button
                       key={i}
                       onClick={() => handleClickTakeWaitingBurger(i)}
-                      className="cookingOrder"
+                      className="cookingOrder uniqueWaitingBurger"
                     >
-                      <ul>
-                        {burger.ingredient.bread !== emptyBurger && (
-                          <li>{burger.ingredient.bread}</li>
-                        )}
-                        {burger.ingredient.meat !== emptyBurger && (
-                          <li>{burger.ingredient.meat}</li>
-                        )}
-                        {burger.ingredient.cheese?.length !== 0 &&
-                          burger.ingredient.cheese !== undefined &&
-                          burger.ingredient.cheese.map((ingredient) => (
-                            <li key={ingredient}>{ingredient} </li>
-                          ))}
-                        {burger.ingredient.sauce?.length !== 0 &&
-                          burger.ingredient.sauce !== undefined &&
-                          burger.ingredient.sauce.map((sauce) => (
-                            <li key={sauce}>{sauce} </li>
-                          ))}
-                        {burger.ingredient.variousIngredient?.length !== 0 &&
-                          burger.ingredient.variousIngredient !== undefined &&
-                          burger.ingredient.variousIngredient.map(
-                            (ingredient) => (
-                              <li key={ingredient}>{ingredient} </li>
-                            )
-                          )}
-                      </ul>
+                      <WaitingBurgerJSX burger={burger} />
                     </button>
                   ))}
                 </div>
+              </div>
+              <div>
+                <h3>Commandes</h3>
+                <div id="burgerOrder"></div>
               </div>
             </div>
           </div>

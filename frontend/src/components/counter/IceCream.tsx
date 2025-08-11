@@ -35,7 +35,7 @@ function IceCreamComponent({
 
   //TOOL VARIABLES
   const stockRawIndex: number = 7;
-  const limiteSizeShelf: number = 11;
+  const limiteSizeShelf: number = 20;
   const coulisIdentifier: string = "Coulis";
   const eclatsIndentifier: string = "Eclats";
   const emptyIceCream: string = "Vide";
@@ -255,22 +255,20 @@ function IceCreamComponent({
       <div id="iceCreamPageContent">
         <h3>Pret</h3>
         <ul className="readyProductArrayFrontPage">
-        {readyIceCream.map(
-          (ice: FinalProductDessert, i) =>
-            "coulisTopping" in ice.ingredient && (
-              <li key={ice.dateId + i}
-              className="readyButton frontPageLi"
-              >
-                {ice.ingredient.coulisTopping[0]}{" "}
-                {ice.ingredient.coulisTopping[1]}
-              </li>
-            )
-        )}
-        {emptyPlace.map((ice, i) => (
-          <li key={i}
-          className="neutralButton frontPageLi"
-          >{ice}</li>
-        ))}
+          {readyIceCream.map(
+            (ice: FinalProductDessert, i) =>
+              "coulisTopping" in ice.ingredient && (
+                <li key={ice.dateId + i} className="readyButton frontPageLi">
+                  {ice.ingredient.coulisTopping[0]}{" "}
+                  {ice.ingredient.coulisTopping[1]}
+                </li>
+              )
+          )}
+          {emptyPlace.map((ice, i) => (
+            <li key={i} className="neutralButton frontPageLi">
+              {ice}
+            </li>
+          ))}
         </ul>
       </div>
       <div className={toggleModal ? "modalOpen" : "modalClose"}>
@@ -298,106 +296,109 @@ function IceCreamComponent({
             </button>
           </div>
           <div id="iceCreamModalContent">
-            <div>
-              <h3>Pret</h3>
-              {meltedIceCream.map(
-                (ice, i) =>
-                  "coulisTopping" in ice.ingredient && (
-                    <button
-                      onClick={() => throwAwayOneMeltedIce(ice)}
-                      key={ice.dateId + i}
-                      className="grilledButton"
-                    >
-                      {ice.ingredient.coulisTopping[0]}{" "}
-                      {ice.ingredient.coulisTopping[1]}
+            <div id="readyAndBuildIceCream">
+              <div id="cookingIceCream">
+                <h3>Pret</h3>
+                <div id="cookingArrayIceCream">
+                  {meltedIceCream.map(
+                    (ice, i) =>
+                      "coulisTopping" in ice.ingredient && (
+                        <button
+                          onClick={() => throwAwayOneMeltedIce(ice)}
+                          key={ice.dateId + i}
+                          className="grilledButton"
+                        >
+                          {ice.ingredient.coulisTopping[0]}{" "}
+                          {ice.ingredient.coulisTopping[1]}
+                        </button>
+                      )
+                  )}
+                  {readyIceCream.map(
+                    (ice, i) =>
+                      "coulisTopping" in ice.ingredient && (
+                        <button key={ice.dateId + i} className="readyButton">
+                          {ice.ingredient.coulisTopping[0]}{" "}
+                          {ice.ingredient.coulisTopping[1]}
+                        </button>
+                      )
+                  )}
+                  {cookingIceCream.map(
+                    (ice, i) =>
+                      "coulisTopping" in ice.ingredient && (
+                        <button key={ice.dateId + i} className="cookingButton">
+                          {ice.ingredient.coulisTopping[0]}{" "}
+                          {ice.ingredient.coulisTopping[1]}
+                        </button>
+                      )
+                  )}
+                  {emptyPlace.map((ice, i) => (
+                    <button key={i} className="neutralButton">
+                      {ice}
                     </button>
-                  )
-              )}
-              {readyIceCream.map(
-                (ice, i) =>
-                  "coulisTopping" in ice.ingredient && (
-                    <button key={ice.dateId + i}
-                    className="readyButton"
-                    >
-                      {ice.ingredient.coulisTopping[0]}{" "}
-                      {ice.ingredient.coulisTopping[1]}
-                    </button>
-                  )
-              )}
-              {cookingIceCream.map(
-                (ice, i) =>
-                  "coulisTopping" in ice.ingredient && (
-                    <button key={ice.dateId + i}
-                    className="cookingButton"
-                    >
-                      {ice.ingredient.coulisTopping[0]}{" "}
-                      {ice.ingredient.coulisTopping[1]}
-                    </button>
-                  )
-              )}
-              {emptyPlace.map((ice, i) => (
-                <button key={i}
-                className="neutralButton"
-                >{ice}</button>
-              ))}
-            </div>
-            <hr />
-            <div>
-              <h3>Preparation</h3>
-              <h4>Coulis</h4>
-              {iceCream.map(
-                (ice) =>
-                  ice.ingredientName.includes(coulisIdentifier) === true && (
-                    <button
-                      key={ice.ingredientName}
-                      onClick={() =>
-                        handleCLickBuildingIceCream(ice.ingredientName)
-                      }
-                      className="neutralButton"
-                    >
-                      {ice.ingredientName}
-                    </button>
-                  )
-              )}
-              <h4>Topping</h4>
-              {iceCream.map(
-                (ice) =>
-                  ice.ingredientName.includes(eclatsIndentifier) === true && (
-                    <button
-                      key={ice.ingredientName}
-                      onClick={() =>
-                        handleCLickBuildingIceCream(ice.ingredientName)
-                      }
-                      className="neutralButton"
-                    >
-                      {ice.ingredientName}
-                    </button>
-                  )
-              )}
-              <h4>Glace</h4>
-              {"coulisTopping" in buildingIceCream.ingredient && (
-                <ul>
-                  <li>
-                    Coulis : {buildingIceCream.ingredient.coulisTopping[0]}
-                  </li>
-                  <li>
-                    Eclats : {buildingIceCream.ingredient.coulisTopping[1]}
-                  </li>
-                </ul>
-              )}
-              <button onClick={handleClickAddBuildingIceCreamToCookingArray}
-              className="neutralButton"
-              >
-                Preparer
-              </button>
-            </div>
-            <hr />
-            <div>
-              <div>
-                <h3>Commandes</h3>
+                  ))}
+                </div>
               </div>
               <hr />
-              <div>
+              <div id="buildingIceCream">
+                <h3>Preparation</h3>
+                <h4>Coulis</h4>
+                {iceCream.map(
+                  (ice) =>
+                    ice.ingredientName.includes(coulisIdentifier) === true && (
+                      <button
+                        key={ice.ingredientName}
+                        onClick={() =>
+                          handleCLickBuildingIceCream(ice.ingredientName)
+                        }
+                        className="neutralButton"
+                      >
+                        {ice.ingredientName}
+                      </button>
+                    )
+                )}
+                <h4>Topping</h4>
+                {iceCream.map(
+                  (ice) =>
+                    ice.ingredientName.includes(eclatsIndentifier) === true && (
+                      <button
+                        key={ice.ingredientName}
+                        onClick={() =>
+                          handleCLickBuildingIceCream(ice.ingredientName)
+                        }
+                        className="neutralButton"
+                      >
+                        {ice.ingredientName}
+                      </button>
+                    )
+                )}
+                <h4>Glace</h4>
+                {"coulisTopping" in buildingIceCream.ingredient && (
+                  <ul>
+                    <li>
+                      Coulis : {buildingIceCream.ingredient.coulisTopping[0]}
+                    </li>
+                    <li>
+                      Eclats : {buildingIceCream.ingredient.coulisTopping[1]}
+                    </li>
+                  </ul>
+                )}
+                <button
+                  onClick={handleClickAddBuildingIceCreamToCookingArray}
+                  className="neutralButton"
+                >
+                  Preparer
+                </button>
+              </div>
+            </div>
+            <hr />
+            <div id="ordersAndFridgeIceCream">
+              <div id="orderIceCream">
+                <h3>Commandes</h3>
+                <div id="orderArrayIceCream"
+                ></div>
+              </div>
+              <hr />
+              <div id="fridgeIceCream">
                 <h3>Stocks</h3>
                 <ul>
                   {stocksRawsIngredients[stockRawIndex].productionArray.map(

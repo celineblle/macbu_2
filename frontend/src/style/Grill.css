@@ -8,4 +8,46 @@
   width: 50%;
 }
 
+#buildingGrill {
+  display: flex;
+  flex-direction: column;
+}
+
+#readyGrillStock, #cookingGrill, #grillFridge {
+  width: 30%;
+  height: 100%;
+}
+
+#insideCookingGrill {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+#insideCookingGrill button {
+  width: 10vw;
+}
+
+#grillFridge {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+#grillFridge div {
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+#grillFridge div button {
+  width: 10vw;
+}
+
+#grillOrder {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-x: scroll;
+}
+
 /*# sourceMappingURL=Grill.css.map */

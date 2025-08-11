@@ -206,6 +206,10 @@ button {
 
 // COMMANDES
 
+.cookingOrder, .readyOrder{
+  flex-shrink: 0;
+}
+
 .cookingOrder {
   border: 2px solid style.$orange;
   border-radius: 5px;

@@ -13,7 +13,7 @@ function BuildingBurgerComponent({
 }) {
   return (
     <ul className="buildingBurgerAndRecipeComponent">
-      <li>
+      <li className="buildingBurgerProperty">
         Pain :{" "}
         {buildingBurger.ingredient.bread === emptyBurger ? (
           " "
@@ -30,7 +30,7 @@ function BuildingBurgerComponent({
           </button>
         )}
       </li>
-      <li>
+      <li className="buildingBurgerProperty">
         Viande :{" "}
         {buildingBurger.ingredient.meat === emptyBurger ? (
           " "
@@ -47,7 +47,7 @@ function BuildingBurgerComponent({
           </button>
         )}
       </li>
-      <li>
+      <li className="buildingBurgerProperty">
         Fromage :{" "}
         {buildingBurger.ingredient.cheese === undefined
           ? " "
@@ -65,7 +65,7 @@ function BuildingBurgerComponent({
               </button>
             ))}
       </li>
-      <li>
+      <li className="buildingBurgerProperty">
         Autres ingrédients :{" "}
         {buildingBurger.ingredient.variousIngredient === undefined
           ? " "
@@ -83,7 +83,7 @@ function BuildingBurgerComponent({
               </button>
             ))}
       </li>
-      <li>
+      <li className="buildingBurgerProperty" id="lastBuildingBurgerProperty">
         Sauce :{" "}
         {buildingBurger.ingredient.sauce === undefined
           ? " "
@@ -96,6 +96,7 @@ function BuildingBurgerComponent({
                 }
                 key={sauce}
                 className="neutralButton"
+                
               >
                 {sauce}
               </button>

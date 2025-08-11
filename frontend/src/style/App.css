@@ -218,6 +218,10 @@ button {
   height: 110px;
 }
 
+.cookingOrder, .readyOrder {
+  flex-shrink: 0;
+}
+
 .cookingOrder {
   border: 2px solid #f78800;
   border-radius: 5px;

@@ -33,7 +33,7 @@ function Grill({
   const [toggleModal, setToggleModal] = useState(false);
 
   // LIMIT SIZE & PLACE HOLDER VARIABLE
-  const limiteSizeGrill: number = 8;
+  const limiteSizeGrill: number = 16;
   const emptyGrill: string = "Vide";
   const indexRawArray: number = 4;
 
@@ -178,8 +178,9 @@ function Grill({
               X
             </button>
           </div>
+          <div id="buildingGrill">
           <div id="grillModalContent">
-            <div>
+            <div id="readyGrillStock">
               <h3>Pret</h3>
               <ul>
                 {availableGrill.map((steak) => (
@@ -189,8 +190,10 @@ function Grill({
                 ))}
               </ul>
             </div>
-            <div>
+            <hr />
+            <div id="cookingGrill">
               <h3>Cuisson</h3>
+              <div id="insideCookingGrill">
               {grilledGrill.map((steak) => (
                 <button
                   key={steak.dateId}
@@ -219,8 +222,10 @@ function Grill({
                   {place}
                 </button>
               ))}
+              </div>
             </div>
-            <div>
+            <hr />
+            <div id="grillFridge">
               <h3>Frigo</h3>
               {stocksRawsIngredients[indexRawArray].productionArray.map(
                 (steak) => (
@@ -236,7 +241,10 @@ function Grill({
                 )
               )}
             </div>
-            <div>
+            
+</div>
+<hr />
+            <div id="grillOrder">
               <h3>Commandes</h3>
             </div>
           </div>
