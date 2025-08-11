@@ -26,6 +26,7 @@ import {
   OrdersToPrepareContext,
   SetOrdersToPrepareContext,
 } from "../../../context/OrderContext";
+import { Slide, ToastContainer } from "react-toastify";
 
 function AssemblyCounter({
   cashFund,
@@ -177,6 +178,19 @@ function AssemblyCounter({
       </div>
       <div className={toggleModal ? "modalOpen" : "modalClose"}>
         <div className="modalContent">
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+            transition={Slide}
+          />
           <div className="headerModal">
             <h2>Comptoir</h2>
             <p>Budget : {cashFund} €</p>
