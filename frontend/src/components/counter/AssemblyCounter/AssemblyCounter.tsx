@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   setActionModal,
   updateEmptyPlace,
@@ -20,8 +20,9 @@ import {
 import TrayCounterFunction from "./TrayCounterFunction";
 import AssemblyCounterTools from "./AssemblyCounterTools";
 import ValidateOrders from "./ValidateOrders";
-import { bag, size } from "../../../elements/ingredients";
+import { size } from "../../../elements/ingredients";
 import { allBags } from "../../../elements/produits";
+import { OrdersToPrepareContext, SetOrdersToPrepareContext } from "../../../context/OrderContext";
 
 function AssemblyCounter({
   cashFund,
@@ -61,9 +62,12 @@ function AssemblyCounter({
   const limitOfOrdersPlace: number = 4;
   const emptyOrder: string = "Vide";
 
+  //ORDERS CONTEXT
+  const ordersToPrepare = useContext(OrdersToPrepareContext);
+  const setOrdersToPrepare = useContext(SetOrdersToPrepareContext);
+
   // ORDERS TO PREPARE VARIABLES
   const limitOfOrders: number = 10;
-  const [ordersToPrepare, setOrdersToPrepare] = useState<Order[]>([]);
   const ordersToPrepareRef = useRef<Order[]>([]);
   // empty place
   const [emptyPlacesPrepare, setEmptyPlacePrepare] = useState<string[]>([]);
@@ -91,8 +95,9 @@ function AssemblyCounter({
     if (ordersToPrepareRef.current.length < limitOfOrders) {
       setTimeout(() => {
         const newOrder = generateRamdomOrders();
-
-        setOrdersToPrepare([...ordersToPrepareRef.current, newOrder]);
+        if(setOrdersToPrepare !== undefined) {
+                  setOrdersToPrepare([...ordersToPrepareRef.current, newOrder]);
+        }
       }, 1000);
     }
   }, [ordersToPrepare]);
@@ -141,9 +146,9 @@ function AssemblyCounter({
     tray,
     setTray,
     trayIdSelected,
-    ordersToPrepare,
-    setOrdersToPrepare,
   });
+  
+
 
   return (
     <div id="assemblyCounterComponent" className="component">
@@ -161,6 +166,7 @@ function AssemblyCounter({
         <div id="trayArrayFrontPage">
           {tray.map((uniqueTray) => (
             <ul className="cookingOrder assemblyComptoirTrayFrontPage">
+              <li>Taille : {uniqueTray.bagCapacity}</li>
               {uniqueTray.products.map((product, i) => (
                 <li key={i}>{product.name}</li>
               ))}
@@ -195,6 +201,12 @@ function AssemblyCounter({
                         className="readyOrder uniqueOrdrer"
                       >
                         <ul>
+                          <li>
+                            N° de commande : {index + 1}
+                          </li>
+                          <li>
+                            Taille : {order.size}  
+                          </li>
                           {order.products.map((detail, i) =>
                             "sandwich" in detail ? (
                               <ul key={detail.dateId + i}>
@@ -207,6 +219,9 @@ function AssemblyCounter({
                               <li key={detail.name + i}>{detail.name}</li>
                             )
                           )}
+                        <li>
+                          Prix : {order.price} €
+                        </li>
                         </ul>
                       </button>
                     )

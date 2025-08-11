@@ -5,4 +5,4 @@ import { SectionRawIngredients } from "../interfaces/compositionElementsInterfac
 const allProductCopy: SectionRawIngredients[] = allProductsArray.slice();
 export const StocksRawsIngredientsContext = createContext<SectionRawIngredients[]>(allProductCopy)
 
-export const SetStocksRawsIngredientsContext = createContext< React.Dispatch<React.SetStateAction<SectionRawIngredients[]>> | undefined>(undefined)
+export const SetStocksRawsIngredientsContext = createContext<React.Dispatch<React.SetStateAction<SectionRawIngredients[]>> | undefined>(undefined)

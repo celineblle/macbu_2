@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Tray, Order } from "../../../interfaces/compositionElementsInterfaces";
 import {
   displayNoProductsInTray,
@@ -12,6 +12,10 @@ import {
   FinalProductNugget,
 } from "../../../interfaces/produitsInterfaces";
 import { toast } from "react-toastify";
+import {
+  OrdersToPrepareContext,
+  SetOrdersToPrepareContext,
+} from "../../../context/OrderContext";
 
 function ValidateOrders({
   cashFund,
@@ -19,17 +23,17 @@ function ValidateOrders({
   tray,
   setTray,
   trayIdSelected,
-  ordersToPrepare,
-  setOrdersToPrepare,
 }: {
   cashFund: number;
   setCashFund: React.Dispatch<React.SetStateAction<number>>;
   tray: Tray[];
   setTray: React.Dispatch<React.SetStateAction<Tray[]>>;
   trayIdSelected: number;
-  ordersToPrepare: Order[];
-  setOrdersToPrepare: React.Dispatch<React.SetStateAction<Order[]>>;
 }) {
+  //ORDERS CONTEXT
+  const ordersToPrepare = useContext(OrdersToPrepareContext);
+  const setOrdersToPrepare = useContext(SetOrdersToPrepareContext);
+
   let orderPrice = 0;
   // TOAST FONCTION FOR VALIDATION
   const orderValidate = () => (
@@ -61,7 +65,6 @@ function ValidateOrders({
     if (isItPresent !== -1) {
       currentTray.products.splice(isItPresent, 1);
     } else {
-
       if (orderPrice > currentProduct.price) {
         orderPrice = orderPrice - currentProduct.price;
       } else {
@@ -75,7 +78,6 @@ function ValidateOrders({
   function startCheckForOrder(currentOrder: Order, currentTray: Tray) {
     orderPrice = currentOrder.price;
 
-    
     for (let i = 0; i < currentOrder.products.length; i++) {
       const currentProduct = currentOrder.products[i];
       let isItPresent: number | undefined = 0;
@@ -121,7 +123,9 @@ function ValidateOrders({
         // update orders array
         const orderArrayCopy = ordersToPrepare.slice();
         orderArrayCopy.splice(orderId, 1);
-        setOrdersToPrepare(orderArrayCopy);
+        if (setOrdersToPrepare !== undefined) {
+          setOrdersToPrepare(orderArrayCopy);
+        }
 
         // update tray
         const trayArrayCopy = tray.slice();
