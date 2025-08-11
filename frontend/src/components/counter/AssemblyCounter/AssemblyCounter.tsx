@@ -202,6 +202,9 @@ function AssemblyCounter({
                       >
                         <ul>
                           <li>
+                            N° de commande : {index + 1}
+                          </li>
+                          <li>
                             Taille : {order.size}  
                           </li>
                           {order.products.map((detail, i) =>
