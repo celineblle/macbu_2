@@ -5,6 +5,7 @@ import Counter from "./components/counter/Counter";
 import "./style/App.css";
 import {
   NuggetBoxStock,
+  Order,
   SectionRawIngredients,
 } from "./interfaces/compositionElementsInterfaces";
 import { allProductsArray } from "./elements/ingredients";
@@ -13,7 +14,14 @@ import {
   FinalProductSide,
 } from "./interfaces/produitsInterfaces";
 import { allNuggets } from "./elements/produits";
-import { StocksRawsIngredientsContext, SetStocksRawsIngredientsContext } from "./context/StockRawsContext";
+import {
+  StocksRawsIngredientsContext,
+  SetStocksRawsIngredientsContext,
+} from "./context/StockRawsContext";
+import {
+  OrdersToPrepareContext,
+  SetOrdersToPrepareContext,
+} from "./context/OrderContext";
 
 function App() {
   // OFFICE & GLOBAL VARIABLES
@@ -46,43 +54,46 @@ function App() {
   ]);
 
   // KITCHEN ASSEMBLY VARIABLES
-
   const [readyBurger, setReadyBurger] = useState<FinalProductBurger[]>([]);
+
+  //ORDERS
+  const [ordersToPrepare, setOrdersToPrepare] = useState<Order[]>([]);
 
   return (
     <div id="homePage">
       <SetStocksRawsIngredientsContext value={setStocksRawsIngredients}>
         <StocksRawsIngredientsContext value={stocksRawsIngredients}>
-
-        
-      <Office
-        cashFund={cashFund}
-        setCashFund={setCashFund}
-        stocksRawsIngredients={stocksRawsIngredients}
-        setStocksRawsIngredients={setStocksRawsIngredients}
-      />
-      <Kitchen
-        stocksRawsIngredients={stocksRawsIngredients}
-        setStocksRawsIngredients={setStocksRawsIngredients}
-        readyPortionFries={readyPortionFries}
-        setReadyPortionFries={setReadyPortionFries}
-        readyNuggetBox={readyNuggetBox}
-        setReadyNuggetBox={setReadyNuggetBox}
-        readyBurger={readyBurger}
-        setReadyBurger={setReadyBurger}
-      />
-      <Counter
-        cashFund={cashFund}
-        setCashFund={setCashFund}
-        readyBurger={readyBurger}
-        setReadyBurger={setReadyBurger}
-        readyPortionFries={readyPortionFries}
-        setReadyPortionFries={setReadyPortionFries}
-        readyNuggetBox={readyNuggetBox}
-        setReadyNuggetBox={setReadyNuggetBox}
-
-      />
-      </StocksRawsIngredientsContext>
+          <OrdersToPrepareContext value={ordersToPrepare}>
+            <SetOrdersToPrepareContext value={setOrdersToPrepare}>
+              <Office
+                cashFund={cashFund}
+                setCashFund={setCashFund}
+                stocksRawsIngredients={stocksRawsIngredients}
+                setStocksRawsIngredients={setStocksRawsIngredients}
+              />
+              <Kitchen
+                stocksRawsIngredients={stocksRawsIngredients}
+                setStocksRawsIngredients={setStocksRawsIngredients}
+                readyPortionFries={readyPortionFries}
+                setReadyPortionFries={setReadyPortionFries}
+                readyNuggetBox={readyNuggetBox}
+                setReadyNuggetBox={setReadyNuggetBox}
+                readyBurger={readyBurger}
+                setReadyBurger={setReadyBurger}
+              />
+              <Counter
+                cashFund={cashFund}
+                setCashFund={setCashFund}
+                readyBurger={readyBurger}
+                setReadyBurger={setReadyBurger}
+                readyPortionFries={readyPortionFries}
+                setReadyPortionFries={setReadyPortionFries}
+                readyNuggetBox={readyNuggetBox}
+                setReadyNuggetBox={setReadyNuggetBox}
+              />
+            </SetOrdersToPrepareContext>
+          </OrdersToPrepareContext>
+        </StocksRawsIngredientsContext>
       </SetStocksRawsIngredientsContext>
     </div>
   );

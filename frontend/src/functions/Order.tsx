@@ -351,7 +351,7 @@ function getPricesAndSizesFromRawsIngredient(
 }
 
 // START RAW PRODUCT CREATION
-export function generateRamdomOrders() {
+export function generateRamdomOrders(): Order {
   const tailleCommande: number = getRadomNumber(limitSizeCommande);
   // get raws ingredients
   const rawsProductsOrder: (
