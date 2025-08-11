@@ -1,0 +1,44 @@
+#nuggetStockFrontPage {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 5px;
+}
+#nuggetStockFrontPage li {
+  width: 50%;
+}
+
+#grillModalContent {
+  display: flex;
+  flex-direction: row;
+  height: 90%;
+}
+
+#nuggetPageContent {
+  display: inline-flex;
+}
+
+#readyNugget {
+  width: 25%;
+}
+
+#buildingNugget {
+  width: 35%;
+}
+
+#orderNugget {
+  width: 40%;
+}
+
+#buildingNuggetBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.nuggetBuildingButton {
+  width: 11vw;
+}
+
+/*# sourceMappingURL=Nugget.css.map */

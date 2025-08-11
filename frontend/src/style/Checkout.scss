@@ -1,0 +1,16 @@
+#checkoutPageContent {
+    height: 78%;
+    width: calc(100% - 24px);
+    overflow: scroll;
+    margin: 5px;
+    display: flex;
+        flex-direction: column;
+    align-items: center;
+}
+
+.checkoutOrder {
+    height: 4vh;
+    padding-top: 1.5vh;
+    text-align: center;
+    margin: 5px;
+}

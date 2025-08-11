@@ -1,0 +1,57 @@
+#iceCreamModalContent {
+  display: flex;
+  flex-direction: row;
+  height: 90%;
+}
+
+#readyAndBuildIceCream {
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+}
+
+#cookingIceCream {
+  height: 45%;
+}
+
+#cookingArrayIceCream {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+#cookingArrayIceCream button {
+  width: 10vw;
+}
+
+#buildingIceCream {
+  height: 55%;
+}
+
+#ordersAndFridgeIceCream {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+}
+
+#orderIceCream {
+  height: 65%;
+}
+
+#orderArrayIceCream {
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  flex-wrap: wrap;
+}
+
+#fridgeIceCream {
+  height: 35%;
+}
+
+.iceCreamOrder {
+  height: 15vh;
+  overflow-y: scroll;
+  margin: 4px;
+}
+
+/*# sourceMappingURL=IceCream.css.map */

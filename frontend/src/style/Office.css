@@ -1,0 +1,43 @@
+@font-face {
+  font-family: "BebasNeue";
+  src: url("./assets/BebasNeue-Regular.ttf") format("truetype"), url("bebasneue-regular-webfont.woff2") format("woff2"), url("bebasneue-regular-webfont.woff") format("woff");
+}
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+#officeComponent {
+  height: calc(10vh - 24px);
+}
+
+.allShelf {
+  display: block;
+  width: 80vw;
+}
+
+.storeShelf {
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  height: 32vh;
+}
+
+.uniqueProduct {
+  display: flex;
+  flex-direction: column;
+  width: 13vw;
+  height: 25vh;
+  padding: 5px;
+  margin: 5px;
+  border: solid #a6a6a6 2px;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+/*# sourceMappingURL=Office.css.map */

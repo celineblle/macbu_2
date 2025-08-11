@@ -1,0 +1,70 @@
+#trayArrayFrontPage {
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  width: calc(40vw - 24px);
+  height: 29vh;
+}
+
+.assemblyComptoirTrayFrontPage {
+  height: 200px;
+  margin: 5px;
+}
+.assemblyComptoirTrayFrontPage li {
+  margin: 8px;
+}
+
+#assemblyCounterModalContent {
+  display: flex;
+  flex-direction: column;
+}
+
+#orderCounter, #trayCounter, #productCounter {
+  width: 100%;
+}
+
+#orderCounter, #trayCounter {
+  height: 30%;
+}
+
+#orderArrayCounter, #trayArray {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  overflow-x: scroll;
+  width: 100%;
+}
+#orderArrayCounter button, #trayArray button {
+  text-align: start;
+}
+
+.allTray {
+  margin: 0px;
+}
+
+.uniqueOrdrer, .uniqueTray {
+  overflow-y: scroll;
+  height: 25vh;
+}
+
+#productCounter {
+  height: 40%;
+}
+
+#counterIndication {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#counterIndication ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 2px;
+}
+#counterIndication ul li {
+  margin: 2px;
+  width: 20vw;
+}
+
+/*# sourceMappingURL=AssemblyCounter.css.map */

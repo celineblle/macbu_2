@@ -1,21 +1,9 @@
-@font-face {
-  font-family: "BebasNeue";
-  src: url("./assets/BebasNeue-Regular.ttf") format("truetype"), url("bebasneue-regular-webfont.woff2") format("woff2"), url("bebasneue-regular-webfont.woff") format("woff");
-}
-@keyframes animatetop {
-  from {
-    top: -300px;
-    opacity: 0;
-  }
-  to {
-    top: 0;
-    opacity: 1;
-  }
-}
+@use "./style" as style;
+
 body {
   margin: 0px;
   background-color: whitesmoke;
-  color: #0d0d0d;
+  color: style.$noir;
   display: flex;
   flex-direction: column;
 }
@@ -57,9 +45,11 @@ p {
 }
 
 hr {
-  border: 1px solid #0d0d0d;
+  border: 1px solid style.$noir;
   margin: 10px;
 }
+
+// COMPONENT ORGANISATION
 
 #page {
   display: flex;
@@ -67,11 +57,7 @@ hr {
 }
 
 .component {
-  border: 4px solid #f2bbc9;
-  margin: 4px;
-  padding: 4px;
-  border-radius: 15px;
-  height: calc(45vh - 24px);
+  @include style.border-component;
 }
 
 .headerPage {
@@ -85,7 +71,7 @@ hr {
   padding: 4px;
   height: 40px;
   width: calc(100% - 24px);
-  background-color: #f2f2f2;
+  background-color: style.$blanc;
   border-radius: 5px;
 }
 
@@ -105,13 +91,9 @@ hr {
 
 .modalContent {
   position: relative;
-  background-color: #f2f2f2;
-  color: #0d0d0d;
-  border: 4px solid #f2bbc9;
-  margin: 4px;
-  padding: 4px;
-  border-radius: 15px;
-  height: calc(45vh - 24px);
+  background-color: style.$blanc;
+  color: style.$noir;
+  @include style.border-component;
   margin: auto;
   width: 80%;
   height: 85%;
@@ -119,14 +101,17 @@ hr {
   padding: 1em;
 }
 
-.frontPageLi, button {
+// BUTTON
+
+.frontPageLi,
+button {
   border-radius: 5px;
   outline: none;
   border: none;
-  color: #0d0d0d;
+  color: style.$noir;
   padding: 2px 12px;
   margin: 5px 5px;
-  background-color: #d7d3d2;
+  background-color: style.$gris;
   min-height: 30px;
 }
 
@@ -136,7 +121,7 @@ button {
 
 .buttonOpenModal {
   font-family: "BebasNeue", Impact;
-  border: 2px solid #f2bbc9;
+  border: 2px solid style.$rose;
   font-size: 2em;
   max-height: 50px;
 }
@@ -151,66 +136,72 @@ button {
 }
 
 .grilledButton {
-  background-color: #402116;
-  color: #f2f2f2;
+  background-color: style.$marron;
+  color: style.$blanc;
 }
 
 .readyButton {
-  background-color: #78e8c1;
+  background-color: style.$vert;
 }
 
 .cookingButton {
-  background-color: #f78800;
+  background-color: style.$orange;
 }
 
 .neutralButton {
-  background-color: #d7d3d2;
+  background-color: style.$gris;
 }
 
 .neutralButton:hover,
 .grilledButton:hover {
-  background-color: #f2bbc9;
-  color: #0d0d0d;
+  background-color: style.$rose;
+  color: style.$noir;
 }
 
 .neutralButton:active {
-  background-color: #a6a6a6;
+  background-color: style.$grisBordure;
 }
 
 .grilledButton:active {
-  background-color: #d9af8b;
-  color: #0d0d0d;
+  background-color: style.$beige;
+  color: style.$noir;
 }
 
 .readyButton:hover {
-  background-color: #4bbf52;
+  background-color: style.$vertFonce;
 }
 
 .readyButton:active {
-  background-color: #c7f2b3;
+  background-color: style.$vertClair;
 }
 
 .emptyStockButton {
-  border: 2px solid #a6a6a6;
-}
-.emptyStockButton :hover {
-  background-color: transparent;
-  border: 2px solid #a6a6a6;
-  cursor: default;
+  border: 2px solid style.$grisBordure;
+  :hover {
+    background-color: transparent;
+    border: 2px solid style.$grisBordure;
+    cursor: default;
+  }
 }
 
-.modalClose, .tabClose {
-  display: none;
+// TAB
+
+.modalClose,
+.tabClose {
+  @include style.close-mode;
 }
 
 .tabs {
-  background-color: #d7d3d2;
+  background-color: style.$gris;
   border-radius: 5px 5px 0px 0px;
   margin-bottom: 5px;
 }
 
-.tabs:hover, .tabs:focus, .tabs:active, .tabs:target {
-  background-color: #f2bbc9;
+.tabs:hover,
+.tabs:focus,
+.tabs:active,
+.tabs:target {
+  background-color: style.$rose;
 }
 
 .tabOpen {
@@ -218,45 +209,51 @@ button {
   height: 110px;
 }
 
-.cookingOrder, .readyOrder {
+// COMMANDES
+
+.cookingOrder,
+.readyOrder {
   flex-shrink: 0;
 }
 
 .cookingOrder {
-  border: 2px solid #f78800;
+  border: 2px solid style.$orange;
   border-radius: 5px;
   width: 168px;
 }
 
-.cookingOrder:hover, .cookingOrder:focus, .cookingOrder:active, .cookingOrder:target {
-  background-color: #f78800;
+.cookingOrder:hover,
+.cookingOrder:focus,
+.cookingOrder:active,
+.cookingOrder:target {
+  background-color: style.$orange;
 }
 
 .cookingOrder:active {
-  background-color: #d9af8b;
-  color: #0d0d0d;
+  background-color: style.$beige;
+  color: style.$noir;
 }
 
 .readyOrder {
-  border: 2px solid #78e8c1;
+  border: 2px solid style.$vert;
   border-radius: 5px;
   width: 168px;
 }
 
 .modalOrder {
-  border: 2px solid #f2bbc9;
+  border: 2px solid style.$rose;
   border-radius: 5px;
   width: 168px;
   height: 75px;
 }
 
 .readyOrder:hover {
-  background-color: #78e8c1;
+  background-color: style.$vert;
 }
 
 .readyOrder:active {
-  background-color: #c7f2b3;
-  border-color: #c7f2b3;
+  background-color: style.$vertClair;
+  border-color: style.$vertClair;
 }
 
 .uniqueProductOrder {
@@ -265,10 +262,10 @@ button {
   margin: 4px;
 }
 
+// COMPONENT ELEMENTS
+
 ul {
   list-style-type: none;
   padding: 0;
   margin: 1em;
 }
-
-/*# sourceMappingURL=App.css.map */
