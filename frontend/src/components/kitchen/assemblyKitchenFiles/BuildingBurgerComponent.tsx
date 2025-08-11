@@ -12,8 +12,8 @@ function BuildingBurgerComponent({
   ) => void;
 }) {
   return (
-    <ul>
-      <li>
+    <ul className="buildingBurgerAndRecipeComponent">
+      <li className="buildingBurgerProperty">
         Pain :{" "}
         {buildingBurger.ingredient.bread === emptyBurger ? (
           " "
@@ -24,12 +24,13 @@ function BuildingBurgerComponent({
                 buildingBurger.ingredient.bread
               )
             }
+            className="neutralButton"
           >
             {buildingBurger.ingredient.bread}
           </button>
         )}
       </li>
-      <li>
+      <li className="buildingBurgerProperty">
         Viande :{" "}
         {buildingBurger.ingredient.meat === emptyBurger ? (
           " "
@@ -40,12 +41,13 @@ function BuildingBurgerComponent({
                 buildingBurger.ingredient.meat
               )
             }
+            className="neutralButton"
           >
             {buildingBurger.ingredient.meat}
           </button>
         )}
       </li>
-      <li>
+      <li className="buildingBurgerProperty">
         Fromage :{" "}
         {buildingBurger.ingredient.cheese === undefined
           ? " "
@@ -57,12 +59,13 @@ function BuildingBurgerComponent({
                   )
                 }
                 key={cheese}
+                className="neutralButton"
               >
                 {cheese}
               </button>
             ))}
       </li>
-      <li>
+      <li className="buildingBurgerProperty">
         Autres ingrédients :{" "}
         {buildingBurger.ingredient.variousIngredient === undefined
           ? " "
@@ -74,12 +77,13 @@ function BuildingBurgerComponent({
                   )
                 }
                 key={ingredient}
+                className="neutralButton"
               >
                 {ingredient}
               </button>
             ))}
       </li>
-      <li>
+      <li className="buildingBurgerProperty" id="lastBuildingBurgerProperty">
         Sauce :{" "}
         {buildingBurger.ingredient.sauce === undefined
           ? " "
@@ -91,6 +95,8 @@ function BuildingBurgerComponent({
                   )
                 }
                 key={sauce}
+                className="neutralButton"
+                
               >
                 {sauce}
               </button>

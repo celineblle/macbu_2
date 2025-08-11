@@ -1,0 +1,23 @@
+#kitchenComponent {
+  display: flex;
+  flex-direction: row;
+}
+
+#fryersComponent {
+  display: flex;
+  flex-direction: column;
+  width: 35vw;
+}
+
+#assemblyKitchenComponent {
+  width: 35vw;
+}
+
+#grillComponent {
+  width: 30vw;
+}
+
+#nuggetComponent,
+#friesComponent {
+  height: calc((45vh - 48px) / 2);
+}

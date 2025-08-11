@@ -27,11 +27,13 @@ function TabsCuisineComponent({
   return (
     <div>
       <h3>Fabrication</h3>
-      <div id="tabs">
+      <div >
         {tabIngredient.map((tab) => (
+          tab.tabName !== "Friture" &&
           <button
             key={tab.tabName}
             onClick={() => handleClickSelectedTab(tab.section, setActiveTab)}
+          className="tabs"
           >
             {tab.tabName}
           </button>
@@ -49,6 +51,7 @@ function TabsCuisineComponent({
               onClick={() =>
                 addNewIngredientInBuildingBurger(bread, bread.currentStocks)
               }
+              className="neutralButton"
             >
               {bread.ingredientName} : {bread.currentStocks}
             </button>
@@ -69,18 +72,13 @@ function TabsCuisineComponent({
               {meat.meat.ingredientName} : {meat.quantity}
             </button>
           ))}
-        </div>
-        <div
-          className={
-            activeTab === tabIngredient[2].section ? "tabOpen" : "tabClose"
-          }
-        >
           {availableFrying.map((frying) => (
             <button
               key={frying.meat.ingredientName}
               onClick={() =>
                 addNewIngredientInBuildingBurger(frying.meat, frying.quantity)
               }
+              className="neutralButton"
             >
               {frying.meat.ingredientName} : {frying.quantity}
             </button>
@@ -97,6 +95,7 @@ function TabsCuisineComponent({
               onClick={() =>
                 addNewIngredientInBuildingBurger(cheese, cheese.currentStocks)
               }
+              className="neutralButton"
             >
               {cheese.ingredientName} : {cheese.currentStocks}
             </button>
@@ -116,6 +115,7 @@ function TabsCuisineComponent({
                   ingredient.currentStocks
                 )
               }
+              className="neutralButton"
             >
               {ingredient.ingredientName} : {ingredient.currentStocks}
             </button>
@@ -132,6 +132,7 @@ function TabsCuisineComponent({
               onClick={() =>
                 addNewIngredientInBuildingBurger(sauce, sauce.currentStocks)
               }
+              className="neutralButton"
             >
               {sauce.ingredientName} : {sauce.currentStocks}
             </button>

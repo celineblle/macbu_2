@@ -96,20 +96,23 @@ function Kitchen({
 
   return (
     <div id="kitchenComponent">
-      <Fries
-        stocksRawsIngredients={stocksRawsIngredients}
-        setStocksRawsIngredients={setStocksRawsIngredients}
-        readyPortionFries={readyPortionFries}
-        setReadyPortionFries={setReadyPortionFries}
-      />
-      <Nugget
-        stocksRawsIngredients={stocksRawsIngredients}
-        setStocksRawsIngredients={setStocksRawsIngredients}
-        readyNuggetBox={readyNuggetBox}
-        setReadyNuggetBox={setReadyNuggetBox}
-        availableFrying={availableFrying}
-        setAvailableFrying={setAvailableFrying}
-      />
+      <div id="fryersComponent">
+        <Fries
+          stocksRawsIngredients={stocksRawsIngredients}
+          setStocksRawsIngredients={setStocksRawsIngredients}
+          readyPortionFries={readyPortionFries}
+          setReadyPortionFries={setReadyPortionFries}
+        />
+        <Nugget
+          stocksRawsIngredients={stocksRawsIngredients}
+          setStocksRawsIngredients={setStocksRawsIngredients}
+          readyNuggetBox={readyNuggetBox}
+          setReadyNuggetBox={setReadyNuggetBox}
+          availableFrying={availableFrying}
+          setAvailableFrying={setAvailableFrying}
+        />
+      </div>
+
       <AssemblyKitchen
         availableFrying={availableFrying}
         setAvailableFrying={setAvailableFrying}

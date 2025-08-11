@@ -67,12 +67,12 @@ function Office({
     <div id="officeComponent" className="component">
       <div className="headerPage">
         <h1>MacBu 2</h1>
-        <h2>Budget : {cashFund} €</h2>
+        <h3>Budget : {cashFund} €</h3>
         <button
           className="buttonOpenModal"
           onClick={() => setActionModal(setToggleModal, toggleModal)}
         >
-          Magasin
+          MAGASIN
         </button>
       </div>
       <div id="officePageContent"></div>
@@ -93,7 +93,7 @@ function Office({
           />
           <div className="headerModal">
             <h2>Magasin</h2>
-            <h2>Budget : {cashFund} €</h2>
+            <h3>Budget : {cashFund} €</h3>
             <button
               className="closeModalButton"
               onClick={() => setActionModal(setToggleModal, toggleModal)}
@@ -105,26 +105,32 @@ function Office({
             <br />
             {stocksRawsIngredients.map((section: SectionRawIngredients) => (
               <div key={section.title}>
-                <div>
+                <div className="allShelf">
                   <h3>{section.title}</h3>
+                  <div className="storeShelf">
                   {section.productionArray.map((product: Ingredient) => (
-                    <div key={product.ingredientName}>
-                      <p>{product.ingredientName}</p>
-                      <p>{product.quantity} produits</p>
-                      <p>Stock actuel : {product.currentStocks}</p>
+                    <div key={product.ingredientName}
+                    className="uniqueProduct"
+                    >
+                      <>
+                      <p>{product.ingredientName} <br />
+                      {product.quantity} produits<br />
+                    Stock actuel : {product.currentStocks}
+                      </p>
+                      </>
                       <br />
                       <button
                         onClick={() =>
                           handleClickBuyProduct(product, section.sectionName)
                         }
+                        className="neutralButton"
                       >
                         {product.price} €
                       </button>
                     </div>
                   ))}
+                  </div>
                 </div>
-                <br />
-                <hr />
               </div>
             ))}
           </div>

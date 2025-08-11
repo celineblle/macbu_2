@@ -1,3 +1,113 @@
+.burgerArrayFrontPage {
+  margin: 5px;
+  height: 10vh;
+  overflow-x: scroll;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
 
+.readyBurgerArrayFrontPage,
+.waitingBurgerArrayFrontPage {
+  text-align: center;
+  padding-top: 2vh;
+  flex-shrink: 0;
+}
+
+.readyBurgerArrayFrontPage {
+  height: 5vh;
+}
+
+.waitingBurgerArrayFrontPage {
+  height: 7vh;
+  overflow-y: scroll;
+}
+
+#assemblyKitchenModalContent {
+  display: flex;
+  flex-direction: row;
+  height: 145%;
+}
+
+#buildingBurger {
+  width: 60%;
+}
+
+#standByBurger {
+  width: 40%;
+}
+
+#inProgressBurgerButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.buildingBurgerAndRecipeComponent {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  height: 24vh;
+  width: 97%;
+}
+
+.buildingBurgerProperty {
+  height: 8vh;
+  overflow-x: scroll;
+  flex-shrink: 0;
+}
+
+.buildingBurgerProperty,
+.recipeBurgerLi {
+  width: 50%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#lastBuildingBurgerProperty {
+  width: 100%;
+}
+
+.recipeBurgerLi {
+  display: flex;
+  flex-direction: row;
+  height: 4vh;
+}
+
+#burgerOrder {
+  height: 70vh;
+  overflow-y: scroll;
+}
+
+#readyBurgerArray {
+  height: 10vh;
+  overflow-x: scroll;
+}
+
+#waitingBurgerArray {
+  height: 25vh;
+  overflow-x: scroll;
+}
+
+#burgerOrder,
+#readyBurgerArray,
+#waitingBurgerArray {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.uniqueReadyBurger {
+  height: calc(10vh - 10px);
+}
+
+.uniqueWaitingBurger {
+  margin: 5px;
+  padding: 5px;
+  flex-shrink: 0;
+  height: 20vh;
+  overflow-y: scroll;
+}
 
 /*# sourceMappingURL=AssemblyKitchen.css.map */

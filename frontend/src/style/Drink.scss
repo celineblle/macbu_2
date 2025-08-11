@@ -1,0 +1,36 @@
+#drinkModalContent {
+  display: flex;
+  flex-direction: row;
+  height: 90%;
+}
+
+#cookAndbuildDrink {
+    width: 55%;
+}
+
+#orderAndStockDrink {
+  width: 45%;
+}
+
+#cookingDrink, #buildingDrink {
+    width: 100%;
+}
+
+#cookingDrink, #stockDrink {
+  height: 40%;
+}
+
+#buildingDrink, #orderDrink {
+  height: 60%;
+}
+
+.drinkCookingButton {
+    width: 13vw;
+}
+
+#orderArrayDrink {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+}

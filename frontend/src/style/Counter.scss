@@ -1,0 +1,19 @@
+#counterComponent {
+    display: flex;
+    flex-direction: row;
+}
+
+#checkoutComponent, #drinkComponent, #iceCreamComponent {
+    width: calc(20vw - 24px);
+}
+
+#assemblyCounterComponent {
+    width: calc(40vw - 24px);
+}
+
+.readyProductArrayFrontPage {
+    overflow: scroll;   
+    width: calc(20vw - 45px);
+    height: 29vh;
+    margin: auto;
+}
