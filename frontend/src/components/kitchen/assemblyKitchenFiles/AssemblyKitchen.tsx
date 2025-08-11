@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Slide, ToastContainer } from "react-toastify";
 import { setActionModal } from "../../../functions/generalsFuctions";
 import "../../../style/AssemblyKitchen.css";
@@ -13,12 +13,10 @@ import BuildingBurgerFonctions from "./BuildingBurgerFonctions";
 import TabsCuisineComponent from "./TabsCuisineComponent";
 import { displayNoPlace } from "../../../functions/toastFunctions";
 import GetReadyBurger from "./GetReadyBurger";
-import {
-  emptyBurgerObject,
-  limitSizeBurgerTray,
-  emptyBurger,
-} from "./assemblyKitchenTools";
+import { emptyBurgerObject, limitSizeBurgerTray } from "./assemblyKitchenTools";
 import WaitingBurgerJSX from "./WaitingBurgerJSX";
+import { OrdersToPrepareContext } from "../../../context/OrderContext";
+import ComponentOrder from "../../ComponentOrder";
 
 function AssemblyKitchen({
   availableFrying,
@@ -38,6 +36,38 @@ function AssemblyKitchen({
   // MODAL & TABS
   const [toggleModal, setToggleModal] = useState(false);
   const [activeTab, setActiveTab] = useState("bread");
+
+  //ORDER CONTEXT
+  const ordersToPrepare = useContext(OrdersToPrepareContext);
+
+  // GET BURGER
+  const [burgerOrder, setBurgerOrder] = useState<[number, string[]][]>([]);
+  function getBurger() {
+    const allBurgerOrder: [number, string[]][] = [];
+    for (let i = 0; i < ordersToPrepare.length; i++) {
+      const uniqueOrder: [number, string[]] = [i + 1, []];
+      for (let j = 0; j < ordersToPrepare[i].products.length; j++) {
+        const currentProduct = ordersToPrepare[i].products[j];
+        if ("sandwich" in currentProduct) {
+          uniqueOrder[1].push(currentProduct.sandwich.name);
+        } else if ("bread" in currentProduct.ingredient) {
+          uniqueOrder[1].push(currentProduct.name);
+        }
+      }
+      if (uniqueOrder[1].length > 0) {
+        allBurgerOrder.push(uniqueOrder);
+      }
+    }
+    setBurgerOrder(allBurgerOrder);
+  }
+
+  useEffect(() => {
+    getBurger();
+  }, [ordersToPrepare]);
+
+  // ORDER JSX COMPONENT
+  const orderTab = ComponentOrder(burgerOrder);
+
 
   // BUILDING BURGER VARIABLES
   const [waitingArrayBurger, setWaitingArrayBurger] = useState<
@@ -248,9 +278,11 @@ function AssemblyKitchen({
                   ))}
                 </div>
               </div>
-              <div>
+              <div id="burgerOrder">
                 <h3>Commandes</h3>
-                <div id="burgerOrder"></div>
+                <div id="burgerOrderArray">
+                  {orderTab}
+                </div>
               </div>
             </div>
           </div>

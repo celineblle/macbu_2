@@ -103,7 +103,8 @@ hr {
 
 // BUTTON
 
- .frontPageLi, button {
+.frontPageLi,
+button {
   border-radius: 5px;
   outline: none;
   border: none;
@@ -183,9 +184,10 @@ button {
   }
 }
 
-// TAB 
+// TAB
 
-.modalClose, .tabClose {
+.modalClose,
+.tabClose {
   @include style.close-mode;
 }
 
@@ -195,7 +197,10 @@ button {
   margin-bottom: 5px;
 }
 
-.tabs:hover, .tabs:focus, .tabs:active, .tabs:target {
+.tabs:hover,
+.tabs:focus,
+.tabs:active,
+.tabs:target {
   background-color: style.$rose;
 }
 
@@ -206,17 +211,21 @@ button {
 
 // COMMANDES
 
-.cookingOrder, .readyOrder{
+.cookingOrder,
+.readyOrder {
   flex-shrink: 0;
 }
 
 .cookingOrder {
   border: 2px solid style.$orange;
   border-radius: 5px;
-  width: 170px;
+  width: 168px;
 }
 
-.cookingOrder:hover, .cookingOrder:focus, .cookingOrder:active, .cookingOrder:target {
+.cookingOrder:hover,
+.cookingOrder:focus,
+.cookingOrder:active,
+.cookingOrder:target {
   background-color: style.$orange;
 }
 
@@ -228,13 +237,13 @@ button {
 .readyOrder {
   border: 2px solid style.$vert;
   border-radius: 5px;
-  width: 170px;
+  width: 168px;
 }
 
 .modalOrder {
   border: 2px solid style.$rose;
   border-radius: 5px;
-  width: 170px;
+  width: 168px;
   height: 75px;
 }
 
@@ -245,6 +254,12 @@ button {
 .readyOrder:active {
   background-color: style.$vertClair;
   border-color: style.$vertClair;
+}
+
+.uniqueProductOrder {
+  height: 10vh;
+  overflow-y: scroll;
+  margin: 4px;
 }
 
 // COMPONENT ELEMENTS

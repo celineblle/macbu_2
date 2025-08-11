@@ -25,6 +25,8 @@ import {
 } from "../../functions/toastFunctions";
 import { Slide, ToastContainer } from "react-toastify";
 import { allDrinks } from "../../elements/produits";
+import { OrdersToPrepareContext } from "../../context/OrderContext";
+import ComponentOrder from "../ComponentOrder";
 
 function Drink({
   readyDrink,
@@ -39,6 +41,9 @@ function Drink({
   // STOCKS CONTEXT
   const stocksRawsIngredients = useContext(StocksRawsIngredientsContext);
   const setStocksRawsIngredients = useContext(SetStocksRawsIngredientsContext);
+
+  //ORDER CONTEXT
+  const ordersToPrepare = useContext(OrdersToPrepareContext);
 
   //TOOLS VARIABLES
   const limitSizeDrink: number = 15;
@@ -66,6 +71,35 @@ function Drink({
   useEffect(() => {
     readyDrinkRef.current = readyDrink;
   }, [readyDrink]);
+
+  // GET ONLY DRINK IN ORDER
+  const [drinkOrder, setDrinkOrder] = useState<[number, string[]][]>([]);
+  function getOnlyDrink() {
+    const allDrinkOrder: [number, string[]][] = [];
+    for (let i = 0; i < ordersToPrepare.length; i++) {
+      const uniqueOrder: [number, string[]] = [i + 1, []];
+      for (let j = 0; j < ordersToPrepare[i].products.length; j++) {
+        const currentProduct = ordersToPrepare[i].products[j];
+        if ("sandwich" in currentProduct) {
+          uniqueOrder[1].push(currentProduct.drink.name);
+        } else if ("drink" in currentProduct) {
+          uniqueOrder[1].push(currentProduct.name);
+        }
+      }
+      if (uniqueOrder[1].length > 0) {
+        allDrinkOrder.push(uniqueOrder);
+      }
+    }
+    setDrinkOrder(allDrinkOrder);
+  }
+  // Update drink order
+  useEffect(() => {
+    getOnlyDrink();
+  }, [ordersToPrepare]);
+
+  // ORDER JSX COMPONENT
+  const orderTab = ComponentOrder(drinkOrder);
+
 
   // UPDATE EMPTY PLACE
 
@@ -190,6 +224,7 @@ function Drink({
     }
   }
 
+
   return (
     <div id="drinkComponent" className="component">
       <div className="headerPage">
@@ -254,12 +289,18 @@ function Drink({
                     </button>
                   ))}
                   {cookingDrink.map((drink, i) => (
-                    <button key={drink.dateId + i} className="cookingButton drinkCookingButton">
+                    <button
+                      key={drink.dateId + i}
+                      className="cookingButton drinkCookingButton"
+                    >
                       {drink.name}
                     </button>
                   ))}
                   {emptyPlace.map((drink, i) => (
-                    <button key={i} className="neutralButton drinkCookingButton">
+                    <button
+                      key={i}
+                      className="neutralButton drinkCookingButton"
+                    >
                       {drink}
                     </button>
                   ))}
@@ -308,7 +349,7 @@ function Drink({
             <div id="orderAndStockDrink">
               <div id="orderDrink">
                 <h3>Commandes</h3>
-                <div id="orderArrayDrink"></div>
+                <div id="orderArrayDrink">{orderTab}</div>
               </div>
               <hr />
               <div id="stockDrink">

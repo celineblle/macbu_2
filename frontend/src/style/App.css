@@ -225,7 +225,7 @@ button {
 .cookingOrder {
   border: 2px solid #f78800;
   border-radius: 5px;
-  width: 170px;
+  width: 168px;
 }
 
 .cookingOrder:hover, .cookingOrder:focus, .cookingOrder:active, .cookingOrder:target {
@@ -240,13 +240,13 @@ button {
 .readyOrder {
   border: 2px solid #78e8c1;
   border-radius: 5px;
-  width: 170px;
+  width: 168px;
 }
 
 .modalOrder {
   border: 2px solid #f2bbc9;
   border-radius: 5px;
-  width: 170px;
+  width: 168px;
   height: 75px;
 }
 
@@ -257,6 +257,12 @@ button {
 .readyOrder:active {
   background-color: #c7f2b3;
   border-color: #c7f2b3;
+}
+
+.uniqueProductOrder {
+  height: 10vh;
+  overflow-y: scroll;
+  margin: 4px;
 }
 
 ul {

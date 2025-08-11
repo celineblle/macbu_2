@@ -18,16 +18,20 @@
   flex-direction: column;
 }
 
-#orderCounter, #trayCounter, #productCounter {
+#orderCounter,
+#trayCounter,
+#productCounter {
   width: 100%;
 }
 
-#orderCounter, #trayCounter {
+#orderCounter,
+#trayCounter {
   height: 30%;
 }
 
-#orderArrayCounter, #trayArray {
-    display: flex;
+#orderArrayCounter,
+#trayArray {
+  display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
   overflow-x: scroll;
@@ -37,7 +41,12 @@
   }
 }
 
-.uniqueOrdrer, .uniqueTray {
+.allTray {
+  margin: 0px;
+}
+
+.uniqueOrdrer,
+.uniqueTray {
   overflow-y: scroll;
   height: 25vh;
 }
@@ -60,5 +69,4 @@
       width: 20vw;
     }
   }
-
 }

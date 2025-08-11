@@ -29,4 +29,19 @@
   width: 7vw;
 }
 
+#ordersFriesArray {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  overflow-y: scroll;
+  height: 90%;
+}
+
+.uniqueFriesOrder {
+  height: 10vh;
+  overflow-y: scroll;
+  margin: 4px;
+}
+
 /*# sourceMappingURL=Fries.css.map */

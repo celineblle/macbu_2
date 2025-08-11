@@ -22,7 +22,10 @@ import AssemblyCounterTools from "./AssemblyCounterTools";
 import ValidateOrders from "./ValidateOrders";
 import { size } from "../../../elements/ingredients";
 import { allBags } from "../../../elements/produits";
-import { OrdersToPrepareContext, SetOrdersToPrepareContext } from "../../../context/OrderContext";
+import {
+  OrdersToPrepareContext,
+  SetOrdersToPrepareContext,
+} from "../../../context/OrderContext";
 
 function AssemblyCounter({
   cashFund,
@@ -95,8 +98,8 @@ function AssemblyCounter({
     if (ordersToPrepareRef.current.length < limitOfOrders) {
       setTimeout(() => {
         const newOrder = generateRamdomOrders();
-        if(setOrdersToPrepare !== undefined) {
-                  setOrdersToPrepare([...ordersToPrepareRef.current, newOrder]);
+        if (setOrdersToPrepare !== undefined) {
+          setOrdersToPrepare([...ordersToPrepareRef.current, newOrder]);
         }
       }, 1000);
     }
@@ -147,8 +150,6 @@ function AssemblyCounter({
     setTray,
     trayIdSelected,
   });
-  
-
 
   return (
     <div id="assemblyCounterComponent" className="component">
@@ -201,12 +202,8 @@ function AssemblyCounter({
                         className="readyOrder uniqueOrdrer"
                       >
                         <ul>
-                          <li>
-                            N° de commande : {index + 1}
-                          </li>
-                          <li>
-                            Taille : {order.size}  
-                          </li>
+                          <li>N° de commande : {index + 1}</li>
+                          <li>Taille : {order.size}</li>
                           {order.products.map((detail, i) =>
                             "sandwich" in detail ? (
                               <ul key={detail.dateId + i}>
@@ -219,9 +216,7 @@ function AssemblyCounter({
                               <li key={detail.name + i}>{detail.name}</li>
                             )
                           )}
-                        <li>
-                          Prix : {order.price} €
-                        </li>
+                          <li>Prix : {order.price} €</li>
                         </ul>
                       </button>
                     )
@@ -240,6 +235,7 @@ function AssemblyCounter({
                   <ul
                     key={uniqueTray.dateId + i}
                     onClick={() => updateTrayId(uniqueTray.dateId)}
+                    className="allTray"
                   >
                     {uniqueTray.products.map((product, i) => (
                       <button
@@ -341,18 +337,18 @@ function AssemblyCounter({
               </div>
               <div id="counterIndication">
                 <ul>
-                {allBags.map((element) => (
-                  <li key={element.name}>
-                    {element.name} 
-                    Capacité : {element.ingredient.capacity}
-                  </li>
-                ))}
-                {size.map((element) => (
-                <li key={element.name}>
-                  {element.name} 
-                  Taille : {element.capacity}
-                </li>
-                ))}
+                  {allBags.map((element) => (
+                    <li key={element.name}>
+                      {element.name}
+                      Capacité : {element.ingredient.capacity}
+                    </li>
+                  ))}
+                  {size.map((element) => (
+                    <li key={element.name}>
+                      {element.name}
+                      Taille : {element.capacity}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>

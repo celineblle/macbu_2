@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   removeElementFromRefArray,
   setActionModal,
@@ -10,13 +10,20 @@ import {
   SectionRawIngredients,
   AvailableMeat,
 } from "../../interfaces/compositionElementsInterfaces";
-import { Ingredient } from "../../interfaces/produitsInterfaces";
+import {
+  FinalProductBurger,
+  FinalProductNugget,
+  Ingredient,
+} from "../../interfaces/produitsInterfaces";
 import { frying } from "../../elements/ingredients";
 import { displayNoPlace, displayNoStock } from "../../functions/toastFunctions";
 import {
   removeToStockOfProduct,
   remplaceOldProductByUpdateProduct,
 } from "../../functions/inventoryManagementFunctions";
+import { OrdersToPrepareContext } from "../../context/OrderContext";
+import { allBurgers } from "../../elements/produits";
+import ComponentOrder from "../ComponentOrder";
 
 function Nugget({
   stocksRawsIngredients,
@@ -39,6 +46,61 @@ function Nugget({
 }) {
   // MODAL
   const [toggleModal, setToggleModal] = useState(false);
+
+  //ORDER CONTEXT
+  const ordersToPrepare = useContext(OrdersToPrepareContext);
+
+  // GET GRILL ORDER
+  const [fryingOrder, setFryingOrder] = useState<[number, string[]][]>([]);
+
+  function isItMeat(product: FinalProductBurger): boolean | undefined {
+    const currentBurger: FinalProductBurger | undefined = allBurgers.find(
+      (burger) => burger.name === product.name
+    );
+    if (currentBurger !== undefined) {
+      const currentMeat: Ingredient | undefined = frying.find(
+        (uniqueMeat) => uniqueMeat.ingredientName === product.ingredient.meat
+      );
+      if (currentMeat === undefined) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  }
+
+  function getFrying() {
+    const allFryingOrder: [number, string[]][] = [];
+    for (let i = 0; i < ordersToPrepare.length; i++) {
+      const uniqueOrder: [number, string[]] = [i + 1, []];
+      for (let j = 0; j < ordersToPrepare[i].products.length; j++) {
+        const currentProduct = ordersToPrepare[i].products[j];
+        if ("sandwich" in currentProduct) {
+          if (isItMeat(currentProduct.sandwich) === true) {
+            uniqueOrder[1].push(currentProduct.sandwich.ingredient.meat);
+          }
+        } else if ("bread" in currentProduct) {
+          if (isItMeat(currentProduct)) {
+            uniqueOrder[1].push(currentProduct.ingredient.meat);
+          }
+        } else if ("nuggetQuantity" in currentProduct.ingredient) {
+          const nuggetQuantity: string = `${currentProduct.ingredient.nuggetQuantity} Nugget poulet`;
+          uniqueOrder[1].push(nuggetQuantity);
+        }
+      }
+      if (uniqueOrder[1].length > 0) {
+        allFryingOrder.push(uniqueOrder);
+      }
+    }
+    setFryingOrder(allFryingOrder);
+  }
+
+  useEffect(() => {
+    getFrying();
+  }, [ordersToPrepare]);
+
+  // ORDER JSX COMPONENT
+  const orderTab = ComponentOrder(fryingOrder);
 
   // LIMIT SIZE VARIABLES & PLACE HOLDER
   const limitSizeFryer: number = 6;
@@ -227,15 +289,15 @@ function Nugget({
                 <div>
                   <h4>Fabrication</h4>
                   <div id="buildingNuggetBox">
-                  {readyNuggetBox.map((box: NuggetBoxStock) => (
-                    <button
-                      key={box.boite.name}
-                      onClick={() => handleClickBuildNuggetBox(box)}
-                      className="neutralButton nuggetBuildingButton"
-                    >
-                      {box.boite.name}
-                    </button>
-                  ))}
+                    {readyNuggetBox.map((box: NuggetBoxStock) => (
+                      <button
+                        key={box.boite.name}
+                        onClick={() => handleClickBuildNuggetBox(box)}
+                        className="neutralButton nuggetBuildingButton"
+                      >
+                        {box.boite.name}
+                      </button>
+                    ))}
                   </div>
                 </div>
                 <div>
@@ -250,7 +312,7 @@ function Nugget({
                 </div>
               </div>
             </div>
-            <hr /> 
+            <hr />
             <div id="buildingNugget">
               <div>
                 <h3>Cuisson</h3>
@@ -259,7 +321,7 @@ function Nugget({
                     <button
                       key={frying.dateId}
                       onClick={() => handleClickRemoveGrilledFrying(frying)}
-                    className="grilledButton nuggetBuildingButton"
+                      className="grilledButton nuggetBuildingButton"
                     >
                       {frying.ingredientName}
                     </button>
@@ -276,15 +338,21 @@ function Nugget({
                     </button>
                   ))}
                   {cookingFrying.map((frying: Ingredient) => (
-                    <button key={frying.dateId}
-                    className="cookingButton nuggetBuildingButton"
-                    >{frying.ingredientName}</button>
+                    <button
+                      key={frying.dateId}
+                      className="cookingButton nuggetBuildingButton"
+                    >
+                      {frying.ingredientName}
+                    </button>
                   ))}
 
                   {emptyPlace.map((place: string, i) => (
-                    <button key={i}
-                    className="neutralButton nuggetBuildingButton"
-                    >{place}</button>
+                    <button
+                      key={i}
+                      className="neutralButton nuggetBuildingButton"
+                    >
+                      {place}
+                    </button>
                   ))}
                 </div>
                 <h3>Frigo</h3>
@@ -312,6 +380,9 @@ function Nugget({
             <hr />
             <div id="orderNugget">
               <h3>Commandes</h3>
+              <div>
+                {orderTab}
+              </div>
             </div>
           </div>
         </div>
