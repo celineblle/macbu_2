@@ -23,6 +23,7 @@ import { OrdersToPrepareContext } from "../../context/OrderContext";
 import { allBurgers } from "../../elements/produits";
 import { meat } from "../../elements/ingredients";
 import ComponentOrder from "../ComponentOrder";
+import { Slide, ToastContainer } from "react-toastify";
 
 function Grill({
   stocksRawsIngredients,
@@ -229,6 +230,19 @@ function Grill({
       </div>
       <div className={toggleModal ? "modalOpen" : "modalClose"}>
         <div className="modalContent">
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+            transition={Slide}
+          />
           <div className="headerModal">
             <h2>Grill</h2>
             <button

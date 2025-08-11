@@ -24,6 +24,7 @@ import {
 import { OrdersToPrepareContext } from "../../context/OrderContext";
 import { allBurgers } from "../../elements/produits";
 import ComponentOrder from "../ComponentOrder";
+import { Slide, ToastContainer } from "react-toastify";
 
 function Nugget({
   stocksRawsIngredients,
@@ -273,6 +274,19 @@ function Nugget({
             </button>
           </div>
           <div id="grillModalContent">
+            <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+            transition={Slide}
+          />
             <div id="readyNugget">
               <div>
                 <h3>Pret</h3>
