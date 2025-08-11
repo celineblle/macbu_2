@@ -5,11 +5,11 @@
 }
 
 #cookAndbuildDrink {
-  width: 55%;
+  width: 53%;
 }
 
 #orderAndStockDrink {
-  width: 45%;
+  width: 47%;
 }
 
 #cookingDrink, #buildingDrink {
@@ -33,6 +33,13 @@
   flex-direction: row;
   flex-wrap: wrap;
   overflow-y: scroll;
+  height: 90%;
+}
+
+.drinkOrder {
+  height: 10vh;
+  overflow-y: scroll;
+  margin: 4px;
 }
 
 /*# sourceMappingURL=Drink.css.map */

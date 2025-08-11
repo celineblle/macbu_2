@@ -38,6 +38,10 @@
   text-align: start;
 }
 
+.allTray {
+  margin: 0px;
+}
+
 .uniqueOrdrer, .uniqueTray {
   overflow-y: scroll;
   height: 25vh;

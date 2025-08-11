@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   removeElementFromRefArray,
   setActionModal,
@@ -28,6 +28,8 @@ import {
   displayNoStock,
   displayPortionNotComplete,
 } from "../../functions/toastFunctions";
+import { OrdersToPrepareContext } from "../../context/OrderContext";
+import ComponentOrder from "../ComponentOrder";
 
 function Fries({
   stocksRawsIngredients,
@@ -46,6 +48,38 @@ function Fries({
 }) {
   // MODAL
   const [toggleModal, setToggleModal] = useState(false);
+
+  //ORDER CONTEXT
+  const ordersToPrepare = useContext(OrdersToPrepareContext);
+
+  // GET FRIES ORDERS
+  const [friesOrder, setFriesOrder] = useState<[number, string[]][]>([]);
+  function getFries() {
+    const allFriesOrder: [number, string[]][] = [];
+    for (let i = 0; i < ordersToPrepare.length; i++) {
+      const uniqueOrder: [number, string[]] = [i + 1, []];
+      for (let j = 0; j < ordersToPrepare[i].products.length; j++) {
+        const currentProduct = ordersToPrepare[i].products[j];
+        if ("sandwich" in currentProduct) {
+          uniqueOrder[1].push(currentProduct.side.name);
+        } else if ("side" in currentProduct.ingredient) {
+          uniqueOrder[1].push(currentProduct.name);
+        }
+      }
+      if (uniqueOrder[1].length > 0) {
+        allFriesOrder.push(uniqueOrder);
+      }
+    }
+    setFriesOrder(allFriesOrder);
+  }
+
+  useEffect(() => {
+    getFries();
+  }, [ordersToPrepare]);
+
+  // ORDER JSX COMPONENT
+  const orderTab = ComponentOrder(friesOrder);
+
 
   // LIMITES SIZE & PLACE HOLDER VARIABLES
   const limiteSizeFryer: number = 6;
@@ -359,14 +393,12 @@ function Fries({
         </button>
       </div>
       <div id="friesPageContent">
-          <h3>Pret</h3>
-          {productionTray.map((tray) => (
-            <button key={tray.productName}
-            className="readyButton"
-            >
-              {tray.productName} : {tray.quantity}
-            </button>
-          ))}
+        <h3>Pret</h3>
+        {productionTray.map((tray) => (
+          <button key={tray.productName} className="readyButton">
+            {tray.productName} : {tray.quantity}
+          </button>
+        ))}
       </div>
       <div className={toggleModal ? "modalOpen" : "modalClose"}>
         <div className="modalContent">
@@ -398,34 +430,38 @@ function Fries({
               <div id="buildingFries">
                 <h3>Fabrication des portions</h3>
                 <div>
-                {productionTray.map((tray: ProductionTray, index: number) => (
-                  <button
-                    key={tray.productName}
-                    onClick={
-                      tray.grilled === true
-                        ? () => handleClickDeleteGrilledTray(index)
-                        : () => handleClickBuildingFriesPortion(tray)
-                    }
-                    className={tray.grilled === true ? "grilledButton buildingFriesButton" : "readyButton buildingFriesButton"}
-                  >
-                    {tray.productName} : {tray.quantity}
-                  </button>
-                ))}
+                  {productionTray.map((tray: ProductionTray, index: number) => (
+                    <button
+                      key={tray.productName}
+                      onClick={
+                        tray.grilled === true
+                          ? () => handleClickDeleteGrilledTray(index)
+                          : () => handleClickBuildingFriesPortion(tray)
+                      }
+                      className={
+                        tray.grilled === true
+                          ? "grilledButton buildingFriesButton"
+                          : "readyButton buildingFriesButton"
+                      }
+                    >
+                      {tray.productName} : {tray.quantity}
+                    </button>
+                  ))}
                 </div>
                 <div>
-                {size.map((size: Size) => (
-                  <button
-                    key={size.name}
-                    onClick={() => handleClickBuildingFriesPortion(size)}
-                    className="neutralButton buildingFriesButton"
-                  >
-                    {size.name}
-                  </button>
-                ))}
+                  {size.map((size: Size) => (
+                    <button
+                      key={size.name}
+                      onClick={() => handleClickBuildingFriesPortion(size)}
+                      className="neutralButton buildingFriesButton"
+                    >
+                      {size.name}
+                    </button>
+                  ))}
                 </div>
                 <button
                   onClick={handleClickSetBuildingPortionInReadyPortionFries}
-                 className="neutralButton buildingFriesButton"
+                  className="neutralButton buildingFriesButton"
                 >
                   Fabriquer
                 </button>
@@ -435,14 +471,14 @@ function Fries({
               <div>
                 <h3>Pret</h3>
                 {readyPortionFries.map((readyPortion, i) => (
-                  <button key={i}
-                  className="readyButton buildingFriesButton"
-                  >{readyPortion.ingredient.side}</button>
+                  <button key={i} className="readyButton buildingFriesButton">
+                    {readyPortion.ingredient.side}
+                  </button>
                 ))}
                 {emptyPlaceTray.map((place, i) => (
-                  <button key={i}
-                  className="neutralButton buildingFriesButton"
-                  >{place}</button>
+                  <button key={i} className="neutralButton buildingFriesButton">
+                    {place}
+                  </button>
                 ))}
               </div>
             </div>
@@ -451,45 +487,53 @@ function Fries({
               <div>
                 <h3>Cuisson</h3>
                 <div>
-                {fries.map((ingredient) => (
-                  <button
-                    key={ingredient.ingredientName}
-                    onClick={() => handleClickCookingRawFries(ingredient)}
-                  className="neutralButton cookingFriesButton"
-                  >
-                    {ingredient.ingredientName}
-                  </button>
-                ))}
+                  {fries.map((ingredient) => (
+                    <button
+                      key={ingredient.ingredientName}
+                      onClick={() => handleClickCookingRawFries(ingredient)}
+                      className="neutralButton cookingFriesButton"
+                    >
+                      {ingredient.ingredientName}
+                    </button>
+                  ))}
                 </div>
                 <div>
-                {grilledFries.map((fries) => (
-                  <button
-                    key={fries.dateId}
-                    onClick={() => handleClickDeleteGrilledFryer(fries.dateId)}
-                  className="grilledButton cookingFriesButton"
-                  >
-                    {fries.ingredientName}
-                  </button>
-                ))}
-                {readyFries.map((fries) => (
-                  <button
-                    key={fries.dateId}
-                    onClick={() => handleClickSetReadyFriesInFriesTray(fries)}
-                  className="readyButton cookingFriesButton"
-                  >
-                    {fries.ingredientName}
-                  </button>
-                ))}
-                {cookingFries.map((fries) => (
-                  <button key={fries.dateId}
-                  className="cookingButton cookingFriesButton"
-                  >{fries.ingredientName}</button>
-                ))}
-                {emptyPlaceFries.map((place, i) => (
-                  <button key={i}
-                  className="neutralButton cookingFriesButton"
-                  >{place}</button>
-                ))}
+                  {grilledFries.map((fries) => (
+                    <button
+                      key={fries.dateId}
+                      onClick={() =>
+                        handleClickDeleteGrilledFryer(fries.dateId)
+                      }
+                      className="grilledButton cookingFriesButton"
+                    >
+                      {fries.ingredientName}
+                    </button>
+                  ))}
+                  {readyFries.map((fries) => (
+                    <button
+                      key={fries.dateId}
+                      onClick={() => handleClickSetReadyFriesInFriesTray(fries)}
+                      className="readyButton cookingFriesButton"
+                    >
+                      {fries.ingredientName}
+                    </button>
+                  ))}
+                  {cookingFries.map((fries) => (
+                    <button
+                      key={fries.dateId}
+                      className="cookingButton cookingFriesButton"
+                    >
+                      {fries.ingredientName}
+                    </button>
+                  ))}
+                  {emptyPlaceFries.map((place, i) => (
+                    <button
+                      key={i}
+                      className="neutralButton cookingFriesButton"
+                    >
+                      {place}
+                    </button>
+                  ))}
                 </div>
               </div>
               <br />
@@ -510,6 +554,9 @@ function Fries({
             <hr />
             <div id="ordersFries">
               <h3>Commandes</h3>
+              <div id="ordersFriesArray">
+                {orderTab}
+              </div>
             </div>
           </div>
         </div>

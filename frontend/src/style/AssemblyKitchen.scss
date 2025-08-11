@@ -15,7 +15,7 @@
 }
 
 .readyBurgerArrayFrontPage {
-    height: 5vh;
+  height: 5vh;
 }
 
 .waitingBurgerArrayFrontPage {
@@ -26,7 +26,7 @@
 #assemblyKitchenModalContent {
   display: flex;
   flex-direction: row;
-  height: 145%;
+  height: 120%;
 }
 
 #buildingBurger {
@@ -75,11 +75,6 @@
   height: 4vh;
 }
 
-#burgerOrder {
-  height: 70vh;
-  overflow-y: scroll;
-}
-
 #readyBurgerArray {
   height: 10vh;
   overflow-x: scroll;
@@ -90,7 +85,7 @@
   overflow-x: scroll;
 }
 
-#burgerOrder,
+#burgerOrderArray,
 #readyBurgerArray,
 #waitingBurgerArray {
   display: flex;
@@ -108,4 +103,17 @@
   flex-shrink: 0;
   height: 20vh;
   overflow-y: scroll;
+}
+
+#burgerOrderArray {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  height: 90%;
+  align-content: flex-start;
+}
+
+#burgerOrder {
+  height: 50%;
 }

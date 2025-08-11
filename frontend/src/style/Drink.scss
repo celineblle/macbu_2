@@ -5,32 +5,43 @@
 }
 
 #cookAndbuildDrink {
-    width: 55%;
+  width: 53%;
 }
 
 #orderAndStockDrink {
-  width: 45%;
+  width: 47%;
 }
 
-#cookingDrink, #buildingDrink {
-    width: 100%;
+#cookingDrink,
+#buildingDrink {
+  width: 100%;
 }
 
-#cookingDrink, #stockDrink {
+#cookingDrink,
+#stockDrink {
   height: 40%;
 }
 
-#buildingDrink, #orderDrink {
+#buildingDrink,
+#orderDrink {
   height: 60%;
 }
 
 .drinkCookingButton {
-    width: 13vw;
+  width: 13vw;
 }
 
 #orderArrayDrink {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    overflow-y: scroll;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  overflow-y: scroll;
+  height: 90%;
+}
+
+.drinkOrder {
+  height: 10vh;
+  overflow-y: scroll;
+  margin: 4px;
 }

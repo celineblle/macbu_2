@@ -18,6 +18,8 @@ import {
 } from "../../functions/inventoryManagementFunctions";
 import { displayToppingNotComplete } from "../../functions/toastFunctions";
 import { Slide, ToastContainer } from "react-toastify";
+import { OrdersToPrepareContext } from "../../context/OrderContext";
+import ComponentOrder from "../ComponentOrder";
 
 function IceCreamComponent({
   readyIceCream,
@@ -32,6 +34,9 @@ function IceCreamComponent({
   //STOCKS CONTEXT
   const stocksRawsIngredients = useContext(StocksRawsIngredientsContext);
   const setStocksRawsIngredients = useContext(SetStocksRawsIngredientsContext);
+
+  //ORDER CONTEXT
+  const ordersToPrepare = useContext(OrdersToPrepareContext);
 
   //TOOL VARIABLES
   const stockRawIndex: number = 7;
@@ -81,6 +86,38 @@ function IceCreamComponent({
   useEffect(() => {
     meltedIceCreamRef.current = meltedIceCream;
   }, [meltedIceCream]);
+
+  // GET ICE CREAM ORDERS
+  const [iceCreamOrders, setIceCreamOrders] = useState<[number, string[]][]>(
+    []
+  );
+  function getIceCreamOrders() {
+    const allIceCreamOrder: [number, string[]][] = [];
+    for (let i = 0; i < ordersToPrepare.length; i++) {
+      const uniqueOrder: [number, string[]] = [i + 1, []];
+      for (let j = 0; j < ordersToPrepare[i].products.length; j++) {
+        const currentProduct = ordersToPrepare[i].products[j];
+        if (
+          "sandwich" in currentProduct === false &&
+          "coulisTopping" in currentProduct.ingredient === true
+        ) {
+          uniqueOrder[1].push(currentProduct.name);
+        }
+      }
+      if (uniqueOrder[1].length > 0) {
+        allIceCreamOrder.push(uniqueOrder);
+      }
+    }
+    setIceCreamOrders(allIceCreamOrder);
+  }
+
+  useEffect(() => {
+    getIceCreamOrders();
+  }, [ordersToPrepare]);
+
+  // ORDER JSX COMPONENT
+  const orderTab = ComponentOrder(iceCreamOrders);
+
 
   // UPDATE EMPTY PLACE
 
@@ -394,8 +431,9 @@ function IceCreamComponent({
             <div id="ordersAndFridgeIceCream">
               <div id="orderIceCream">
                 <h3>Commandes</h3>
-                <div id="orderArrayIceCream"
-                ></div>
+                <div id="orderArrayIceCream">
+                  {orderTab}
+                </div>
               </div>
               <hr />
               <div id="fridgeIceCream">
